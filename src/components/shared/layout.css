@@ -1,0 +1,91 @@
+@font-face {
+  font-family: 'NBInternational';
+  font-display: auto;
+  src: url('/assets/fonts/NBInternational_Regular.ttf');
+  font-weight: 100 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GT-Super';
+  font-display: auto;
+  src: url('/assets/fonts/GT-Super-Text-Book.ttf');
+  font-weight: 100 500;
+  font-style: normal;
+}
+
+:root {
+  --ff-serif: "GT-Super", "Georgia", "Times", "Times New Roman";
+  --ff-sanserif: "NBInternational", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --fontsm: .85rem;
+  --fontmd: 1rem;
+  --fontlg: 1.5rem;
+  --fontxl: 4rem;
+
+  --black: #000;
+  --black2: #525f7f;
+  --white: #fff;
+
+  --baseborderpadding: 25px;
+
+  --baseboxshadow: 0 1px 3px rgba(188, 193, 217, .12), 0 5px 12px rgba(188, 193, 217, .25);
+}
+
+* {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-font-feature-settings: "pnum";
+  font-feature-settings: "pnum";
+  font-variant-numeric: proportional-nums;
+  font-family: var(--ff-sanserif);
+  font-size: var(--fontmd);
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  transition: background .15s ease-in;
+}
+
+body[data-url="/"] {
+  background: var(--white);
+}
+
+body[data-url="/setup"] {
+  background: #2B44FF;
+}
+
+a, button, input, select, textarea, label {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: #000;
+  transition: background-color 100000000s;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
