@@ -31,7 +31,7 @@ export default React.memo(() => {
       }
       db(
         debounceRef,
-        formState.first_name.trim().length > 1
+        formState.first_name.trim().length > 0
           ? () => {
               dispatchMessage({
                 type: 'SUCCESS',
@@ -50,7 +50,7 @@ export default React.memo(() => {
                 })
               }
             : noop,
-        600
+        500
       )
     },
     [formState.first_name]
@@ -79,8 +79,7 @@ const initialState = {
 }
 
 const validators = {
-  first_name: val =>
-    val.trim().length < 2 ? 'Sorry! This name is invalid. 😭' : false,
+  first_name: val => (val.trim().length === 0 ? 'You need a name. 😭' : false),
 }
 const reducer = (state, { type, payload }) => {
   console.log(type, payload)

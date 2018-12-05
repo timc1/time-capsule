@@ -8,6 +8,11 @@ import About from './steps/about'
 
 export default () => {
   // const { context, dispatch } = useQuestionnaire()
+  // context: {
+  //   currentStep: Component,
+  //   isValid: boolean,
+  // }
+
   return (
     <Container>
       <DescriptionHeader>
@@ -15,7 +20,10 @@ export default () => {
         <p>About</p>
       </DescriptionHeader>
       <Question>What is your name?</Question>
-      <About />
+      <UserInteractionSection>
+        <About />
+      </UserInteractionSection>
+      <NextButton>Next</NextButton>
     </Container>
   )
 }
@@ -71,3 +79,10 @@ const Question = styled.h1`
   text-align: center;
   color: var(--white);
 `
+
+const UserInteractionSection = styled.div`
+  height: 300px;
+  overflow: auto;
+`
+
+const NextButton = styled(UnstyledButton)``
