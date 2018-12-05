@@ -45,10 +45,22 @@ const Input = styled.input`
   }
 `
 
-const MessageContainer = styled.div``
+const MessageContainer = styled.div`
+  height: var(--fontlg);
+  color: ${props => (props.error ? 'var(--error)' : 'var(--success)')};
+  opacity: ${props => (props.hasContent ? 1 : 0)};
+  transition: opacity 0.15s ease-in;
+`
 
-const Message = React.memo(({ message }) => (
-  <MessageContainer>{message.value}</MessageContainer>
-))
+const Message = React.memo(
+  ({ message }) => (
+    <MessageContainer error={message.error} hasContent={message.value}>
+      {message.value}
+    </MessageContainer>
+  ),
+  (prevProps, nextProps) =>
+    prevProps.message.value === nextProps.message.value &&
+    prevProps.message.error === nextProps.message.error
+)
 
 export { Form, Label, Input, Message }

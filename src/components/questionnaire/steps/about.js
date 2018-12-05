@@ -1,11 +1,12 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useEffect, useRef } from 'react'
 import useForm from '../../shared/hooks/useForm'
-import useDebounce from '../../shared/hooks/useDebounce'
+//import useDebounce from '../../shared/hooks/useDebounce'
 
 import { Form, Label, Input, Message } from '../../shared/form-components/index'
+import { randomEmoji, randomGreeting, db, noop } from '../../../utils'
 
 export default React.memo(() => {
-  const [message, setMessage] = useReducer(reducer, initialState)
+  const [message, dispatchMessage] = useReducer(reducer, initialState)
 
   const {
     getFormProps,
@@ -16,32 +17,55 @@ export default React.memo(() => {
     initialValues: {
       first_name: '',
     },
-    validators: {
-      first_name: val =>
-        val.trim().length === 0 ? 'You must have a name, right?' : false,
-    },
+    validators,
     validateOnChange: true,
   })
 
-  useDebounce(() => {
-    if (formState.first_name) {
-      console.log('hey', formState.first_name)
-    } else if (errors.first_name) {
-      console.log('show error')
-    }
-  }, 800)
+  const debounceRef = useRef()
+  useEffect(
+    () => {
+      if (message.type !== null) {
+        dispatchMessage({
+          type: 'RESET',
+        })
+      }
+      db(
+        debounceRef,
+        formState.first_name.trim().length > 1
+          ? () => {
+              dispatchMessage({
+                type: 'SUCCESS',
+                payload: {
+                  value: `${formState.first_name.trim()}, ${randomGreeting()} ${randomEmoji()}`,
+                },
+              })
+            }
+          : errors.first_name
+            ? () => {
+                dispatchMessage({
+                  type: 'ERROR',
+                  payload: {
+                    value: errors.first_name,
+                  },
+                })
+              }
+            : noop,
+        600
+      )
+    },
+    [formState.first_name]
+  )
 
   return (
     <Form {...getFormProps()}>
+      <Message message={message} />
       <Label error={errors.first_name}>
-        <Message message={message} />
         <Input
           {...getInputStateAndProps({
             id: 'first_name',
             autoComplete: 'off',
             placeholder: 'My name',
             error: errors.first_name,
-            trim: true,
           })}
         />
       </Label>
@@ -50,12 +74,29 @@ export default React.memo(() => {
 })
 
 const initialState = {
-  type: null,
-  message: '',
+  error: false,
+  value: '',
 }
 
-const reducer = (state, { type, action }) => {
+const validators = {
+  first_name: val =>
+    val.trim().length < 2 ? 'Sorry! This name is invalid. 😭' : false,
+}
+const reducer = (state, { type, payload }) => {
+  console.log(type, payload)
   switch (type) {
+    case 'SUCCESS':
+      return {
+        error: false,
+        value: payload.value,
+      }
+    case 'ERROR':
+      return {
+        error: true,
+        value: payload.value,
+      }
+    case 'RESET':
+      return initialState
     default:
       return state
   }
