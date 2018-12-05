@@ -24,12 +24,21 @@
   --fontxl: 4rem;
 
   --black: #000;
-  --black2: #525f7f;
+  --black2: rgba(15, 13, 32, 0.99);
   --white: #fff;
 
   --baseborderpadding: 25px;
 
   --baseboxshadow: 0 1px 3px rgba(188, 193, 217, .12), 0 5px 12px rgba(188, 193, 217, .25);
+}
+
+::selection {
+  background: var(--black2); /* WebKit/Blink Browsers */
+  color: #fff;
+}
+::-moz-selection {
+  background: var(--black2);/* Gecko Browsers */
+  color: #fff;
 }
 
 * {

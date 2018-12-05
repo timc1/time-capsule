@@ -1,11 +1,8 @@
-import styled from '@emotion/styled'
-import { Link } from 'gatsby'
+export {
+  screenmd,
+  screenlg,
+  slideInFromLeft,
+  UnstyledLink,
+} from './shared-styles'
 
-const UnstyledLink = styled(Link)`
-  position: relative;
-  text-decoration: none;
-  color: var(--black);
-  cursor: pointer;
-`
-
-export { UnstyledLink }
+export { RocketLink } from './animations/rocket-link'
