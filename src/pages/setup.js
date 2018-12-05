@@ -1,3 +1,4 @@
 import React from 'react'
+import SetupIndex from '../components/questionnaire/index'
 
-export default () => <div>setup page</div>
+export default () => <SetupIndex />

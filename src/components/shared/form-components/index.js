@@ -1,0 +1,54 @@
+import React from 'react'
+import styled from '@emotion/styled'
+
+const Form = styled.form``
+
+const Label = styled.label`
+  position: relative;
+  display: block;
+  cursor: text;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid var(--error);
+    border-radius: var(--baseborderradius);
+    background: transparent;
+    opacity: ${props => (props.error ? 1 : 0)};
+    transition-property: opacity;
+    transition: 0.15s ease-in;
+    z-index: 1;
+  }
+`
+
+const Input = styled.input`
+  position: relative;
+  display: block;
+  background-color: var(--white2);
+  border: none;
+  outline: none;
+  width: 100%;
+  border-radius: var(--baseborderradius);
+  color: #32325d;
+  font-family: var(--ff-sans-serif);
+  font-weight: var(--fontregular);
+  font-size: var(--fontmd);
+  line-height: var(--fontlg);
+  padding: 8px 15px;
+  transition: background-color 0.1s ease-in, color 0.1s ease-in;
+  &::placeholder {
+    transition: color 0.15s ease-in;
+    color: ${props => (props.error ? 'var(--error)' : 'var(--black4)')};
+  }
+`
+
+const MessageContainer = styled.div``
+
+const Message = React.memo(({ message }) => (
+  <MessageContainer>{message.value}</MessageContainer>
+))
+
+export { Form, Label, Input, Message }

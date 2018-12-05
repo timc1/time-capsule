@@ -7,6 +7,14 @@
 }
 
 @font-face {
+  font-family: 'NBInternational';
+  font-display: auto;
+  src: url('/assets/fonts/NBInternational_Bold.ttf');
+  font-weight: 600 900;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'GT-Super';
   font-display: auto;
   src: url('/assets/fonts/GT-Super-Text-Book.ttf');
@@ -17,17 +25,25 @@
 :root {
   --ff-serif: "GT-Super", "Georgia", "Times", "Times New Roman";
   --ff-sanserif: "NBInternational", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --fontbold: 800;
+  --fontregular: 400;
 
   --fontsm: .85rem;
   --fontmd: 1rem;
-  --fontlg: 1.5rem;
+  --fontlg: 2rem;
   --fontxl: 4rem;
 
   --black: #000;
   --black2: rgba(15, 13, 32, 0.99);
+  --black4: rgb(136, 152, 170);
   --white: #fff;
+  --white1: rgba(255, 255, 255, .7);
+  --white2: #f7fafc;
+
+  --error: #ffa27b;
 
   --baseborderpadding: 25px;
+  --baseborderradius: 2px;
 
   --baseboxshadow: 0 1px 3px rgba(188, 193, 217, .12), 0 5px 12px rgba(188, 193, 217, .25);
 }
@@ -69,7 +85,7 @@ body[data-url="/"] {
 }
 
 body[data-url="/setup"] {
-  background: #2B44FF;
+  background: #022B3A;
 }
 
 a, button, input, select, textarea, label {

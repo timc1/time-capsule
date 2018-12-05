@@ -50,4 +50,9 @@ const UnstyledLink = styled(Link)`
   }
 `
 
-export { screenmd, screenlg, slideInFromLeft, UnstyledLink }
+const UnstyledButton = styled.button`
+  border: none;
+  background: none;
+`
+
+export { screenmd, screenlg, slideInFromLeft, UnstyledLink, UnstyledButton }

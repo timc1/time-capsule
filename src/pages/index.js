@@ -1,37 +1,24 @@
-import React, { useRef, useEffect } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 
-import { UnstyledLink } from '../components/shared/styles'
-import RocketAnimation from '../components/shared/animations/rocket'
+import { slideInFromLeft, RocketLink } from '../components/shared/styles'
 
-//import Image from '../components/image'
-
-const IndexPage = React.memo(() => {
-  const containerRef = useRef()
-
-  useEffect(() => {
-    containerRef.current.classList.add('animated')
-    return () => containerRef.current.classList.remove('animated')
-  }, [])
-
+const IndexPage = () => {
   return (
-    <Intro ref={containerRef}>
-      <h1 className="title">There will be a title</h1>
+    <Intro>
+      <h1 className="title">New Year Time Capsule</h1>
       <h2 className="subtitle">
-        There will be some type of text that'll make people feel great and click
-        the call to action
+        Write a letter to your future self, take action, receive it 365 days
+        from today.
       </h2>
-      <AnimatedLink to="/setup">
-        <p className="text">start</p>
-        <RocketAnimation />
-      </AnimatedLink>
+      <RocketLink to="/setup" text="Start" />
     </Intro>
   )
-})
+}
 
 const Intro = styled.section`
-  position: absolute;
-  max-width: 600px;
+  position: relative;
+  max-width: 400px;
   margin-top: 100px;
 
   .title,
@@ -48,7 +35,7 @@ const Intro = styled.section`
 
   .subtitle {
     font-family: var(--ff-sans-serif);
-    font-size: var(--fontlg);
+    font-size: var(--fontmd);
     margin-bottom: 40px;
   }
 
@@ -62,21 +49,10 @@ const Intro = styled.section`
     background: var(--white);
     transform: scaleX(1);
     transform-origin: 100%;
-    transition: transform 0.15s ease-in;
-  }
-`
-
-const AnimatedLink = styled(UnstyledLink)`
-  display: inline-block;
-  padding: 15px 60px 15px 25px;
-  border: 2px solid var(--black);
-  outline: none;
-
-  .text {
-    display: inline-block;
-    margin: 0;
-    text-transform: uppercase;
-    transition: transform 0.15s ease-in;
+    transition: transform 0.25s ease-in;
+    animation: ${slideInFromLeft} 0.25s ease-in;
+    animation-fill-mode: forwards;
+    animation-delay: 0.5s;
   }
 `
 

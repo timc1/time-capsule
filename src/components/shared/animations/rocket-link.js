@@ -29,6 +29,7 @@ const AnimatedLink = styled(UnstyledLink)`
   display: inline-block;
   padding: 15px 60px 15px 25px;
   border: 2px solid var(--black);
+  border-radius: 2px;
   outline: none;
 
   .text {
