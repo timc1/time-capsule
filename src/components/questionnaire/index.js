@@ -30,8 +30,18 @@ const questionnaireSteps = [
     data: {
       component: Occupation,
       meta: {
-        sectionTitle: 'Career Goals',
-        question: 'HI',
+        sectionTitle: 'About',
+        question: 'I currently am...',
+      },
+    },
+  },
+  {
+    id: 'TEST',
+    data: {
+      component: Occupation,
+      meta: {
+        sectionTitle: 'About',
+        question: 'I currently am...',
       },
     },
   },
@@ -61,7 +71,10 @@ export default React.memo(props => {
                 index === 0
                   ? e => navigate('/')
                   : e => {
-                      setTransitionDirection('horizontal-right')
+                      if (canContinue) setContinue(false)
+                      if (transitionDirection !== 'horizontal-right') {
+                        setTransitionDirection('horizontal-right')
+                      }
                       context.dispatch({
                         type: 'NEXT',
                         payload: {
@@ -90,13 +103,16 @@ export default React.memo(props => {
             <NextButton
               disabled={!canContinue}
               onClick={e => {
-                setTransitionDirection('horizontal-left')
+                if (transitionDirection !== 'horizontal-left') {
+                  setTransitionDirection('horizontal-left')
+                }
                 context.dispatch({
                   type: 'NEXT',
                   payload: {
                     value: questionnaireSteps[index + 1].id,
                   },
                 })
+                if (canContinue) setContinue(false)
               }}
             >
               <span>Next</span>
