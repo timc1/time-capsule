@@ -12,11 +12,11 @@ const randomGreeting = () => {
   const num = randomNum(0, 2)
   return greetings[num]
 }
-const debounce = (func, wait, immediate) => {
-  var timeout, args, context, timestamp, result
+const debounceFn = (func, wait, immediate) => {
+  let timeout, args, context, timestamp, result
   if (null == wait) wait = 100
   function later() {
-    var last = Date.now() - timestamp
+    let last = Date.now() - timestamp
     if (last < wait && last >= 0) {
       timeout = setTimeout(later, wait - last)
     } else {
@@ -27,11 +27,11 @@ const debounce = (func, wait, immediate) => {
       }
     }
   }
-  var debounced = function() {
+  let debounced = function() {
     context = this
     args = arguments
     timestamp = Date.now()
-    var callNow = immediate && !timeout
+    let callNow = immediate && !timeout
     if (!timeout) timeout = setTimeout(later, wait)
     if (callNow) {
       result = func.apply(context, args)
@@ -55,12 +55,13 @@ const debounce = (func, wait, immediate) => {
   }
   return debounced
 }
-const db = (debouncedRef = {}, fn = () => {}, delayMs = 1000) => {
+const debounce = (debouncedRef = {}, fn = () => {}, delayMs = 1000) => {
   return (() => {
     if (debouncedRef.current) debouncedRef.current.clear()
-    debouncedRef.current = debounce(() => fn(), delayMs)
+    debouncedRef.current = debounceFn(() => fn(), delayMs)
     debouncedRef.current()
+    return debouncedRef.current
   })()
 }
 const noop = () => {}
-export { randomNum, randomEmoji, randomGreeting, db, noop }
+export { randomNum, randomEmoji, randomGreeting, debounce, noop }

@@ -4,7 +4,7 @@ import {
   Transition as ReactTransition,
 } from 'react-transition-group'
 
-import useBackgroundColorUpdater from '../hooks/useBackgroundColorUpdater'
+import useBackgroundColorUpdater from './hooks/useBackgroundColorUpdater'
 
 const timeout = 250
 const getBaseStyles = {

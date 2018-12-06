@@ -1,37 +1,60 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from '@emotion/styled'
+import { css } from '@emotion/core'
 import { UnstyledButton } from '../shared/styles'
 
 import caretLeft from '../../images/caret-left.svg'
 
 import About from './steps/about'
 
-export default () => {
-  // const { context, dispatch } = useQuestionnaire()
-  // context: {
-  //   currentStep: Component,
-  //   isValid: boolean,
-  // }
+import useQuestionnaire from '../shared/hooks/useQuestionnaire'
+
+const questionnaireSteps = [
+  {
+    id: 'ABOUT',
+    data: {
+      component: About,
+      meta: {
+        sectionTitle: 'About',
+        question: 'What is your name?',
+      },
+    },
+  },
+]
+
+export default React.memo(() => {
+  const [canContinue, setContinue] = useState(false)
+  const { context } = useQuestionnaire()
+  console.log('context', context)
+
+  const index = questionnaireSteps.findIndex(
+    step => step.id === context.state.meta.currentStepId
+  )
+  const {
+    data: { component: Component, meta },
+  } = questionnaireSteps[index]
 
   return (
     <Container>
       <DescriptionHeader>
         <BackButton>back</BackButton>
-        <p>About</p>
+        <p>{meta.sectionTitle}</p>
       </DescriptionHeader>
-      <Question>What is your name?</Question>
+      <Question>{meta.question}</Question>
       <UserInteractionSection>
-        <About />
+        <Component canContinue={canContinue} setContinue={setContinue} />
       </UserInteractionSection>
-      <NextButton>Next</NextButton>
+      <NextButton disabled={!canContinue}>
+        <span>Next</span>
+      </NextButton>
     </Container>
   )
-}
+})
 
 const Container = styled.section`
   max-width: 400px;
   width: 100%;
-  margin: 100px auto;
+  margin: 80px auto;
   padding: var(--baseborderpadding);
 `
 
@@ -54,7 +77,6 @@ const DescriptionHeader = styled.div`
 `
 
 const BackButton = styled(UnstyledButton)`
-  position: relative;
   color: var(--white1);
   padding: 0;
   font-size: 0;
@@ -85,4 +107,70 @@ const UserInteractionSection = styled.div`
   overflow: auto;
 `
 
-const NextButton = styled(UnstyledButton)``
+const NextButton = styled(UnstyledButton)`
+  padding: var(--fontmd);
+  width: 100%;
+  background: transparent;
+  border-radius: var(--baseborderradius);
+  font-weight: var(--fontbold);
+  color: var(--white);
+  cursor: pointer;
+  transition: transform 0.15s ease-in;
+  overflow: hidden;
+  outline: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gray);
+    z-index: -1;
+    transition: 0.25s ease-in;
+    transition-property: opacity, transform;
+    transform: ${props => (props.disabled ? 'scaleX(1)' : 'scaleX(0)')};
+    opacity: ${props => (props.disabled ? 1 : 0.8)};
+    transform-origin: ${props => (props.disabled ? '0 50%' : '100% 50%')};
+  }
+
+  > span {
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+    &::before {
+      background: var(--blue2);
+      z-index: -2;
+    }
+    &::after {
+      background: var(--blue);
+      z-index: -2;
+      transition: opacity 0.1s ease-in;
+    }
+  }
+
+  ${props =>
+    !props.disabled &&
+    css`
+      &:hover,
+      &:focus {
+        transform: translateY(-1px);
+        > span::after {
+          opacity: 0;
+        }
+      }
+      &:active {
+        transform: translateY(1px);
+        > span::after {
+          opacity: 1;
+        }
+      }
+    `};
+`

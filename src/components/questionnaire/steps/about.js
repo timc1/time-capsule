@@ -1,12 +1,13 @@
 import React, { useReducer, useEffect, useRef } from 'react'
 import useForm from '../../shared/hooks/useForm'
-//import useDebounce from '../../shared/hooks/useDebounce'
+import useQuestionnaire from '../../shared/hooks/useQuestionnaire'
 
 import { Form, Label, Input, Message } from '../../shared/form-components/index'
-import { randomEmoji, randomGreeting, db, noop } from '../../../utils'
+import { randomEmoji, randomGreeting, debounce, noop } from '../../../utils'
 
-export default React.memo(() => {
+export default React.memo(({ canContinue, setContinue }) => {
   const [message, dispatchMessage] = useReducer(reducer, initialState)
+  const { context } = useQuestionnaire()
 
   const {
     getFormProps,
@@ -15,7 +16,7 @@ export default React.memo(() => {
     state: formState,
   } = useForm({
     initialValues: {
-      first_name: '',
+      first_name: context.state.user.name,
     },
     validators,
     validateOnChange: true,
@@ -24,15 +25,16 @@ export default React.memo(() => {
   const debounceRef = useRef()
   useEffect(
     () => {
-      if (message.type !== null) {
+      if (message.value !== '') {
         dispatchMessage({
           type: 'RESET',
         })
       }
-      db(
+      const debouncedObj = debounce(
         debounceRef,
         formState.first_name.trim().length > 0
           ? () => {
+              if (!canContinue) setContinue(true)
               dispatchMessage({
                 type: 'SUCCESS',
                 payload: {
@@ -42,6 +44,7 @@ export default React.memo(() => {
             }
           : errors.first_name
             ? () => {
+                if (canContinue) setContinue(false)
                 dispatchMessage({
                   type: 'ERROR',
                   payload: {
@@ -52,6 +55,9 @@ export default React.memo(() => {
             : noop,
         500
       )
+
+      // Clear debounced function on unmount.
+      return () => debouncedObj.clear()
     },
     [formState.first_name]
   )
@@ -66,6 +72,7 @@ export default React.memo(() => {
             autoComplete: 'off',
             placeholder: 'My name',
             error: errors.first_name,
+            maxLength: 20,
           })}
         />
       </Label>
@@ -82,7 +89,6 @@ const validators = {
   first_name: val => (val.trim().length === 0 ? 'You need a name. 😭' : false),
 }
 const reducer = (state, { type, payload }) => {
-  console.log(type, payload)
   switch (type) {
     case 'SUCCESS':
       return {

@@ -51,8 +51,13 @@ const UnstyledLink = styled(Link)`
 `
 
 const UnstyledButton = styled.button`
+  position: relative;
   border: none;
   background: none;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 `
 
 export { screenmd, screenlg, slideInFromLeft, UnstyledLink, UnstyledButton }
