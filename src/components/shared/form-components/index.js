@@ -20,7 +20,6 @@ const Label = styled.label`
     opacity: ${props => (props.error ? 1 : 0)};
     transition-property: opacity;
     transition: 0.15s ease-in;
-    z-index: 1;
   }
 `
 

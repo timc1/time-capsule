@@ -36,17 +36,15 @@ export default React.memo(({ canContinue, setContinue }) => {
         debounceRef,
         name.length > 0
           ? () => {
-              if (!canContinue) {
-                setContinue(true)
-                context.dispatch({
-                  type: 'UPDATE_USER',
-                  payload: {
-                    user: {
-                      name,
-                    },
+              if (!canContinue) setContinue(true)
+              context.dispatch({
+                type: 'UPDATE_USER',
+                payload: {
+                  user: {
+                    name,
                   },
-                })
-              }
+                },
+              })
               dispatchMessage({
                 type: 'SUCCESS',
                 payload: {

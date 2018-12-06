@@ -10,6 +10,8 @@ import About from './steps/about'
 
 import useQuestionnaire from '../shared/hooks/useQuestionnaire'
 
+import Transition from '../shared/transition'
+
 const Occupation = () => <div>hi</div>
 
 const questionnaireSteps = [
@@ -36,10 +38,11 @@ const questionnaireSteps = [
 ]
 
 export default React.memo(props => {
-  console.log('props', props)
   const [canContinue, setContinue] = useState(false)
+  const [transitionDirection, setTransitionDirection] = useState(
+    'horizontal-left'
+  )
   const { context } = useQuestionnaire()
-  console.log('context', context)
 
   const index = questionnaireSteps.findIndex(
     step => step.id === context.state.meta.currentStepId
@@ -54,36 +57,47 @@ export default React.memo(props => {
         <Container>
           <DescriptionHeader>
             <BackButton
-              onClick={e =>
+              onClick={
                 index === 0
-                  ? navigate('/')
-                  : context.dispatch({
-                      type: 'NEXT',
-                      payload: {
-                        value: questionnaireSteps[index - 1].id,
-                      },
-                    })
+                  ? e => navigate('/')
+                  : e => {
+                      setTransitionDirection('horizontal-right')
+                      context.dispatch({
+                        type: 'NEXT',
+                        payload: {
+                          value: questionnaireSteps[index - 1].id,
+                        },
+                      })
+                    }
               }
             >
               back
             </BackButton>
             <p>{meta.sectionTitle}</p>
           </DescriptionHeader>
-          <Question>{meta.question}</Question>
-          <UserInteractionSection>
-            <Component canContinue={canContinue} setContinue={setContinue} />
-          </UserInteractionSection>
+          <Transition transitionKey={context.state.meta.currentStepId}>
+            <Question>{meta.question}</Question>
+          </Transition>
+          <Transition
+            transitionKey={context.state.meta.currentStepId}
+            type={transitionDirection}
+          >
+            <UserInteractionSection>
+              <Component canContinue={canContinue} setContinue={setContinue} />
+            </UserInteractionSection>
+          </Transition>
           {index !== questionnaireSteps.length - 1 && (
             <NextButton
               disabled={!canContinue}
-              onClick={e =>
+              onClick={e => {
+                setTransitionDirection('horizontal-left')
                 context.dispatch({
                   type: 'NEXT',
                   payload: {
                     value: questionnaireSteps[index + 1].id,
                   },
                 })
-              }
+              }}
             >
               <span>Next</span>
             </NextButton>

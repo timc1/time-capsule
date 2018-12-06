@@ -8,55 +8,77 @@ import useBackgroundColorUpdater from './hooks/useBackgroundColorUpdater'
 
 const timeout = 250
 const getBaseStyles = {
-  transitionProperties: 'opacity',
-}
-const getTransitionStyles = {
-  entering: {
-    position: 'absolute',
-    opacity: 0,
-  },
+  transitionProperties: 'opacity, transform',
   entered: {
     transition: `${timeout}ms ease-in`,
     opacity: 1,
+    transform: 'translateX(0)',
   },
   exiting: {
     transition: `${timeout}ms ease-in`,
     opacity: 0,
+    transform: 'translateX(0px)',
   },
+}
+const getTransitionStyles = type => {
+  switch (type.toUpperCase()) {
+    case 'HORIZONTAL-LEFT':
+      return {
+        entering: {
+          position: 'absolute',
+          opacity: 0,
+          transform: 'translateX(40px)',
+        },
+        ...getBaseStyles,
+      }
+    case 'HORIZONTAL-RIGHT':
+      return {
+        entering: {
+          position: 'absolute',
+          opacity: 0,
+          transform: 'translateX(-40px)',
+        },
+        ...getBaseStyles,
+      }
+    default:
+      return {
+        entering: {
+          position: 'absolute',
+          opacity: 0,
+        },
+        ...getBaseStyles,
+      }
+  }
 }
 
 const Transition = React.memo(
-  ({ children, location, transitionKey }) => {
+  ({ children, location, transitionKey, type = 'default' }) => {
     useBackgroundColorUpdater(location)
 
     return (
       <TransitionGroup component={null}>
         <ReactTransition
-          key={transitionKey || location.pathname}
-          location={location}
+          key={transitionKey}
           timeout={{
             enter: timeout,
             exit: timeout,
           }}
           style={{ position: 'relative' }}
         >
-          {status =>
-            console.log('status', status) || (
-              <div
-                style={{
-                  ...getBaseStyles,
-                  ...getTransitionStyles[status],
-                }}
-              >
-                {children}
-              </div>
-            )
-          }
+          {status => (
+            <div
+              style={{
+                ...getBaseStyles,
+                ...getTransitionStyles(type)[status],
+              }}
+            >
+              {children}
+            </div>
+          )}
         </ReactTransition>
       </TransitionGroup>
     )
-  },
-  () => false
+  }
 )
 
 export default Transition
