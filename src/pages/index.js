@@ -1,7 +1,11 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { slideInFromLeft, RocketLink } from '../components/shared/styles'
+import {
+  slideInFromLeft,
+  fadeIn,
+  RocketLink,
+} from '../components/shared/styles'
 
 const IndexPage = () => {
   return (
@@ -20,6 +24,10 @@ const Intro = styled.section`
   position: relative;
   max-width: 400px;
   margin-top: 100px;
+  opacity: 0;
+  animation: ${fadeIn} 0.25s ease-in;
+  animation-fill-mode: forwards;
+  animation-delay: 0.15s;
 
   .title,
   .subtitle {

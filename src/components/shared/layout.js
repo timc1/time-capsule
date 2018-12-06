@@ -35,13 +35,13 @@ const Layout = ({ children }) => (
         </Helmet>
         <Header siteTitle={data.site.siteMetadata.title} />
         <Location>
-          {({ location }) => {
-            return (
-              <Main>
-                <Transition location={location}>{children}</Transition>
-              </Main>
-            )
-          }}
+          {({ location }) => (
+            <Main>
+              <Transition location={location} transitionKey={location.pathname}>
+                {children}
+              </Transition>
+            </Main>
+          )}
         </Location>
       </>
     )}

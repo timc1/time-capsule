@@ -2,12 +2,15 @@ import React, { useState } from 'react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import { UnstyledButton } from '../shared/styles'
+import { Location } from '@reach/router'
 
 import caretLeft from '../../images/caret-left.svg'
 
 import About from './steps/about'
 
 import useQuestionnaire from '../shared/hooks/useQuestionnaire'
+
+const Occupation = () => <div>hi</div>
 
 const questionnaireSteps = [
   {
@@ -20,9 +23,20 @@ const questionnaireSteps = [
       },
     },
   },
+  {
+    id: 'OCCUPATION',
+    data: {
+      component: Occupation,
+      meta: {
+        sectionTitle: 'Career Goals',
+        question: 'HI',
+      },
+    },
+  },
 ]
 
-export default React.memo(() => {
+export default React.memo(props => {
+  console.log('props', props)
   const [canContinue, setContinue] = useState(false)
   const { context } = useQuestionnaire()
   console.log('context', context)
@@ -35,19 +49,48 @@ export default React.memo(() => {
   } = questionnaireSteps[index]
 
   return (
-    <Container>
-      <DescriptionHeader>
-        <BackButton>back</BackButton>
-        <p>{meta.sectionTitle}</p>
-      </DescriptionHeader>
-      <Question>{meta.question}</Question>
-      <UserInteractionSection>
-        <Component canContinue={canContinue} setContinue={setContinue} />
-      </UserInteractionSection>
-      <NextButton disabled={!canContinue}>
-        <span>Next</span>
-      </NextButton>
-    </Container>
+    <Location>
+      {({ navigate }) => (
+        <Container>
+          <DescriptionHeader>
+            <BackButton
+              onClick={e =>
+                index === 0
+                  ? navigate('/')
+                  : context.dispatch({
+                      type: 'NEXT',
+                      payload: {
+                        value: questionnaireSteps[index - 1].id,
+                      },
+                    })
+              }
+            >
+              back
+            </BackButton>
+            <p>{meta.sectionTitle}</p>
+          </DescriptionHeader>
+          <Question>{meta.question}</Question>
+          <UserInteractionSection>
+            <Component canContinue={canContinue} setContinue={setContinue} />
+          </UserInteractionSection>
+          {index !== questionnaireSteps.length - 1 && (
+            <NextButton
+              disabled={!canContinue}
+              onClick={e =>
+                context.dispatch({
+                  type: 'NEXT',
+                  payload: {
+                    value: questionnaireSteps[index + 1].id,
+                  },
+                })
+              }
+            >
+              <span>Next</span>
+            </NextButton>
+          )}
+        </Container>
+      )}
+    </Location>
   )
 })
 

@@ -2,6 +2,7 @@ export {
   screenmd,
   screenlg,
   slideInFromLeft,
+  fadeIn,
   UnstyledLink,
   UnstyledButton,
 } from './shared-styles'

@@ -14,6 +14,12 @@ const slideInFromLeft = keyframes`
   }
 `
 
+const fadeIn = keyframes`
+  to {
+    opacity: 1; 
+  }
+`
+
 const UnstyledLink = styled(Link)`
   position: relative;
   text-decoration: none;
@@ -60,4 +66,11 @@ const UnstyledButton = styled.button`
   }
 `
 
-export { screenmd, screenlg, slideInFromLeft, UnstyledLink, UnstyledButton }
+export {
+  screenmd,
+  screenlg,
+  slideInFromLeft,
+  fadeIn,
+  UnstyledLink,
+  UnstyledButton,
+}

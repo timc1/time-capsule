@@ -40,7 +40,21 @@ const initialState = {
 }
 
 const reducer = (state, { type, payload }) => {
+  console.log('type, payload', type, payload)
   switch (type) {
+    case 'NEXT':
+      return {
+        ...state,
+        meta: {
+          currentStepId: payload.value,
+        },
+      }
+    case 'UPDATE_USER':
+      const user = Object.assign({}, state.user, payload.user)
+      return {
+        ...state,
+        user,
+      }
     default:
       return state
   }
