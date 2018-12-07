@@ -1,75 +1,35 @@
-import React, { useEffect, useRef, useState } from 'react'
-import styled from '@emotion/styled'
+import React from 'react'
 
 import useQuestionnaire from '../../shared/hooks/useQuestionnaire'
-import useCheckboxes from '../../shared/hooks/useCheckboxes'
-
-import { UnstyledButton } from '../../shared/styles'
-import { Message } from '../../shared/form-components/index'
-
-import { debounce } from '../../../utils'
-
-import CheckboxGroup from '../../shared/form-components/checkbox-group'
+import useCheckbox, { Checkbox } from '../../shared/hooks/useCheckbox'
 
 export default React.memo(({ canContinue, setContinue }) => {
   const { context } = useQuestionnaire()
-  const {
-    state: occupationRoles,
-    getCheckboxItemProps,
-    addCheckboxItem,
-  } = useCheckboxes({
-    initialState: getOccupationRolesState(context),
-  })
-  const [message, setMessage] = useState(false)
 
-  const debounceRef = useRef()
-  useEffect(
-    () => {
-      if (message) setMessage(false)
-      const selectedRoles = occupationRoles.filter(role => role.isChecked)
-      if (selectedRoles.length === 0 && canContinue) {
-        setContinue(false)
-      }
-
-      const debouncedObj = debounce(
-        debounceRef,
-        () => {
-          if (selectedRoles.length > 0) {
-            if (!canContinue) setContinue(true)
-            setMessage({ value: 'Nice' })
-          }
-          if (selectedRoles.length === 0 && canContinue) {
-            setMessage({ error: true, value: 'You gotta pick something bro' })
-          }
-
-          context.dispatch({
-            type: 'UPDATE_ANSWER',
-            payload: {
-              id: 'occupationRole',
-              value: selectedRoles,
-            },
-          })
+  const { items, getCheckboxItemProps } = useCheckbox({
+    items: getOccupationRoles(context),
+    onSuccess: value => {
+      context.dispatch({
+        type: 'UPDATE_ANSWER',
+        payload: {
+          id: 'occupationRole',
+          value,
         },
-        500
-      )
-
-      return () => debouncedObj.clear()
+      })
     },
-    [JSON.stringify(occupationRoles)]
-  )
+    onError: error => {
+      console.log('error', error)
+    },
+  })
 
   return (
     <>
-      <Message message={message} />
-      <CheckboxGroup
-        items={occupationRoles}
-        getCheckboxItemProps={getCheckboxItemProps}
-      />
+      <Checkbox getCheckboxItemProps={getCheckboxItemProps} items={items} />
     </>
   )
 })
 
-const getOccupationRolesState = context => {
+const getOccupationRoles = context => {
   const roles = [
     { id: 'student', name: 'Student' },
     { id: 'designer', name: 'Designer' },

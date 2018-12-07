@@ -1,27 +1,20 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { UnstyledButton } from '../styles'
+import { UnstyledButton } from '../../styles'
 
-export default ({ items, getCheckboxItemProps }) => {
-  return (
-    <CheckboxContainer>
-      {items.map(({ id, name, ...props }) => (
-        <li key={id}>
-          <CheckboxButton
-            {...getCheckboxItemProps({
-              id,
-              ...props,
-            })}
-          >
-            <span>{name}</span>
-          </CheckboxButton>
-        </li>
-      ))}
-    </CheckboxContainer>
-  )
-}
+const Checkbox = ({ getCheckboxItemProps, items }) => (
+  <CheckboxGroup>
+    {items.map(item => (
+      <li key={item.id}>
+        <CheckboxItem {...getCheckboxItemProps({ id: item.id })}>
+          <span>{item.name}</span>
+        </CheckboxItem>
+      </li>
+    ))}
+  </CheckboxGroup>
+)
 
-const CheckboxContainer = styled.ul`
+const CheckboxGroup = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -29,7 +22,7 @@ const CheckboxContainer = styled.ul`
   padding: 5px;
 `
 
-const CheckboxButton = styled(UnstyledButton)`
+const CheckboxItem = styled(UnstyledButton)`
   padding: 15px 20px;
   margin: 5px;
   outline: none;
@@ -81,3 +74,5 @@ const CheckboxButton = styled(UnstyledButton)`
     transform: translateY(1px);
   }
 `
+
+export { Checkbox }
