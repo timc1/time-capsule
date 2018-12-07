@@ -1,9 +1,14 @@
 import React, { useReducer, useEffect, useRef } from 'react'
-import useForm from '../../shared/hooks/useForm'
-import useQuestionnaire from '../../shared/hooks/useQuestionnaire'
+import useForm from '../../../shared/hooks/useForm'
+import useQuestionnaire from '../../../shared/hooks/useQuestionnaire'
 
-import { Form, Label, Input, Message } from '../../shared/form-components/index'
-import { randomEmoji, randomGreeting, debounce, noop } from '../../../utils'
+import {
+  Form,
+  Label,
+  Input,
+  Message,
+} from '../../../shared/form-components/index'
+import { randomEmoji, randomGreeting, debounce, noop } from '../../../../utils'
 
 export default React.memo(({ canContinue, setContinue }) => {
   const [message, dispatchMessage] = useReducer(reducer, initialState)

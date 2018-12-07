@@ -6,8 +6,8 @@ import { Location } from '@reach/router'
 
 import caretLeft from '../../images/caret-left.svg'
 
-import About from './steps/about'
-import Occupation from './steps/occupation'
+import About from './steps/about/index'
+import Occupation from './steps/occupation/index'
 
 import useQuestionnaire from '../shared/hooks/useQuestionnaire'
 
