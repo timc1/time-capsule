@@ -45,6 +45,7 @@ export default ({ items = [], onSuccess, onError }) => {
   )
 
   return {
+    // Spreads the current state onto each checkbox item.
     getCheckboxItemProps,
     items: state,
   }

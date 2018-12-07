@@ -8,6 +8,7 @@ const getQuestionnaire = q => ({
   },
   answers: {
     occupationRole: [],
+    occupationAdditionalRoles: [],
     occupationCompany: '',
     occupationPlan: '',
     hobbyThisYear: '',

@@ -7,6 +7,7 @@
     "@emotion/core": "^10.0.2",
     "@emotion/styled": "^10.0.2",
     "@reach/router": "^1.2.1",
+    "babel-preset-gatsby": "^0.1.6",
     "gatsby": "^2.0.53",
     "gatsby-image": "^2.0.20",
     "gatsby-plugin-layout": "^1.0.10",
@@ -33,6 +34,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
     "prettier": "^1.15.2"
   },
   "repository": {

@@ -26,18 +26,23 @@ const UnstyledLink = styled(Link)`
   color: var(--black);
   cursor: pointer;
   transform: translateY(0);
-  transition: transform 0.1s ease-in;
+  transition: transform 0.15s ease-in;
 
-  &::before {
+  &::before,
+  &::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    box-shadow: var(--baseboxshadow);
+  }
+
+  &::before {
+    box-shadow: var(--boxshadow2);
     opacity: 0;
-    transition: opacity 0.1s ease-in;
+    transition-property: opacity;
+    transition: 0.15s ease-in;
   }
 
   &:hover,
@@ -78,6 +83,10 @@ const UnstyledButton = styled.button`
   }
 `
 
+const ExitButton = styled.button``
+
+const ExitIcon = styled.div``
+
 export {
   screenmd,
   screenlg,
@@ -85,4 +94,6 @@ export {
   fadeIn,
   UnstyledLink,
   UnstyledButton,
+  ExitButton,
+  ExitIcon,
 }
