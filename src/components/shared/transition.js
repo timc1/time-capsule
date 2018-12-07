@@ -27,7 +27,7 @@ const getTransitionStyles = type => {
         entering: {
           position: 'absolute',
           opacity: 0,
-          transform: 'translateX(40px)',
+          transform: 'translateX(20px)',
         },
         ...getBaseStyles,
       }
@@ -36,7 +36,7 @@ const getTransitionStyles = type => {
         entering: {
           position: 'absolute',
           opacity: 0,
-          transform: 'translateX(-40px)',
+          transform: 'translateX(-20px)',
         },
         ...getBaseStyles,
       }

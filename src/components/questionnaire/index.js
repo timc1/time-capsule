@@ -7,12 +7,11 @@ import { Location } from '@reach/router'
 import caretLeft from '../../images/caret-left.svg'
 
 import About from './steps/about'
+import Occupation from './steps/occupation'
 
 import useQuestionnaire from '../shared/hooks/useQuestionnaire'
 
 import Transition from '../shared/transition'
-
-const Occupation = () => <div>hi</div>
 
 const questionnaireSteps = [
   {
@@ -31,7 +30,7 @@ const questionnaireSteps = [
       component: Occupation,
       meta: {
         sectionTitle: 'About',
-        question: 'I currently am...',
+        question: 'I currently am a...',
       },
     },
   },
@@ -41,7 +40,7 @@ const questionnaireSteps = [
       component: Occupation,
       meta: {
         sectionTitle: 'About',
-        question: 'I currently am...',
+        question: 'I currently am a...',
       },
     },
   },
@@ -202,9 +201,8 @@ const NextButton = styled(UnstyledButton)`
     background: var(--gray);
     z-index: -1;
     transition: 0.25s ease-in;
-    transition-property: opacity, transform;
+    transition-property: transform;
     transform: ${props => (props.disabled ? 'scaleX(1)' : 'scaleX(0)')};
-    opacity: ${props => (props.disabled ? 1 : 0.8)};
     transform-origin: ${props => (props.disabled ? '0 50%' : '100% 50%')};
   }
 

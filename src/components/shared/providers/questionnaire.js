@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react'
+import { getQuestionnaire } from '../../../models/questionnaire'
 
 const QuestionnaireContext = React.createContext()
 
@@ -17,27 +18,7 @@ const QuestionnaireProvider = React.memo(({ children }) => {
   )
 })
 
-const initialState = {
-  meta: {
-    currentStepId: 'ABOUT',
-  },
-  user: {
-    name: '',
-    email: '',
-  },
-  answers: {
-    occupationRole: '',
-    occupationCompany: '',
-    hobbyThisYear: '',
-    hobbyThisYearPlan: '',
-    wantToLearn: '',
-    wantToLearnPlan: '',
-    placeToVisit: '',
-    placeToVisitPlan: '',
-    betterYourCommunity: '',
-    betterYourCommunityPlan: '',
-  },
-}
+const initialState = getQuestionnaire()
 
 const reducer = (state, { type, payload }) => {
   console.log('type, payload', type, payload)
@@ -54,6 +35,14 @@ const reducer = (state, { type, payload }) => {
       return {
         ...state,
         user,
+      }
+    case 'UPDATE_ANSWER':
+      const updatedAnswers = Object.assign({}, state.answers, {
+        [payload.id]: payload.value,
+      })
+      return {
+        ...state,
+        answers: updatedAnswers,
       }
     default:
       return state

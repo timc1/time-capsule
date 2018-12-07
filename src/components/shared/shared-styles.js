@@ -64,6 +64,18 @@ const UnstyledButton = styled.button`
   &:disabled {
     cursor: not-allowed;
   }
+
+  > span {
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
 `
 
 export {
