@@ -20,6 +20,15 @@ const fadeIn = keyframes`
   }
 `
 
+const zoomIn = keyframes`
+  from {
+    transform: scale(.5); 
+  }
+  to {
+    transform: scale(1); 
+  }
+`
+
 const UnstyledLink = styled(Link)`
   position: relative;
   text-decoration: none;
@@ -92,6 +101,7 @@ export {
   screenlg,
   slideInFromLeft,
   fadeIn,
+  zoomIn,
   UnstyledLink,
   UnstyledButton,
   ExitButton,

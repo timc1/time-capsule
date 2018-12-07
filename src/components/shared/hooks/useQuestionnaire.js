@@ -1,13 +1,20 @@
 import { useContext } from 'react'
-import { QuestionnaireContext } from '../providers/questionnaire.js'
+import { QuestionnaireContext } from '../providers/questionnaire/index'
 
 export default () => {
-  const { state, dispatch } = useContext(QuestionnaireContext)
+  const {
+    questionnaireState,
+    questionnaireDispatch,
+    questionnaireOptionsState,
+    questionnaireOptionsDispatch,
+  } = useContext(QuestionnaireContext)
 
   return {
     context: {
-      state,
-      dispatch,
+      questionnaireState,
+      questionnaireDispatch,
+      questionnaireOptionsState,
+      questionnaireOptionsDispatch,
     },
   }
 }

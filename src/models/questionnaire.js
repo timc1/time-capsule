@@ -8,7 +8,6 @@ const getQuestionnaire = q => ({
   },
   answers: {
     occupationRole: [],
-    occupationAdditionalRoles: [],
     occupationCompany: '',
     occupationPlan: '',
     hobbyThisYear: '',
@@ -24,4 +23,15 @@ const getQuestionnaire = q => ({
   },
 })
 
-export { getQuestionnaire }
+const getQuestionnaireOptions = () => ({
+  occupationRole: [
+    { id: 'student', name: 'Student' },
+    { id: 'designer', name: 'Designer' },
+    { id: 'developer', name: 'Developer' },
+    { id: 'businessPerson', name: 'Business Person' },
+    { id: 'artist', name: 'Artist' },
+    { id: 'contentCreator', name: 'Content Creator' },
+  ],
+})
+
+export { getQuestionnaire, getQuestionnaireOptions }

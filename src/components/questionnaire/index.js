@@ -54,7 +54,7 @@ export default React.memo(props => {
   const { context } = useQuestionnaire()
 
   const index = questionnaireSteps.findIndex(
-    step => step.id === context.state.meta.currentStepId
+    step => step.id === context.questionnaireState.meta.currentStepId
   )
   const {
     data: { component: Component, meta },
@@ -74,7 +74,7 @@ export default React.memo(props => {
                       if (transitionDirection !== 'horizontal-right') {
                         setTransitionDirection('horizontal-right')
                       }
-                      context.dispatch({
+                      context.questionnaireDispatch({
                         type: 'NEXT',
                         payload: {
                           value: questionnaireSteps[index - 1].id,
@@ -87,11 +87,13 @@ export default React.memo(props => {
             </BackButton>
             <p>{meta.sectionTitle}</p>
           </DescriptionHeader>
-          <Transition transitionKey={context.state.meta.currentStepId}>
+          <Transition
+            transitionKey={context.questionnaireState.meta.currentStepId}
+          >
             <Question>{meta.question}</Question>
           </Transition>
           <Transition
-            transitionKey={context.state.meta.currentStepId}
+            transitionKey={context.questionnaireState.meta.currentStepId}
             type={transitionDirection}
           >
             <UserInteractionSection>
@@ -105,7 +107,7 @@ export default React.memo(props => {
                 if (transitionDirection !== 'horizontal-left') {
                   setTransitionDirection('horizontal-left')
                 }
-                context.dispatch({
+                context.questionnaireDispatch({
                   type: 'NEXT',
                   payload: {
                     value: questionnaireSteps[index + 1].id,
@@ -176,10 +178,14 @@ const Question = styled.h1`
 
 const UserInteractionSection = styled.div`
   height: 300px;
+  margin-top: 40px;
+  display: grid;
+  grid-gap: 5px;
+  grid-auto-rows: max-content;
   overflow: auto;
 `
 
-const NextButton = styled(UnstyledButton)`
+export const NextButton = styled(UnstyledButton)`
   padding: var(--fontmd);
   width: 100%;
   background: transparent;

@@ -5,6 +5,9 @@ import useCheckbox, { Checkbox } from '../../shared/hooks/useCheckbox'
 
 import Modal from '../../shared/modal'
 
+import { AddNewOccupationItem } from './intermediate-components/occupation'
+import { ClickForMoreButton } from './intermediate-components/shared'
+
 export default React.memo(({ canContinue, setContinue }) => {
   // useQuestionnaire stores all our questionnaire values
   const { context } = useQuestionnaire()
@@ -14,7 +17,7 @@ export default React.memo(({ canContinue, setContinue }) => {
 
   console.log('state', state)
   console.log('context', context)
-  const { items, getCheckboxItemProps } = useCheckbox({
+  const { items, getCheckboxItemProps, dispatchCheckbox } = useCheckbox({
     items: getOccupationRoles(context),
     onSuccess: values => {
       context.dispatch({
@@ -40,19 +43,34 @@ export default React.memo(({ canContinue, setContinue }) => {
 
   return (
     <>
+      <Modal
+        domElement="modal-root"
+        toggleModal={action =>
+          dispatch({
+            type: 'TOGGLE_MODAL_OFF',
+          })
+        }
+        isShowing={state.isOptionsModalShowing}
+        backgroundColor="rgba(2, 43, 58,.9)"
+      >
+        <AddNewOccupationItem
+          items={items}
+          dispatchCheckbox={dispatchCheckbox}
+        />
+      </Modal>
       <Checkbox getCheckboxItemProps={getCheckboxItemProps} items={items} />
-      <button
+      <ClickForMoreButton
         onClick={e =>
           dispatch({
-            type: 'TOGGLE_MODAL',
+            type: 'TOGGLE_MODAL_ON',
             payload: {
-              modal: <div>hii!</div>,
+              modal: {},
             },
           })
         }
       >
-        Options
-      </button>
+        <span>More</span>
+      </ClickForMoreButton>
     </>
   )
 })
@@ -71,11 +89,17 @@ const reducer = (state, { type, payload }) => {
         ...state,
         isCompanyTypeShowing: true,
       }
-    case 'TOGGLE_MODAL':
+    case 'TOGGLE_MODAL_ON':
       return {
         ...state,
         isOptionsModalShowing: true,
         optionsModalContent: payload.modal,
+      }
+    case 'TOGGLE_MODAL_OFF':
+      return {
+        ...state,
+        isOptionsModalShowing: false,
+        optionsModalContent: null,
       }
     case 'RESET':
       return initialState
@@ -92,13 +116,17 @@ const getOccupationRoles = context => {
     { id: 'developer', name: 'Developer' },
     { id: 'businessPerson', name: 'Business Person' },
     { id: 'artist', name: 'Artist' },
-    { id: 'content', name: 'Content Creator' },
+    { id: 'contentCreator', name: 'Content Creator' },
     ...context.state.answers.occupationAdditionalRoles,
   ]
+
   const filtered = roles.map(role => {
     if (
       context.state.answers.occupationRole.findIndex(i => i.id === role.id) !==
-      -1
+        -1 &&
+      context.state.answers.occupationAdditionalRoles.findIndex(
+        i => i.id === role.id
+      ) !== -1
     ) {
       role.isChecked = true
     } else {

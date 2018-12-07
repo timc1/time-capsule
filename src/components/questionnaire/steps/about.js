@@ -16,7 +16,7 @@ export default React.memo(({ canContinue, setContinue }) => {
     state: formState,
   } = useForm({
     initialValues: {
-      first_name: context.state.user.name,
+      first_name: context.questionnaireState.user.name,
     },
     validators,
     validateOnChange: true,
@@ -37,7 +37,7 @@ export default React.memo(({ canContinue, setContinue }) => {
         name.length > 0
           ? () => {
               if (!canContinue) setContinue(true)
-              context.dispatch({
+              context.questionnaireDispatch({
                 type: 'UPDATE_USER',
                 payload: {
                   user: {

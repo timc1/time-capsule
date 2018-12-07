@@ -1,7 +1,6 @@
 import { useReducer } from 'react'
 
 const reducer = (state, { type, payload }) => {
-  //console.log(type, payload)
   switch (type) {
     case 'INPUT_CHANGE':
       return {
@@ -56,14 +55,17 @@ export default ({
     }
   }
 
-  const getFormProps = () => ({
+  const getFormProps = ({ onSubmit } = {}) => ({
     onSubmit: e => {
       e.preventDefault()
-      console.log('submit')
+      if (onSubmit) {
+        const { errors, ...values } = state
+        onSubmit(values)
+      }
     },
   })
 
-  const getInputStateAndProps = ({ id, onChange, ...props }) => ({
+  const getInputStateAndProps = ({ id, onChange, ...props } = {}) => ({
     id,
     value: state[id],
     onChange: e => {

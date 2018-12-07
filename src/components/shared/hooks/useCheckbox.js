@@ -48,10 +48,13 @@ export default ({ items = [], onSuccess, onError }) => {
     // Spreads the current state onto each checkbox item.
     getCheckboxItemProps,
     items: state,
+    // Expose dispatch - allows user to dispatch actions if necessary - inversion of control.
+    dispatchCheckbox: dispatch,
   }
 }
 
 const reducer = (state, { type, payload }) => {
+  console.log('toggled reducer', type, payload)
   switch (type) {
     case 'TOGGLE':
       const copy = state.slice()

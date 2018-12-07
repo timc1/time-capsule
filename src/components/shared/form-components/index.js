@@ -7,6 +7,9 @@ const Label = styled.label`
   position: relative;
   display: block;
   cursor: text;
+  color: var(--white);
+  font-family: var(--ff-serif);
+  font-weight: var(--fontbold);
   &::before {
     content: '';
     position: absolute;
@@ -32,7 +35,7 @@ const Input = styled.input`
   width: 100%;
   border-radius: var(--baseborderradius);
   color: #32325d;
-  font-family: var(--ff-sans-serif);
+  font-family: var(--ff-sanserif);
   font-weight: var(--fontregular);
   font-size: var(--fontmd);
   line-height: var(--fontlg);
