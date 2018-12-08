@@ -4,9 +4,8 @@ import { zoomIn, UnstyledButton } from '../../../shared/styles'
 
 const SmallModalContainer = styled.div`
   position: relative;
-  margin: calc(30vh) auto 100px auto;
-  padding: var(--baseborderpadding);
-  max-width: 400px;
+  margin: calc(25vh) auto 100px auto;
+  max-width: 340px;
   width: 100%;
   animation: ${zoomIn} 0.15s ease-in;
 
@@ -35,31 +34,33 @@ const ClickForMoreButton = styled(UnstyledButton)`
     transition: opacity 0.1s ease-in;
     &::before {
       border-radius: var(--baseborderradius);
-      box-shadow: 0 0 12px var(--white1);
-      transform: scale(0.9);
+      box-shadow: 0 0 1px var(--white1);
+      transform: scale(0.8);
       opacity: 0;
       transition-property: opacity, transform;
       transition: 0.1s ease-in;
     }
   }
 
-  &:hover,
-  &:focus {
+  &:hover {
     transform: translateY(-1px);
     > span {
       opacity: 1;
     }
   }
 
-  &:active {
-    transform: translateY(1px);
-  }
-
-  &:active,
   &:focus {
     > span::before {
       opacity: 1;
-      transform: scale(1);
+      transform: scale(1.05);
+    }
+  }
+
+  &:active {
+    transform: translateY(1px);
+    > span::before {
+      opacity: 1;
+      transform: scale(0.95);
     }
   }
 `

@@ -30,7 +30,7 @@ const questionnaireSteps = [
       component: Occupation,
       meta: {
         sectionTitle: 'About',
-        question: 'I currently am a...',
+        question: 'I am currently a...',
       },
     },
   },
@@ -126,10 +126,9 @@ export default React.memo(props => {
 })
 
 const Container = styled.section`
-  max-width: 400px;
+  max-width: 340px;
   width: 100%;
   margin: 80px auto;
-  padding: var(--baseborderpadding);
 `
 
 const DescriptionHeader = styled.div`
@@ -157,6 +156,7 @@ const BackButton = styled(UnstyledButton)`
   padding: 5px;
   margin-left: -5px;
   cursor: w-resize;
+  outline: none;
   &::before {
     content: '';
     height: var(--fontsm);
@@ -165,6 +165,43 @@ const BackButton = styled(UnstyledButton)`
     display: block;
     -webkit-mask: url(${caretLeft}) center center / contain no-repeat;
     mask: url(${caretLeft}) center center / contain no-repeat;
+  }
+
+  &::after {
+    content: '';
+    box-shadow: 0 0 1px var(--white1);
+    border-radius: var(--baseborderradius);
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: scale(0.7);
+    transition: transform 0.1s ease-in;
+  }
+
+  &:hover {
+    > div {
+      opacity: 1;
+    }
+  }
+
+  &:focus {
+    &::after {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+
+  &:active {
+    > div {
+      opacity: 0.7;
+    }
+    &::after {
+      opacity: 0.7;
+      transform: scale(0.95);
+    }
   }
 `
 
@@ -177,12 +214,11 @@ const Question = styled.h1`
 `
 
 const UserInteractionSection = styled.div`
-  height: 300px;
-  margin-top: 40px;
+  min-height: 300px;
+  height: 100%;
+  margin: 40px 0;
   display: grid;
-  grid-gap: 5px;
   grid-auto-rows: max-content;
-  overflow: auto;
 `
 
 export const NextButton = styled(UnstyledButton)`

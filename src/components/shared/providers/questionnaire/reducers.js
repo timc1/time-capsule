@@ -24,7 +24,6 @@ const questionnaireReducer = (state, { type, payload }) => {
     case 'ADD_UNIQUE_OCCUPATION':
       const occupationRole = state.answers.occupationRole.slice()
       occupationRole.push(payload.value)
-      console.log('occupationRole', occupationRole)
       return {
         ...state,
         answers: {

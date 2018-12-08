@@ -92,9 +92,88 @@ const UnstyledButton = styled.button`
   }
 `
 
-const ExitButton = styled.button``
+const ExitButton = styled(UnstyledButton)`
+  height: 30px;
+  width: 30px;
+  border-radius: var(--baseborderradius);
+  outline: none;
+  > div {
+    opacity: 0.7;
+  }
+  > span {
+    display: none;
+  }
+  &::after {
+    content: '';
+    box-shadow: 0 0 1px var(--white1);
+    border-radius: 50%;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: scale(0.7);
+    transition: transform 0.1s ease-in;
+  }
 
-const ExitIcon = styled.div``
+  &:hover {
+    > div {
+      opacity: 1;
+    }
+  }
+
+  &:focus {
+    &::after {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+
+  &:active {
+    > div {
+      opacity: 0.7;
+    }
+    &::after {
+      opacity: 0.7;
+      transform: scale(0.95);
+    }
+  }
+`
+
+const ExitIcon = styled.div`
+  color: var(--white);
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 0;
+  margin-left: 0;
+  width: 21px;
+  height: 21px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 21px;
+    height: 2px;
+    background-color: currentColor;
+    border-radius: var(--baseborderradius);
+  }
+
+  &::before {
+    transform: rotate(-45deg);
+  }
+
+  &::after {
+    transform: rotate(45deg);
+  }
+`
 
 export {
   screenmd,

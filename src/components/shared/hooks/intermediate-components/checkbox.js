@@ -18,14 +18,12 @@ const CheckboxGroup = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: auto;
-  padding: 5px;
 `
 
 const CheckboxItem = React.memo(
   styled(UnstyledButton)`
     padding: 15px 20px;
-    margin: 5px;
+    margin: 0 5px 10px 5px;
     outline: none;
     cursor: pointer;
     transition: transform 0.15s ease-in;

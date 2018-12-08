@@ -29,6 +29,10 @@ export default React.memo(({ canContinue, setContinue }) => {
     items: context.questionnaireState.answers.occupationRole,
     onSuccess: value => {
       if (!canContinue) setContinue(true)
+      setMessage({
+        error: false,
+        value: formatMessage(value),
+      })
 
       if (firstRender.current) {
         firstRender.current = false
@@ -42,11 +46,6 @@ export default React.memo(({ canContinue, setContinue }) => {
           value,
         },
       })
-
-      setMessage({
-        error: false,
-        value: formatMessage(context),
-      })
     },
     onError: error => {
       if (canContinue) setContinue(false)
@@ -57,6 +56,14 @@ export default React.memo(({ canContinue, setContinue }) => {
       setMessage({
         error: true,
         value: 'You need to select something!',
+      })
+
+      context.questionnaireDispatch({
+        type: 'UPDATE_OCCUPATION',
+        payload: {
+          id: 'occupationRole',
+          value: error,
+        },
       })
     },
     callBeforeDebounceFn: () =>

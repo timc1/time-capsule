@@ -52,10 +52,9 @@ export default ({ items = [], onSuccess, onError, callBeforeDebounceFn }) => {
         () => {
           const selectedItems = state.filter(item => item.isChecked)
           if (selectedItems.length > 0 && onSuccess) onSuccess(state)
-          if (selectedItems.length === 0 && onError)
-            onError('No items selected.')
+          if (selectedItems.length === 0 && onError) onError(state)
         },
-        800
+        600
       )
 
       return () => debouncedObj.clear()

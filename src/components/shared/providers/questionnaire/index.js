@@ -10,7 +10,7 @@ const QuestionnaireProvider = React.memo(({ children }) => {
     initialQuestionnaireState
   )
 
-  console.log('quetionnaireState', questionnaireState)
+  console.log('questionnaireState', questionnaireState)
 
   useEffect(() => {
     const root = document.getElementById('___gatsby')

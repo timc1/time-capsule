@@ -48,7 +48,9 @@ const Input = styled.input`
 `
 
 const MessageContainer = styled.div`
-  height: var(--fontlg);
+  min-height: var(--fontlg);
+  padding-bottom: 5px;
+  text-align: center;
   color: ${props => (props.error ? 'var(--error)' : 'var(--success)')};
   opacity: ${props => (props.hasContent ? 1 : 0)};
   transition: opacity 0.15s ease-in;

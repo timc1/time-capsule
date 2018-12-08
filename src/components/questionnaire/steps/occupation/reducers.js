@@ -1,3 +1,5 @@
+import { randomEmoji } from '../../../../utils'
+
 const initialUIState = {
   isCompanyTypeShowing: false,
   isHappinessShowing: false,
@@ -31,8 +33,21 @@ const occupationsUIReducer = (state, { type, payload }) => {
   }
 }
 
-const formatMessage = context => {
-  return 'yayy!!!'
+const formatMessage = items => {
+  const selected = items.filter(i => i.isChecked)
+  let formatted = ''
+
+  selected.forEach((item, index) => {
+    if (index === selected.length - 1 && index !== 0) {
+      formatted += ' and '
+    }
+    formatted += `${item.name}`
+    if (index !== selected.length - 1 && index !== selected.length - 2) {
+      formatted += ', '
+    }
+  })
+
+  return formatted.toLowerCase() + ` ${randomEmoji()}`
 }
 
 export { initialUIState, occupationsUIReducer, formatMessage }

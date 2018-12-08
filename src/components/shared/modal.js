@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react'
 import ReactDOM from 'react-dom'
 
+import styled from '@emotion/styled'
+
 import { ExitButton, ExitIcon } from './styles'
 
 const root = document.getElementById('___gatsby')
@@ -27,6 +29,7 @@ export default React.memo(
       height: 100%; 
       width: 100%;
       background: ${backgroundColor};
+      padding: var(--baseborderpadding);
       z-index: 9;
       opacity: 0;
       transition: opacity .15s ease-in;
@@ -79,14 +82,17 @@ export default React.memo(
     return el.current
       ? ReactDOM.createPortal(
           <>
-            <ExitButton
-              ref={initialFocusRef}
-              onClick={e => toggleModal()}
-              tabIndex={isShowing ? '0' : '-1'}
-            >
-              <ExitIcon />
-              <span className="screen-reader">Exit modal</span>
-            </ExitButton>
+            <ExitContainer>
+              <ExitButton
+                ref={initialFocusRef}
+                onClick={e => toggleModal()}
+                tabIndex={isShowing ? '0' : '-1'}
+              >
+                <ExitIcon />
+                <span className="screen-reader">Exit modal</span>
+              </ExitButton>
+              <p className="nice-to-know">(or click Esc)</p>
+            </ExitContainer>
             {children}
           </>,
           el.current
@@ -100,3 +106,19 @@ const handleKeyDown = (e, toggleModal) => {
     toggleModal()
   }
 }
+
+// Styles
+
+const ExitContainer = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  align-items: center;
+  grid-gap 15px;
+
+  .nice-to-know {
+    margin: 0; 
+    color: var(--black4);
+    font-size: var(--fontsm);
+  }
+`
