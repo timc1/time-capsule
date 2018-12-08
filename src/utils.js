@@ -63,5 +63,14 @@ const debounce = (debouncedRef = {}, fn = () => {}, delayMs = 1000) => {
     return debouncedRef.current
   })()
 }
+const deepClone = arr => {
+  const copy = arr.slice()
+  const clonedCopy = copy.map(f => {
+    let o = {}
+    for (let i in f) o[i] = f[i]
+    return o
+  })
+  return clonedCopy
+}
 const noop = () => {}
-export { randomNum, randomEmoji, randomGreeting, debounce, noop }
+export { randomNum, randomEmoji, randomGreeting, debounce, deepClone, noop }

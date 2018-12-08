@@ -24,16 +24,18 @@ const AddNewOccupationItem = React.memo(({ dispatchCheckbox, toggleModal }) => {
             // Validate if value already exists in items
             const uniqueId = occupation.replace(/\s/g, '').toUpperCase()
 
-            const exists = context.questionnaireState.answers.occupationRole.filter(
+            const roles = context.questionnaireState.answers.occupationRole
+            const index = roles.findIndex(
               item => item.id.toUpperCase() === uniqueId
-            )[0]
+            )
+            const exists = index !== -1 ? roles[index] : null
 
             if (exists) {
               if (exists.isChecked === false) {
                 dispatchCheckbox({
                   type: 'TOGGLE',
                   payload: {
-                    id: exists.id,
+                    index,
                   },
                 })
               }

@@ -17,39 +17,43 @@ export default React.memo(({ canContinue, setContinue }) => {
 
   // This reducer manages UI state specifically relevant within this component
   const [state, dispatch] = useReducer(occupationsUIReducer, initialUIState)
-  //
+
   const [message, setMessage] = useState({
     error: false,
     value: '',
   })
 
-  const firstUpdate = useRef(true)
+  // Use ref to prevent first useEffect call on setting error messages.
+  const firstRender = useRef(true)
   const { getCheckboxItemProps, items, dispatchCheckbox } = useCheckbox({
     items: context.questionnaireState.answers.occupationRole,
     onSuccess: value => {
       if (!canContinue) setContinue(true)
-      if (firstUpdate.current) {
-        firstUpdate.current = false
+
+      if (firstRender.current) {
+        firstRender.current = false
         return
       }
+
       context.questionnaireDispatch({
-        type: 'UPDATE_ANSWER',
+        type: 'UPDATE_OCCUPATION',
         payload: {
           id: 'occupationRole',
           value,
         },
       })
+
       setMessage({
         error: false,
         value: formatMessage(context),
       })
     },
     onError: error => {
-      if (firstUpdate.current) {
-        firstUpdate.current = false
+      if (canContinue) setContinue(false)
+      if (firstRender.current) {
+        firstRender.current = false
         return
       }
-      if (canContinue) setContinue(false)
       setMessage({
         error: true,
         value: 'You need to select something!',

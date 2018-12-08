@@ -1,24 +1,15 @@
 import { useReducer, useRef, useEffect } from 'react'
-import { debounce } from '../../../utils'
+import { debounce, deepClone } from '../../../utils'
 export { Checkbox } from './intermediate-components/checkbox'
 
 export default ({ items = [], onSuccess, onError, callBeforeDebounceFn }) => {
-  const [state, dispatch] = useReducer(reducer, items)
+  const clonedCopy = deepClone(items)
 
-  useEffect(
-    () => {
-      dispatch({
-        type: 'SETUP',
-        payload: {
-          items,
-        },
-      })
-    },
-    [items.length]
-  )
+  const [state, dispatch] = useReducer(reducer, clonedCopy)
 
   const getCheckboxItemProps = ({ id, ...props }) => {
     const index = state.findIndex(cbox => cbox.id === id)
+
     return {
       id,
       isChecked: state[index].isChecked,
@@ -26,7 +17,7 @@ export default ({ items = [], onSuccess, onError, callBeforeDebounceFn }) => {
         dispatch({
           type: 'TOGGLE',
           payload: {
-            id,
+            index,
           },
         })
       },
@@ -34,27 +25,42 @@ export default ({ items = [], onSuccess, onError, callBeforeDebounceFn }) => {
     }
   }
 
+  const firstRender = useRef(true)
+  useEffect(
+    () => {
+      if (firstRender.current) {
+        firstRender.current = false
+        return
+      }
+      dispatch({
+        type: 'SETUP',
+        payload: {
+          items: clonedCopy,
+        },
+      })
+    },
+    [items.length]
+  )
+
   const debouncedRef = useRef()
   useEffect(
     () => {
       if (callBeforeDebounceFn) callBeforeDebounceFn()
-      const selectedItems = items.filter(item => item.isChecked)
+
       const debouncedObj = debounce(
         debouncedRef,
         () => {
-          if (selectedItems.length > 0 && onSuccess) {
-            onSuccess(items)
-          }
-          if (selectedItems.length === 0 && onError) {
+          const selectedItems = state.filter(item => item.isChecked)
+          if (selectedItems.length > 0 && onSuccess) onSuccess(state)
+          if (selectedItems.length === 0 && onError)
             onError('No items selected.')
-          }
         },
-        500
+        800
       )
 
       return () => debouncedObj.clear()
     },
-    [JSON.stringify(items)]
+    [JSON.stringify(state)]
   )
 
   return {
@@ -69,14 +75,11 @@ export default ({ items = [], onSuccess, onError, callBeforeDebounceFn }) => {
 const reducer = (state, { type, payload }) => {
   switch (type) {
     case 'TOGGLE':
-      const copy = state.slice()
-      copy.forEach(item => {
-        if (item.id === payload.id) {
-          item.isChecked = !item.isChecked
-        }
-      })
-      return copy
+      const clonedCopy = deepClone(state)
+      clonedCopy[payload.index].isChecked = !clonedCopy[payload.index].isChecked
+      return clonedCopy
     case 'SETUP':
+      console.log('hi', payload)
       return payload.items
     default:
       return state

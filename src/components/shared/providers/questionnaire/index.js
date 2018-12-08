@@ -10,6 +10,8 @@ const QuestionnaireProvider = React.memo(({ children }) => {
     initialQuestionnaireState
   )
 
+  console.log('quetionnaireState', questionnaireState)
+
   useEffect(() => {
     const root = document.getElementById('___gatsby')
     const el = document.createElement('div')
