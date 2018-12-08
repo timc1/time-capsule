@@ -1,5 +1,5 @@
 const questionnaireReducer = (state, { type, payload }) => {
-  console.log('questionnaireReducer', type, payload)
+  console.log('type', type)
   switch (type) {
     case 'NEXT':
       return {
@@ -14,7 +14,7 @@ const questionnaireReducer = (state, { type, payload }) => {
         ...state,
         user,
       }
-    case 'UPDATE_ANSWER':
+    case 'UPDATE_OCCUPATION':
       return {
         ...state,
         answers: Object.assign({}, state.answers, {
@@ -22,13 +22,12 @@ const questionnaireReducer = (state, { type, payload }) => {
         }),
       }
     case 'ADD_UNIQUE_OCCUPATION':
-      const additionalRoles = state.answers.occupationAdditionalRoles.slice()
-      additionalRoles.push(payload.value)
+      const occupationRole = state.answers.occupationRole.slice()
+      occupationRole.push(payload.value)
       return {
         ...state,
         answers: {
-          ...state.answers,
-          occupationAdditionalRoles: additionalRoles,
+          occupationRole,
         },
       }
     default:
@@ -36,11 +35,4 @@ const questionnaireReducer = (state, { type, payload }) => {
   }
 }
 
-const questionnaireOptionsReducer = (state, { type, payload }) => {
-  switch (type) {
-    default:
-      return state
-  }
-}
-
-export { questionnaireReducer, questionnaireOptionsReducer }
+export { questionnaireReducer }

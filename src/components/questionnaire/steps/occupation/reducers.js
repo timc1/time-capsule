@@ -31,4 +31,8 @@ const occupationsUIReducer = (state, { type, payload }) => {
   }
 }
 
-export { initialUIState, occupationsUIReducer }
+const formatMessage = context => {
+  return 'yayy!!!'
+}
+
+export { initialUIState, occupationsUIReducer, formatMessage }

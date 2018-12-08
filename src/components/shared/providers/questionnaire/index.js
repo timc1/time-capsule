@@ -1,9 +1,6 @@
 import React, { useReducer, useEffect } from 'react'
-import {
-  getQuestionnaire,
-  getQuestionnaireOptions,
-} from '../../../../models/questionnaire'
-import { questionnaireReducer, questionnaireOptionsReducer } from './reducers'
+import { getQuestionnaire } from '../../../../models/questionnaire'
+import { questionnaireReducer } from './reducers'
 
 const QuestionnaireContext = React.createContext()
 
@@ -11,10 +8,6 @@ const QuestionnaireProvider = React.memo(({ children }) => {
   const [questionnaireState, questionnaireDispatch] = useReducer(
     questionnaireReducer,
     initialQuestionnaireState
-  )
-  const [questionnaireOptionsState, questionnaireOptionsDispatch] = useReducer(
-    questionnaireOptionsReducer,
-    initialQuestionnaireOptions
   )
 
   useEffect(() => {
@@ -30,8 +23,6 @@ const QuestionnaireProvider = React.memo(({ children }) => {
       value={{
         questionnaireState,
         questionnaireDispatch,
-        questionnaireOptionsState,
-        questionnaireOptionsDispatch,
       }}
     >
       {children}
@@ -40,7 +31,5 @@ const QuestionnaireProvider = React.memo(({ children }) => {
 })
 
 const initialQuestionnaireState = getQuestionnaire()
-
-const initialQuestionnaireOptions = getQuestionnaireOptions()
 
 export { QuestionnaireContext, QuestionnaireProvider }

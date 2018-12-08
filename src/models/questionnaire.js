@@ -7,7 +7,14 @@ const getQuestionnaire = q => ({
     email: '',
   },
   answers: {
-    occupationRole: [],
+    occupationRole: [
+      { id: 'student', name: 'Student', isChecked: false },
+      { id: 'designer', name: 'Designer', isChecked: false },
+      { id: 'developer', name: 'Developer', isChecked: false },
+      { id: 'businessPerson', name: 'Business Person', isChecked: false },
+      { id: 'artist', name: 'Artist', isChecked: false },
+      { id: 'contentCreator', name: 'Content Creator', isChecked: false },
+    ],
     occupationCompany: '',
     occupationPlan: '',
     hobbyThisYear: '',
@@ -23,15 +30,4 @@ const getQuestionnaire = q => ({
   },
 })
 
-const getQuestionnaireOptions = () => ({
-  occupationRole: [
-    { id: 'student', name: 'Student' },
-    { id: 'designer', name: 'Designer' },
-    { id: 'developer', name: 'Developer' },
-    { id: 'businessPerson', name: 'Business Person' },
-    { id: 'artist', name: 'Artist' },
-    { id: 'contentCreator', name: 'Content Creator' },
-  ],
-})
-
-export { getQuestionnaire, getQuestionnaireOptions }
+export { getQuestionnaire }

@@ -7,7 +7,7 @@ import useQuestionnaire from '../../../../shared/hooks/useQuestionnaire'
 import { SmallModalContainer } from '../../shared/index'
 import { NextButton } from '../../../index'
 
-const AddNewOccupationItem = React.memo(({ items, dispatchCheckbox }) => {
+const AddNewOccupationItem = React.memo(({ dispatchCheckbox, toggleModal }) => {
   const { context } = useQuestionnaire()
   const { getFormProps, getInputStateAndProps, state } = useForm({
     initialValues: {
@@ -23,30 +23,36 @@ const AddNewOccupationItem = React.memo(({ items, dispatchCheckbox }) => {
           onSubmit: ({ occupation }) => {
             // Validate if value already exists in items
             const uniqueId = occupation.replace(/\s/g, '').toUpperCase()
-            console.log('items', items)
-            const exists = items.filter(
+
+            const exists = context.questionnaireState.answers.occupationRole.filter(
               item => item.id.toUpperCase() === uniqueId
             )[0]
 
             if (exists) {
-              dispatchCheckbox({
-                type: 'TOGGLE',
-                payload: {
-                  id: exists.id,
-                },
-              })
+              if (exists.isChecked === false) {
+                dispatchCheckbox({
+                  type: 'TOGGLE',
+                  payload: {
+                    id: exists.id,
+                  },
+                })
+              }
             } else {
               const formattedPayload = {
-                id: occupation.toLowerCase(),
+                id: uniqueId.toLowerCase(),
                 name: occupation,
+                isChecked: true,
               }
-              context.dispatch({
+
+              context.questionnaireDispatch({
                 type: 'ADD_UNIQUE_OCCUPATION',
                 payload: {
                   value: formattedPayload,
                 },
               })
             }
+
+            toggleModal()
           },
         })}
       >

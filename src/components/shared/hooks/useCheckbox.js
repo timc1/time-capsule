@@ -2,8 +2,20 @@ import { useReducer, useRef, useEffect } from 'react'
 import { debounce } from '../../../utils'
 export { Checkbox } from './intermediate-components/checkbox'
 
-export default ({ items = [], onSuccess, onError }) => {
+export default ({ items = [], onSuccess, onError, callBeforeDebounceFn }) => {
   const [state, dispatch] = useReducer(reducer, items)
+
+  useEffect(
+    () => {
+      dispatch({
+        type: 'SETUP',
+        payload: {
+          items,
+        },
+      })
+    },
+    [items.length]
+  )
 
   const getCheckboxItemProps = ({ id, ...props }) => {
     const index = state.findIndex(cbox => cbox.id === id)
@@ -25,23 +37,24 @@ export default ({ items = [], onSuccess, onError }) => {
   const debouncedRef = useRef()
   useEffect(
     () => {
-      const selectedItems = state.filter(item => item.isChecked)
+      if (callBeforeDebounceFn) callBeforeDebounceFn()
+      const selectedItems = items.filter(item => item.isChecked)
       const debouncedObj = debounce(
         debouncedRef,
         () => {
           if (selectedItems.length > 0 && onSuccess) {
-            onSuccess(selectedItems)
+            onSuccess(items)
           }
           if (selectedItems.length === 0 && onError) {
             onError('No items selected.')
           }
         },
-        800
+        500
       )
 
       return () => debouncedObj.clear()
     },
-    [JSON.stringify(state)]
+    [JSON.stringify(items)]
   )
 
   return {
@@ -54,7 +67,6 @@ export default ({ items = [], onSuccess, onError }) => {
 }
 
 const reducer = (state, { type, payload }) => {
-  console.log('toggled reducer', type, payload)
   switch (type) {
     case 'TOGGLE':
       const copy = state.slice()
@@ -64,6 +76,8 @@ const reducer = (state, { type, payload }) => {
         }
       })
       return copy
+    case 'SETUP':
+      return payload.items
     default:
       return state
   }
