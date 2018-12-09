@@ -6,7 +6,7 @@ import useCheckbox, { Checkbox } from '../../../shared/hooks/useCheckbox'
 import Modal from '../../../shared/modal'
 
 import { AddNewOccupationItem } from './sections/add-new-occupation'
-import { ClickForMoreButton } from '../shared/index'
+import { ClickForMoreButton, SectionName } from '../shared/index'
 import { Message } from '../../../shared/form-components/index'
 
 import { initialUIState, occupationsUIReducer, formatMessage } from './reducers'
@@ -25,7 +25,11 @@ export default React.memo(({ canContinue, setContinue }) => {
 
   // Use ref to prevent first useEffect call on setting error messages.
   const firstRender = useRef(true)
-  const { getCheckboxItemProps, items, dispatchCheckbox } = useCheckbox({
+  const {
+    getCheckboxItemProps: getRoleCheckboxItemProps,
+    items: roleItems,
+    dispatchRoleCheckbox,
+  } = useCheckbox({
     items: context.questionnaireState.answers.occupationRole,
     onSuccess: value => {
       if (!canContinue) setContinue(true)
@@ -73,6 +77,39 @@ export default React.memo(({ canContinue, setContinue }) => {
       }),
   })
 
+  const rolesFirstRender = useRef(true)
+  const {
+    getCheckboxItemProps: getPlaceItemProps,
+    items: occupationPlaceItems,
+    dispatchCheckbox: dispatchOccupationPlace,
+  } = useCheckbox({
+    items: context.questionnaireState.answers.occupationPlace,
+    onSuccess: value => {
+      console.log('value', value)
+      context.questionnaireDispatch({
+        type: 'UPDATE_OCCUPATION',
+        payload: {
+          id: 'occupationPlace',
+          value: value,
+        },
+      })
+    },
+    onError: error => {
+      console.log('error')
+      if (rolesFirstRender.current) {
+        rolesFirstRender.current = false
+        return
+      }
+      context.questionnaireDispatch({
+        type: 'UPDATE_OCCUPATION',
+        payload: {
+          id: 'occupationPlace',
+          value: error,
+        },
+      })
+    },
+  })
+
   const toggleModal = action =>
     dispatch({
       type: 'TOGGLE_MODAL_OFF',
@@ -84,12 +121,16 @@ export default React.memo(({ canContinue, setContinue }) => {
         domElement="modal-root"
         toggleModal={toggleModal}
         isShowing={state.isOptionsModalShowing}
-        backgroundColor="rgba(2, 43, 58,.9)"
+        backgroundColor="rgba(0,0,0,.9)"
       >
         {state.optionsModalContent}
       </Modal>
       <Message message={message} />
-      <Checkbox items={items} getCheckboxItemProps={getCheckboxItemProps} />
+      <SectionName>Role</SectionName>
+      <Checkbox
+        items={roleItems}
+        getCheckboxItemProps={getRoleCheckboxItemProps}
+      />
       <ClickForMoreButton
         onClick={e =>
           dispatch({
@@ -97,7 +138,7 @@ export default React.memo(({ canContinue, setContinue }) => {
             payload: {
               modal: (
                 <AddNewOccupationItem
-                  dispatchCheckbox={dispatchCheckbox}
+                  dispatchCheckbox={dispatchRoleCheckbox}
                   toggleModal={toggleModal}
                 />
               ),
@@ -107,6 +148,11 @@ export default React.memo(({ canContinue, setContinue }) => {
       >
         <span>More</span>
       </ClickForMoreButton>
+      <SectionName>Place</SectionName>
+      <Checkbox
+        items={occupationPlaceItems}
+        getCheckboxItemProps={getPlaceItemProps}
+      />
     </>
   )
 })

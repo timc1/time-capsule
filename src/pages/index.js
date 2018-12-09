@@ -44,6 +44,7 @@ const Intro = styled.section`
   .subtitle {
     font-family: var(--ff-sans-serif);
     font-size: var(--fontmd);
+    font-weight: var(--fontregular);
     margin-bottom: 40px;
   }
 

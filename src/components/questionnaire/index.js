@@ -25,22 +25,32 @@ const questionnaireSteps = [
     },
   },
   {
-    id: 'OCCUPATION',
+    id: 'OCCUPATION_TITLE',
     data: {
       component: Occupation,
       meta: {
         sectionTitle: 'About',
-        question: 'I am currently a...',
+        question: 'I am currently a',
       },
     },
   },
   {
-    id: 'TEST',
+    id: 'OCCUPATION_COMPANY',
     data: {
       component: Occupation,
       meta: {
         sectionTitle: 'About',
-        question: 'I currently am a...',
+        question: 'working at',
+      },
+    },
+  },
+  {
+    id: 'OCCUPATION_HAPPINESS',
+    data: {
+      component: Occupation,
+      meta: {
+        sectionTitle: 'About',
+        question: 'working at...',
       },
     },
   },
@@ -126,7 +136,7 @@ export default React.memo(props => {
 })
 
 const Container = styled.section`
-  max-width: 340px;
+  max-width: 400px;
   width: 100%;
   margin: 80px auto;
 `
@@ -216,7 +226,7 @@ const Question = styled.h1`
 const UserInteractionSection = styled.div`
   min-height: 300px;
   height: 100%;
-  margin: 40px 0;
+  margin: 5rem 0 2.5rem 0;
   display: grid;
   grid-auto-rows: max-content;
 `

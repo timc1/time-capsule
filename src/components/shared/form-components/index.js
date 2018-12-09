@@ -34,7 +34,7 @@ const Input = styled.input`
   outline: none;
   width: 100%;
   border-radius: var(--baseborderradius);
-  color: #32325d;
+  color: var(--black);
   font-family: var(--ff-sanserif);
   font-weight: var(--fontregular);
   font-size: var(--fontmd);
@@ -48,10 +48,12 @@ const Input = styled.input`
 `
 
 const MessageContainer = styled.div`
-  min-height: var(--fontlg);
-  padding-bottom: 5px;
+  position: absolute;
+  top: -2.5rem;
+  width: 100%;
   text-align: center;
   color: ${props => (props.error ? 'var(--error)' : 'var(--success)')};
+  font-size: var(--fontsm);
   opacity: ${props => (props.hasContent ? 1 : 0)};
   transition: opacity 0.15s ease-in;
 `

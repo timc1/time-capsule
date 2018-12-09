@@ -18,7 +18,7 @@ const questionnaireReducer = (state, { type, payload }) => {
         ...state,
         answers: {
           ...state.answers,
-          occupationRole: payload.value,
+          [payload.id]: payload.value,
         },
       }
     case 'ADD_UNIQUE_OCCUPATION':

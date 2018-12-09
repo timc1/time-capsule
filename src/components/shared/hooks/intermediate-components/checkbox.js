@@ -17,12 +17,12 @@ const Checkbox = ({ getCheckboxItemProps, items }) => (
 const CheckboxGroup = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  margin: 0 -5px;
 `
 
 const CheckboxItem = React.memo(
   styled(UnstyledButton)`
-    padding: 15px 20px;
+    padding: 8px 10px 10px 10px;
     margin: 0 5px 10px 5px;
     outline: none;
     cursor: pointer;
@@ -32,16 +32,17 @@ const CheckboxItem = React.memo(
 
     > span {
       color: var(--white2);
+      font-size: var(--fontsm);
       &::before,
       &::after {
         transition: opacity 0.15s ease-in;
         z-index: -1;
       }
       &::before {
-        border: 2px solid var(--white1);
+        border: 1px solid var(--white1);
       }
       &::after {
-        border: 2px solid var(--success);
+        border: 1px solid var(--success);
         background: var(--white3);
         opacity: ${props => (props.isChecked ? 1 : 0)};
       }
@@ -54,13 +55,9 @@ const CheckboxItem = React.memo(
       left: 0;
       right: 0;
       bottom: 0;
-      border: 2px solid var(--black3);
+      border: 1px solid var(--black3);
       opacity: 0;
       transition: opacity 0.15s ease-in;
-    }
-
-    &:hover {
-      transform: translateY(-1px);
     }
 
     &:focus {

@@ -44,10 +44,11 @@
   --white3: rgba(255, 255, 255, 0.1);
 
   --error: #ffa27b;
-  --success: #21ffca;
+  --success: #9CF0E1;
   --success2: #96ffe6;
   --blue: #0900e0;
   --blue2: #001aff;
+  --yellow: #FFC864;
   --gray: #b5c7da;
 
   --baseborderpadding: 25px;
@@ -94,7 +95,7 @@ body[data-url="/"] {
 }
 
 body[data-url="/setup"] {
-  background: #022B3A;
+  background: var(--black);
 }
 
 a, button, input, select, textarea, label {
