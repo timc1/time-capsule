@@ -82,7 +82,7 @@ const SectionName = React.memo(styled.h2`
 
 const Checkboxes = React.memo(
   ({ items, onSuccess, onError, callBeforeDebounceFn, limit }) => {
-    const { getCheckboxItemProps, items: checkboxItems } = useCheckbox({
+    const { getCheckboxItemProps, items: updatedItems } = useCheckbox({
       items,
       onSuccess,
       onError,
@@ -92,7 +92,7 @@ const Checkboxes = React.memo(
 
     return (
       <Checkbox
-        items={checkboxItems}
+        items={updatedItems}
         getCheckboxItemProps={getCheckboxItemProps}
       />
     )

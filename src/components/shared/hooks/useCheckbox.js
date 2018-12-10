@@ -46,7 +46,7 @@ export default ({
         },
       })
     },
-    [items.length]
+    [JSON.stringify(items)]
   )
 
   const debouncedRef = useRef()

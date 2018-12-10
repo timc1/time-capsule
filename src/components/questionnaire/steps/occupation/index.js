@@ -36,8 +36,7 @@ export default React.memo(({ canContinue, setContinue }) => {
 
   // Occupation role name
   // Use ref to prevent first useEffect call on setting error messages.
-  const firstRender = useRef(true)
-
+  const occupationFirstRender = useRef(true)
   // Occupation role work place
   const rolesFirstRender = useRef(true)
 
@@ -68,11 +67,6 @@ export default React.memo(({ canContinue, setContinue }) => {
               value: formatMessage({ roles: value }),
             })
 
-            if (firstRender.current) {
-              firstRender.current = false
-              return
-            }
-
             context.questionnaireDispatch({
               type: 'UPDATE_OCCUPATION',
               payload: {
@@ -87,8 +81,8 @@ export default React.memo(({ canContinue, setContinue }) => {
           }}
           onError={error => {
             if (canContinue) setContinue(false)
-            if (firstRender.current) {
-              firstRender.current = false
+            if (occupationFirstRender.current) {
+              occupationFirstRender.current = false
               return
             }
             setMessage({
