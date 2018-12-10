@@ -55,7 +55,7 @@ const CheckboxItem = React.memo(
       left: 0;
       right: 0;
       bottom: 0;
-      border: 1px solid var(--gray2);
+      border: 1px solid var(--gray3);
       border-radius: var(--baseborderradius);
       opacity: 0;
       transition: opacity 0.15s ease-in;

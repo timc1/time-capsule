@@ -49,11 +49,11 @@ const Input = styled.input`
 
 const MessageContainer = styled.div`
   position: absolute;
-  top: -2.5rem;
+  bottom: 100%;
   width: 100%;
-  text-align: center;
+  margin-bottom: 15px;
   color: ${props => (props.error ? 'var(--error)' : 'var(--success)')};
-  font-size: var(--fontsm);
+  font-size: var(--fontmd);
   opacity: ${props => (props.hasContent ? 1 : 0)};
   transition: opacity 0.15s ease-in;
 `

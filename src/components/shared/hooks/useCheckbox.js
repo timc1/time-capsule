@@ -2,7 +2,13 @@ import { useReducer, useRef, useEffect } from 'react'
 import { debounce, deepClone } from '../../../utils'
 export { Checkbox } from './intermediate-components/checkbox'
 
-export default ({ items = [], onSuccess, onError, callBeforeDebounceFn }) => {
+export default ({
+  items = [],
+  onSuccess,
+  onError,
+  callBeforeDebounceFn,
+  limit,
+}) => {
   const clonedCopy = deepClone(items)
 
   const [state, dispatch] = useReducer(reducer, clonedCopy)
@@ -15,9 +21,10 @@ export default ({ items = [], onSuccess, onError, callBeforeDebounceFn }) => {
       isChecked: state[index].isChecked,
       onClick: e => {
         dispatch({
-          type: 'TOGGLE',
+          type: limit ? 'TOGGLE_LIMIT' : 'TOGGLE',
           payload: {
             index,
+            limit,
           },
         })
       },
@@ -77,6 +84,9 @@ const reducer = (state, { type, payload }) => {
       const clonedCopy = deepClone(state)
       clonedCopy[payload.index].isChecked = !clonedCopy[payload.index].isChecked
       return clonedCopy
+    case 'TOGGLE_LIMIT':
+      console.log('ayoo')
+      return state
     case 'SETUP':
       console.log('hi', payload)
       return payload.items

@@ -15,6 +15,9 @@ const slideInFromLeft = keyframes`
 `
 
 const fadeIn = keyframes`
+  from {
+    opacity: 0; 
+  }
   to {
     opacity: 1; 
   }
@@ -26,6 +29,17 @@ const zoomIn = keyframes`
   }
   to {
     transform: scale(1); 
+  }
+`
+
+const fadeInUp = keyframes`
+  from {
+    opacity: 0; 
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1; 
+    transform: translateY(0px);
   }
 `
 
@@ -105,7 +119,7 @@ const ExitButton = styled(UnstyledButton)`
   }
   &::after {
     content: '';
-    box-shadow: 0 0 1px var(--white1);
+    box-shadow: 0 0 1px var(--black1);
     border-radius: 50%;
     opacity: 0;
     position: absolute;
@@ -142,7 +156,7 @@ const ExitButton = styled(UnstyledButton)`
 `
 
 const ExitIcon = styled.div`
-  color: var(--white);
+  color: var(--black);
   position: absolute;
   top: 0;
   left: 0;
@@ -180,6 +194,7 @@ export {
   screenlg,
   slideInFromLeft,
   fadeIn,
+  fadeInUp,
   zoomIn,
   UnstyledLink,
   UnstyledButton,

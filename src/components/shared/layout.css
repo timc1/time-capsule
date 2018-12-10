@@ -30,17 +30,20 @@
 
   --fontsm: .85rem;
   --fontmd: 1rem;
-  --fontlg: 2rem;
+  --fontlg: 2.5rem;
   --fontxl: 4rem;
 
   --black: #000;
   --black1: rgba(15, 13, 32, 0.99);
+  --black2: rgba(0,0,0,.95);
   --white: #fff;
   --white1: rgba(255,255,255,.9);
+  --white2: rgba(246, 250, 253, 0.9);
 
   --gray: #F6FAFD;
   --gray1: #c6c9cc;
   --gray2: #606467;
+  --gray3: #272635;
   --blue: #3c3cff;
   --blue1: #3372ff;
   --error: #ffa27b;

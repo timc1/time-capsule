@@ -39,7 +39,7 @@ const questionnaireSteps = [
     data: {
       component: Occupation,
       meta: {
-        sectionTitle: 'About',
+        sectionTitle: 'Interests',
         question: 'working at',
       },
     },
@@ -61,7 +61,6 @@ export default React.memo(props => {
   const [transitionDirection, setTransitionDirection] = useState(
     'horizontal-left'
   )
-  console.log('transitionDirection', transitionDirection)
   const { context } = useQuestionnaire()
 
   const index = questionnaireSteps.findIndex(

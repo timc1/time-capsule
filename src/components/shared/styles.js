@@ -3,6 +3,7 @@ export {
   screenlg,
   slideInFromLeft,
   fadeIn,
+  fadeInUp,
   zoomIn,
   UnstyledLink,
   UnstyledButton,

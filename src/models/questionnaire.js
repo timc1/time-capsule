@@ -21,7 +21,7 @@ const getQuestionnaire = q => ({
       { id: 'company', name: 'Company', isChecked: false },
       { id: 'independent', name: 'Independent', isChecked: false },
     ],
-    occupationHappiness: [],
+    occupationHappiness: baseHappiness,
     occupationPlan: '',
     hobbyThisYear: '',
     hobbyThisYearPlan: '',
@@ -35,5 +35,13 @@ const getQuestionnaire = q => ({
     betterYourCommunityPlan: '',
   },
 })
+
+const baseHappiness = [
+  { id: 'unsatisfied', name: 'Unsatisfied', isChecked: false },
+  { id: 'notSoWell', name: 'Not So Well', isChecked: false },
+  { id: 'couldBeBetter', name: 'Could Be Better', isChecked: false },
+  { id: 'satisfied', name: 'Satisfied', isChecked: false },
+  { id: 'vertySatisfied', name: 'Very Satisfied', isChecked: false },
+]
 
 export { getQuestionnaire }

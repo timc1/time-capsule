@@ -32,7 +32,7 @@ export default React.memo(
       padding: var(--baseborderpadding);
       z-index: 9;
       opacity: 0;
-      transition: opacity .15s ease-in;
+      transition: opacity 0.15s ease-in;
       overflow: auto;
       -webkit-overflow-scrolling: touch; 
       pointer-events: none;
@@ -44,7 +44,7 @@ export default React.memo(
         modalRoot.removeChild(el.current)
         document.removeEventListener('keydown', eventListener.current)
         // Unfreeze root content div
-        root.style = `width: 100%`
+        root.style = `width: 100%;`
         window.scrollTo({ top: currentScrollPosition.current })
       }
     }, [])

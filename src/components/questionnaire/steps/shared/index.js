@@ -1,14 +1,17 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { zoomIn, UnstyledButton } from '../../../shared/styles'
+import { fadeInUp, UnstyledButton } from '../../../shared/styles'
+import { Checkbox } from '../../../shared/hooks/intermediate-components/checkbox'
+
+import useCheckbox from '../../../shared/hooks/useCheckbox'
 
 const SmallModalContainer = styled.div`
   position: relative;
   margin: calc(25vh) auto 100px auto;
   max-width: 400px;
   width: 100%;
-  animation: ${zoomIn} 0.15s ease-in;
+  animation: ${fadeInUp} 0.15s ease-in;
 
   label {
     margin-bottom: 10px;
@@ -17,7 +20,7 @@ const SmallModalContainer = styled.div`
 
   form {
     display: grid;
-    grid-gap: 10px;
+    grid-gap: 15px;
   }
 `
 
@@ -65,6 +68,8 @@ const ClickForMoreButton = styled(UnstyledButton)`
 
 const Section = styled.section`
   display: grid;
+  animation: ${fadeInUp} 0.15s ease-in;
+  margin-bottom: 15px;
 `
 
 const SectionName = React.memo(styled.h2`
@@ -75,4 +80,29 @@ const SectionName = React.memo(styled.h2`
   text-transform: uppercase;
 `)
 
-export { SmallModalContainer, ClickForMoreButton, Section, SectionName }
+const Checkboxes = React.memo(
+  ({ items, onSuccess, onError, callBeforeDebounceFn, limit }) => {
+    const { getCheckboxItemProps, items: checkboxItems } = useCheckbox({
+      items,
+      onSuccess,
+      onError,
+      callBeforeDebounceFn,
+      limit,
+    })
+
+    return (
+      <Checkbox
+        items={checkboxItems}
+        getCheckboxItemProps={getCheckboxItemProps}
+      />
+    )
+  }
+)
+
+export {
+  SmallModalContainer,
+  ClickForMoreButton,
+  Section,
+  SectionName,
+  Checkboxes,
+}

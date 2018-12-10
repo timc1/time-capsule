@@ -7,14 +7,8 @@ import useQuestionnaire from '../../../../shared/hooks/useQuestionnaire'
 import { SmallModalContainer } from '../../shared/index'
 import { NextButton } from '../../../index'
 
-const AddNewOccupationItem = React.memo(
-  ({
-    dispatchCheckbox,
-    toggleModal,
-    sectionToUpdate = '',
-    title = '',
-    placeholder = '',
-  }) => {
+export default React.memo(
+  ({ toggleModal, sectionToUpdate = '', title = '', placeholder = '' }) => {
     const { context } = useQuestionnaire()
     const { getFormProps, getInputStateAndProps, state } = useForm({
       initialValues: {
@@ -41,10 +35,12 @@ const AddNewOccupationItem = React.memo(
 
               if (exists) {
                 if (exists.isChecked === false) {
-                  dispatchCheckbox({
-                    type: 'TOGGLE',
+                  exists.isChecked = true
+                  context.questionnaireDispatch({
+                    type: 'UPDATE_OCCUPATION',
                     payload: {
-                      index,
+                      id: sectionToUpdate,
+                      value: items,
                     },
                   })
                 }
@@ -89,5 +85,3 @@ const AddNewOccupationItem = React.memo(
     )
   }
 )
-
-export { AddNewOccupationItem }
