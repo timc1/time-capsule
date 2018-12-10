@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import { UnstyledButton } from '../shared/styles'
@@ -57,6 +57,7 @@ const questionnaireSteps = [
 ]
 
 export default React.memo(props => {
+  const initialFocusRef = useRef()
   const [canContinue, setContinue] = useState(false)
   const [transitionDirection, setTransitionDirection] = useState(
     'horizontal-left'
@@ -70,12 +71,20 @@ export default React.memo(props => {
     data: { component: Component, meta },
   } = questionnaireSteps[index]
 
+  useEffect(
+    () => {
+      initialFocusRef.current.focus()
+    },
+    [context.questionnaireState.meta.currentStepId]
+  )
+
   return (
     <Location>
       {({ navigate }) => (
         <Container>
           <DescriptionHeader>
             <BackButton
+              ref={initialFocusRef}
               onClick={
                 index === 0
                   ? e => navigate('/')
@@ -164,7 +173,7 @@ const DescriptionHeader = styled.div`
 const BackButton = styled(UnstyledButton)`
   padding: 0;
   font-size: 0;
-  padding: 5px;
+  padding: 5px 5px 4px 5px;
   margin-left: -5px;
   cursor: w-resize;
   outline: none;

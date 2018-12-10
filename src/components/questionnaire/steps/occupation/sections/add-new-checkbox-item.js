@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import { Form, Label, Input } from '../../../../shared/form-components/index'
 
 import useForm from '../../../../shared/hooks/useForm'
@@ -9,12 +9,17 @@ import { NextButton } from '../../../index'
 
 export default React.memo(
   ({ toggleModal, sectionToUpdate = '', title = '', placeholder = '' }) => {
+    const initialFocusRef = useRef()
     const { context } = useQuestionnaire()
     const { getFormProps, getInputStateAndProps, state } = useForm({
       initialValues: {
         [sectionToUpdate]: '',
       },
     })
+
+    useEffect(() => {
+      initialFocusRef.current.focus()
+    }, [])
 
     const val = state[sectionToUpdate].trim()
     return (
@@ -71,6 +76,7 @@ export default React.memo(
               placeholder,
               autoComplete: 'off',
               maxLength: 30,
+              ref: initialFocusRef,
             })}
           />
           <NextButton

@@ -17,7 +17,6 @@ export default React.memo(
   }) => {
     const modalRoot = document.getElementById(domElement)
     const eventListener = useRef()
-    const initialFocusRef = useRef()
     const currentScrollPosition = useRef()
 
     const el = useRef()
@@ -65,7 +64,6 @@ export default React.memo(
           overflow: hidden;
           pointer-events: none;
         `
-          initialFocusRef.current.focus()
         } else {
           el.current.style.opacity = 0
           el.current.style.pointerEvents = 'none'
@@ -84,7 +82,6 @@ export default React.memo(
           <>
             <ExitContainer>
               <ExitButton
-                ref={initialFocusRef}
                 onClick={e => toggleModal()}
                 tabIndex={isShowing ? '0' : '-1'}
               >

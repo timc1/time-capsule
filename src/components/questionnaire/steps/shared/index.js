@@ -2,7 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import { fadeInUp, UnstyledButton } from '../../../shared/styles'
-import { Checkbox } from '../../../shared/hooks/intermediate-components/checkbox'
+import { Checkbox } from '../../../shared/form-components/checkbox'
 
 import useCheckbox from '../../../shared/hooks/useCheckbox'
 
@@ -27,7 +27,7 @@ const SmallModalContainer = styled.div`
 const ClickForMoreButton = styled(UnstyledButton)`
   justify-self: center;
   align-self: center;
-  padding: 5px 10px;
+  padding: 5px 10px 6px 10px;
   outline: none;
   cursor: pointer;
   > span {

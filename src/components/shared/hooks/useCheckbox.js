@@ -1,6 +1,5 @@
 import { useReducer, useRef, useEffect } from 'react'
 import { debounce, deepClone } from '../../../utils'
-export { Checkbox } from './intermediate-components/checkbox'
 
 export default ({
   items = [],
@@ -79,14 +78,29 @@ export default ({
 }
 
 const reducer = (state, { type, payload }) => {
+  const clonedCopy = deepClone(state)
   switch (type) {
     case 'TOGGLE':
-      const clonedCopy = deepClone(state)
       clonedCopy[payload.index].isChecked = !clonedCopy[payload.index].isChecked
       return clonedCopy
     case 'TOGGLE_LIMIT':
-      console.log('ayoo')
-      return state
+      if (payload.limit === 1) {
+        if (clonedCopy[payload.index].isChecked) {
+          clonedCopy[payload.index].isChecked = false
+        } else {
+          clonedCopy.forEach((item, index) => {
+            if (index === payload.index) {
+              item.isChecked = true
+            } else {
+              item.isChecked = false
+            }
+          })
+        }
+      } else {
+        // TODO: prevent state update if user already has payload.limit amount of items checked
+      }
+
+      return clonedCopy
     case 'SETUP':
       console.log('hi', payload)
       return payload.items

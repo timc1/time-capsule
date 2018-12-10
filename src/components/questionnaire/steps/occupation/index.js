@@ -102,12 +102,14 @@ export default React.memo(({ canContinue, setContinue }) => {
               type: 'HIDE_COMPANY_TYPE',
             })
           }}
-          callBeforeDebounceFn={() =>
-            setMessage({
-              error: false,
-              value: '',
-            })
-          }
+          callBeforeDebounceFn={() => {
+            if (message.value !== '') {
+              setMessage({
+                error: false,
+                value: '',
+              })
+            }
+          }}
         />
         <ClickForMoreButton
           onClick={e =>
@@ -187,7 +189,15 @@ export default React.memo(({ canContinue, setContinue }) => {
             <SectionName>How I'm feeling</SectionName>
             <Checkboxes
               items={context.questionnaireState.answers.occupationHappiness}
-              onSuccess={success => console.log('success', success)}
+              onSuccess={success => {
+                context.questionnaireDispatch({
+                  type: 'UPDATE_OCCUPATION',
+                  payload: {
+                    id: 'occupationHappiness',
+                    value: success,
+                  },
+                })
+              }}
               onError={error => console.log('error', error)}
               limit={1}
             />
