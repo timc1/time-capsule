@@ -7,76 +7,87 @@ import useQuestionnaire from '../../../../shared/hooks/useQuestionnaire'
 import { SmallModalContainer } from '../../shared/index'
 import { NextButton } from '../../../index'
 
-const AddNewOccupationItem = React.memo(({ dispatchCheckbox, toggleModal }) => {
-  const { context } = useQuestionnaire()
-  const { getFormProps, getInputStateAndProps, state } = useForm({
-    initialValues: {
-      occupation: '',
-    },
-  })
+const AddNewOccupationItem = React.memo(
+  ({
+    dispatchCheckbox,
+    toggleModal,
+    sectionToUpdate = '',
+    title = '',
+    placeholder = '',
+  }) => {
+    const { context } = useQuestionnaire()
+    const { getFormProps, getInputStateAndProps, state } = useForm({
+      initialValues: {
+        [sectionToUpdate]: '',
+      },
+    })
 
-  const val = state.occupation.trim()
-  return (
-    <SmallModalContainer>
-      <Form
-        {...getFormProps({
-          onSubmit: ({ occupation }) => {
-            // Validate if value already exists in items
-            const uniqueId = occupation.replace(/\s/g, '').toUpperCase()
+    const val = state[sectionToUpdate].trim()
+    return (
+      <SmallModalContainer>
+        <Form
+          {...getFormProps({
+            onSubmit: value => {
+              // Validate if value already exists in items
+              const uniqueId = value[sectionToUpdate]
+                .replace(/\s/g, '')
+                .toUpperCase()
 
-            const roles = context.questionnaireState.answers.occupationRole
-            const index = roles.findIndex(
-              item => item.id.toUpperCase() === uniqueId
-            )
-            const exists = index !== -1 ? roles[index] : null
+              const items = context.questionnaireState.answers[sectionToUpdate]
+              const index = items.findIndex(
+                item => item.id.toUpperCase() === uniqueId
+              )
+              const exists = index !== -1 ? items[index] : null
 
-            if (exists) {
-              if (exists.isChecked === false) {
-                dispatchCheckbox({
-                  type: 'TOGGLE',
+              if (exists) {
+                if (exists.isChecked === false) {
+                  dispatchCheckbox({
+                    type: 'TOGGLE',
+                    payload: {
+                      index,
+                    },
+                  })
+                }
+              } else {
+                const formattedPayload = {
+                  id: uniqueId.toLowerCase(),
+                  name: value[sectionToUpdate],
+                  isChecked: true,
+                }
+
+                context.questionnaireDispatch({
+                  type: 'ADD_UNIQUE_CHECKBOX_ITEM',
                   payload: {
-                    index,
+                    id: sectionToUpdate,
+                    value: formattedPayload,
                   },
                 })
               }
-            } else {
-              const formattedPayload = {
-                id: uniqueId.toLowerCase(),
-                name: occupation,
-                isChecked: true,
-              }
 
-              context.questionnaireDispatch({
-                type: 'ADD_UNIQUE_OCCUPATION',
-                payload: {
-                  value: formattedPayload,
-                },
-              })
-            }
-
-            toggleModal()
-          },
-        })}
-      >
-        <Label htmlFor="occupation">I am currently a...</Label>
-        <Input
-          {...getInputStateAndProps({
-            id: 'occupation',
-            placeholder: 'Small business owner',
-            autoComplete: 'off',
-            maxLength: 30,
+              toggleModal()
+            },
           })}
-        />
-        <NextButton
-          disabled={val.length < 2}
-          aria-label={`Toggle to add ${state.occupation ||
-            'your own occupation.'}`}
         >
-          <span>+ {val.length < 2 ? '' : val}</span>
-        </NextButton>
-      </Form>
-    </SmallModalContainer>
-  )
-})
+          <Label htmlFor="occupation">{title}</Label>
+          <Input
+            {...getInputStateAndProps({
+              id: sectionToUpdate,
+              placeholder,
+              autoComplete: 'off',
+              maxLength: 30,
+            })}
+          />
+          <NextButton
+            disabled={val.length < 2}
+            aria-label={`Toggle to add ${state.occupation ||
+              'your own occupation.'}`}
+          >
+            <span>+ {val.length < 2 ? '' : val}</span>
+          </NextButton>
+        </Form>
+      </SmallModalContainer>
+    )
+  }
+)
 
 export { AddNewOccupationItem }

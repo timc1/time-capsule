@@ -1,10 +1,15 @@
 import { randomEmoji } from '../../../../utils'
 
-const initialUIState = {
-  isCompanyTypeShowing: false,
-  isHappinessShowing: false,
-  isOptionsModalShowing: false,
-  optionsModalContent: null,
+const getInitialUIState = (context = {}) => {
+  const hasOccupation =
+    context.questionnaireState.answers.occupationRole.filter(i => i.isChecked)
+      .length > 0
+  return {
+    isCompanyTypeShowing: hasOccupation ? true : false,
+    isHappinessShowing: hasOccupation ? true : false,
+    isOptionsModalShowing: false,
+    optionsModalContent: null,
+  }
 }
 
 const occupationsUIReducer = (state, { type, payload }) => {
@@ -13,6 +18,11 @@ const occupationsUIReducer = (state, { type, payload }) => {
       return {
         ...state,
         isCompanyTypeShowing: true,
+      }
+    case 'HIDE_COMPANY_TYPE':
+      return {
+        ...state,
+        isCompanyTypeShowing: false,
       }
     case 'TOGGLE_MODAL_ON':
       return {
@@ -27,14 +37,14 @@ const occupationsUIReducer = (state, { type, payload }) => {
         optionsModalContent: null,
       }
     case 'RESET':
-      return initialUIState
+      return getInitialUIState()
     default:
       return state
   }
 }
 
-const formatMessage = items => {
-  const selected = items.filter(i => i.isChecked)
+const formatMessage = ({ roles }) => {
+  const selected = roles.filter(i => i.isChecked)
   let formatted = ''
 
   selected.forEach((item, index) => {
@@ -50,4 +60,4 @@ const formatMessage = items => {
   return formatted.toLowerCase() + ` ${randomEmoji()}`
 }
 
-export { initialUIState, occupationsUIReducer, formatMessage }
+export { getInitialUIState, occupationsUIReducer, formatMessage }

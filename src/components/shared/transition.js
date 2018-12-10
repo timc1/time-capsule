@@ -7,52 +7,26 @@ import {
 import useBackgroundColorUpdater from './hooks/useBackgroundColorUpdater'
 
 const timeout = 250
-const getBaseStyles = {
-  transitionProperties: 'opacity, transform',
+
+const getBaseStyles = ({ delay }) => ({
+  entering: {
+    position: 'absolute',
+    opacity: 0,
+  },
   entered: {
-    transition: `${timeout}ms ease-in`,
+    transition: `${delay}ms ease-in`,
     opacity: 1,
     transform: 'translateX(0)',
   },
   exiting: {
-    transition: `${timeout}ms ease-in`,
+    transition: `${delay}ms ease-in`,
     opacity: 0,
     transform: 'translateX(0px)',
   },
-}
-const getTransitionStyles = type => {
-  switch (type.toUpperCase()) {
-    case 'HORIZONTAL-LEFT':
-      return {
-        entering: {
-          position: 'absolute',
-          opacity: 0,
-          transform: 'translateX(20px)',
-        },
-        ...getBaseStyles,
-      }
-    case 'HORIZONTAL-RIGHT':
-      return {
-        entering: {
-          position: 'absolute',
-          opacity: 0,
-          transform: 'translateX(-20px)',
-        },
-        ...getBaseStyles,
-      }
-    default:
-      return {
-        entering: {
-          position: 'absolute',
-          opacity: 0,
-        },
-        ...getBaseStyles,
-      }
-  }
-}
+})
 
 const Transition = React.memo(
-  ({ children, location, transitionKey, type = 'default' }) => {
+  ({ children, location, transitionKey, type = 'default', delay = 250 }) => {
     useBackgroundColorUpdater(location)
 
     return (
@@ -68,8 +42,36 @@ const Transition = React.memo(
           {status => (
             <div
               style={{
-                ...getBaseStyles,
-                ...getTransitionStyles(type)[status],
+                ...getBaseStyles({ delay })[status],
+              }}
+            >
+              {children}
+            </div>
+          )}
+        </ReactTransition>
+      </TransitionGroup>
+    )
+  }
+)
+
+const WizardTransition = React.memo(
+  ({ children, location, transitionKey, type = 'default', delay = 250 }) => {
+    useBackgroundColorUpdater(location)
+
+    return (
+      <TransitionGroup component={null}>
+        <ReactTransition
+          key={transitionKey}
+          timeout={{
+            enter: timeout,
+            exit: timeout,
+          }}
+          style={{ position: 'relative' }}
+        >
+          {status => (
+            <div
+              style={{
+                ...getBaseStyles({ delay })[status],
               }}
             >
               {children}
@@ -82,3 +84,4 @@ const Transition = React.memo(
 )
 
 export default Transition
+export { WizardTransition }

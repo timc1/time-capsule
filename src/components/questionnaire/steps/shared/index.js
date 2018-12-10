@@ -66,6 +66,10 @@ const ClickForMoreButton = styled(UnstyledButton)`
   }
 `
 
+const Section = styled.section`
+  display: grid;
+`
+
 const SectionName = React.memo(styled.h2`
   margin: 0 0 15px 0;
   font-size: var(--fontsm);
@@ -74,4 +78,4 @@ const SectionName = React.memo(styled.h2`
   text-transform: uppercase;
 `)
 
-export { SmallModalContainer, ClickForMoreButton, SectionName }
+export { SmallModalContainer, ClickForMoreButton, Section, SectionName }

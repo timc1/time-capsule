@@ -21,14 +21,15 @@ const questionnaireReducer = (state, { type, payload }) => {
           [payload.id]: payload.value,
         },
       }
-    case 'ADD_UNIQUE_OCCUPATION':
-      const occupationRole = state.answers.occupationRole.slice()
-      occupationRole.push(payload.value)
+    case 'ADD_UNIQUE_CHECKBOX_ITEM':
+      const copy = state.answers[payload.id].slice()
+      copy.push(payload.value)
+
       return {
         ...state,
         answers: {
           ...state.answers,
-          occupationRole,
+          [payload.id]: copy,
         },
       }
     default:

@@ -11,7 +11,7 @@ import Occupation from './steps/occupation/index'
 
 import useQuestionnaire from '../shared/hooks/useQuestionnaire'
 
-import Transition from '../shared/transition'
+import Transition, { WizardTransition } from '../shared/transition'
 
 const questionnaireSteps = [
   {
@@ -61,6 +61,7 @@ export default React.memo(props => {
   const [transitionDirection, setTransitionDirection] = useState(
     'horizontal-left'
   )
+  console.log('transitionDirection', transitionDirection)
   const { context } = useQuestionnaire()
 
   const index = questionnaireSteps.findIndex(
@@ -81,9 +82,11 @@ export default React.memo(props => {
                   ? e => navigate('/')
                   : e => {
                       if (canContinue) setContinue(false)
+
                       if (transitionDirection !== 'horizontal-right') {
                         setTransitionDirection('horizontal-right')
                       }
+
                       context.questionnaireDispatch({
                         type: 'NEXT',
                         payload: {
@@ -102,14 +105,14 @@ export default React.memo(props => {
           >
             <Question>{meta.question}</Question>
           </Transition>
-          <Transition
+          <WizardTransition
             transitionKey={context.questionnaireState.meta.currentStepId}
             type={transitionDirection}
           >
             <UserInteractionSection>
               <Component canContinue={canContinue} setContinue={setContinue} />
             </UserInteractionSection>
-          </Transition>
+          </WizardTransition>
           {index !== questionnaireSteps.length - 1 && (
             <NextButton
               disabled={!canContinue}
