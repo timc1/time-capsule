@@ -34,22 +34,16 @@
   --fontxl: 4rem;
 
   --black: #000;
-  --black2: rgba(15, 13, 32, 0.99);
-  --black3: rgba(15, 13, 32, .5);
-  --black4: rgb(136, 152, 170);
-  --black5: rgba(0,0,0,.3);
+  --black1: rgba(15, 13, 32, 0.99);
   --white: #fff;
-  --white1: rgba(255, 255, 255, .7);
-  --white2: #f7fafc;
-  --white3: rgba(255, 255, 255, 0.1);
+  --white1: rgba(255,255,255,.9);
 
+  --gray: #F6FAFD;
+  --gray1: #c6c9cc;
+  --gray2: #606467;
+  --blue: #3c3cff;
+  --blue1: #3372ff;
   --error: #ffa27b;
-  --success: #9CF0E1;
-  --success2: #96ffe6;
-  --blue: #0900e0;
-  --blue2: #001aff;
-  --yellow: #FFC864;
-  --gray: #b5c7da;
 
   --baseborderpadding: 25px;
   --baseborderradius: 2px;
@@ -59,11 +53,11 @@
 }
 
 ::selection {
-  background: var(--black2); /* WebKit/Blink Browsers */
+  background: var(--black1); /* WebKit/Blink Browsers */
   color: #fff;
 }
 ::-moz-selection {
-  background: var(--black2);/* Gecko Browsers */
+  background: var(--black1);/* Gecko Browsers */
   color: #fff;
 }
 
@@ -95,7 +89,7 @@ body[data-url="/"] {
 }
 
 body[data-url="/setup"] {
-  background: var(--black);
+  background: var(--white);
 }
 
 a, button, input, select, textarea, label {

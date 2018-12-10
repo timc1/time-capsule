@@ -21,15 +21,12 @@ export function RocketLink({ to, text, ...props }) {
 const scroll = keyframes`
   to {
     transform: translateX(35px); 
-    opacity: .2;
   }
 `
 
 const AnimatedLink = styled(UnstyledLink)`
   display: inline-block;
-  padding: 15px 60px 15px 25px;
-  border: 2px solid var(--black2);
-  border-radius: 2px;
+  padding: 15px 60px 15px 20px;
   outline: none;
 
   .text {
@@ -37,6 +34,15 @@ const AnimatedLink = styled(UnstyledLink)`
     margin: 0;
     text-transform: uppercase;
     transition: transform 0.15s ease-in;
+    color: var(--white);
+    font-weight: var(--fontbold);
+  }
+
+  &::after {
+    border: 1px solid var(--blue);
+    border-radius: 2px;
+    background: var(--blue);
+    z-index: -1;
   }
 
   .rockets {
@@ -52,7 +58,7 @@ const AnimatedLink = styled(UnstyledLink)`
       position: absolute;
       height: 10px;
       width: 10px;
-      background: var(--black);
+      background: var(--white);
       mask: url(${arrow}) center center / contain no-repeat;
       -webkit-mask: url(${arrow}) center center / contain no-repeat;
       animation: ${scroll} 1s infinite linear;
@@ -65,6 +71,7 @@ const AnimatedLink = styled(UnstyledLink)`
       transform: translateY(20px);
       &::before {
         animation-duration: 1.1s;
+        background: #fff9a7;
       }
     }
 
@@ -72,6 +79,7 @@ const AnimatedLink = styled(UnstyledLink)`
       transform: translateY(10px);
       &::before {
         animation-duration: 0.9s;
+        background: #9cf0e1;
       }
     }
   }

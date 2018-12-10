@@ -27,23 +27,23 @@ const CheckboxItem = React.memo(
     outline: none;
     cursor: pointer;
     transition: transform 0.15s ease-in;
-    border-radius: var(--baseborderradius);
-    overflow: hidden;
 
     > span {
-      color: var(--white2);
+      color: var(--black);
       font-size: var(--fontsm);
+      opacity: ${props => (props.isChecked ? 1 : 0.7)};
+      transition: opacity 0.15s ease-in;
       &::before,
       &::after {
+        border-radius: var(--baseborderradius);
         transition: opacity 0.15s ease-in;
         z-index: -1;
       }
       &::before {
-        border: 1px solid var(--white1);
+        border: 1px solid var(--gray1);
       }
       &::after {
-        border: 1px solid var(--success);
-        background: var(--white3);
+        border: 1px solid var(--blue);
         opacity: ${props => (props.isChecked ? 1 : 0)};
       }
     }
@@ -55,7 +55,8 @@ const CheckboxItem = React.memo(
       left: 0;
       right: 0;
       bottom: 0;
-      border: 1px solid var(--black3);
+      border: 1px solid var(--gray2);
+      border-radius: var(--baseborderradius);
       opacity: 0;
       transition: opacity 0.15s ease-in;
     }

@@ -158,12 +158,11 @@ const DescriptionHeader = styled.div`
     font-size: var(--fontsm);
     font-weight: var(--fontbold);
     text-transform: uppercase;
-    color: var(--white1);
+    color: var(--black2);
   }
 `
 
 const BackButton = styled(UnstyledButton)`
-  color: var(--white1);
   padding: 0;
   font-size: 0;
   padding: 5px;
@@ -174,7 +173,7 @@ const BackButton = styled(UnstyledButton)`
     content: '';
     height: var(--fontsm);
     width: var(--fontsm);
-    background: #eee;
+    background: var(--black);
     display: block;
     -webkit-mask: url(${caretLeft}) center center / contain no-repeat;
     mask: url(${caretLeft}) center center / contain no-repeat;
@@ -182,7 +181,7 @@ const BackButton = styled(UnstyledButton)`
 
   &::after {
     content: '';
-    box-shadow: 0 0 1px var(--white1);
+    box-shadow: 0 0 1px var(--gray2);
     border-radius: var(--baseborderradius);
     opacity: 0;
     position: absolute;
@@ -223,7 +222,7 @@ const Question = styled.h1`
   font-size: var(--fontlg);
   font-family: var(--ff-serif);
   text-align: center;
-  color: var(--white);
+  color: var(--black);
 `
 
 const UserInteractionSection = styled.div`
@@ -253,7 +252,7 @@ export const NextButton = styled(UnstyledButton)`
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--gray);
+    background: var(--gray1);
     z-index: -1;
     transition: 0.25s ease-in;
     transition-property: transform;
@@ -272,7 +271,7 @@ export const NextButton = styled(UnstyledButton)`
       bottom: 0;
     }
     &::before {
-      background: var(--blue2);
+      background: var(--blue1);
       z-index: -2;
     }
     &::after {

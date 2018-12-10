@@ -136,7 +136,7 @@ export default React.memo(({ canContinue, setContinue }) => {
         domElement="modal-root"
         toggleModal={toggleModal}
         isShowing={state.isOptionsModalShowing}
-        backgroundColor="rgba(0,0,0,.9)"
+        backgroundColor="var(--white1)"
       >
         {state.optionsModalContent}
       </Modal>

@@ -6,8 +6,6 @@ import {
 
 import useBackgroundColorUpdater from './hooks/useBackgroundColorUpdater'
 
-const timeout = 250
-
 const getBaseStyles = ({ delay }) => ({
   entering: {
     position: 'absolute',
@@ -34,8 +32,8 @@ const Transition = React.memo(
         <ReactTransition
           key={transitionKey}
           timeout={{
-            enter: timeout,
-            exit: timeout,
+            enter: delay,
+            exit: delay,
           }}
           style={{ position: 'relative' }}
         >
@@ -63,8 +61,8 @@ const WizardTransition = React.memo(
         <ReactTransition
           key={transitionKey}
           timeout={{
-            enter: timeout,
-            exit: timeout,
+            enter: delay,
+            exit: delay,
           }}
           style={{ position: 'relative' }}
         >

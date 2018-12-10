@@ -29,7 +29,7 @@ const Label = styled.label`
 const Input = styled.input`
   position: relative;
   display: block;
-  background-color: var(--white2);
+  background-color: var(--gray);
   border: none;
   outline: none;
   width: 100%;
@@ -43,7 +43,7 @@ const Input = styled.input`
   transition: background-color 0.1s ease-in, color 0.1s ease-in;
   &::placeholder {
     transition: color 0.15s ease-in;
-    color: ${props => (props.error ? 'var(--error)' : 'var(--black4)')};
+    color: ${props => (props.error ? 'var(--error)' : 'var(--gray2)')};
   }
 `
 
