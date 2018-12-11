@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useLayoutEffect, useEffect, useRef } from 'react'
 import ReactDOM from 'react-dom'
 
 import styled from '@emotion/styled'
@@ -15,13 +15,21 @@ export default React.memo(
     isShowing,
     backgroundColor = '--black4',
   }) => {
-    const modalRoot = document.getElementById(domElement)
+    useLayoutEffect(() => {
+      const root = document.getElementById('___gatsby')
+      const el = document.createElement('div')
+      el.setAttribute('id', 'modal-root')
+      document.body.insertBefore(el, root)
+      return () => document.body.removeChild(el)
+    }, [])
+
     const eventListener = useRef()
     const currentScrollPosition = useRef()
 
     const el = useRef()
 
     useEffect(() => {
+      const modalRoot = document.getElementById(domElement)
       el.current = document.createElement('div')
       el.current.style = `
       position: fixed;

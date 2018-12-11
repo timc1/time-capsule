@@ -135,7 +135,11 @@ const DebouncedInput = React.memo(
           debounceRef,
           () => {
             const { errors, ...values } = formState
-            onSuccess(values)
+            if (values[id].length === 0) {
+              onError(values)
+            } else {
+              onSuccess(values)
+            }
           },
           500
         )

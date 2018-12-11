@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useReducer } from 'react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import { screenmd, UnstyledButton } from '../shared/styles'
@@ -13,6 +13,7 @@ import OccupationPlan from './steps/occupation/occupation-plan'
 import useQuestionnaire from '../shared/hooks/useQuestionnaire'
 
 import Transition, { WizardTransition } from '../shared/transition'
+import Modal from '../shared/modal'
 
 const questionnaireSteps = [
   {
@@ -21,7 +22,7 @@ const questionnaireSteps = [
       component: About,
       meta: {
         sectionTitle: 'About',
-        question: 'What is your name?',
+        question: 'My name is...',
       },
     },
   },
@@ -30,7 +31,7 @@ const questionnaireSteps = [
     data: {
       component: Occupation,
       meta: {
-        sectionTitle: 'Work/Education',
+        sectionTitle: 'Career/Work',
         question: 'I am currently a',
       },
     },
@@ -40,26 +41,50 @@ const questionnaireSteps = [
     data: {
       component: OccupationPlan,
       meta: {
-        sectionTitle: 'Work/Education',
+        sectionTitle: 'Career/Work',
         question: 'What will you do to improve your work?',
+        subquestion:
+          'Think where would you like to be in a year and what actions you are going to take to get there.',
       },
     },
   },
   {
-    id: 'OCCUPATION_HAPPINESS',
+    id: 'PERSONAL_INTERESTS',
     data: {
       component: Occupation,
       meta: {
-        sectionTitle: 'About',
-        question: 'working at...',
+        sectionTitle: 'Personal Interests',
+        question: 'Some of my interests include...',
+        subquestion: '',
       },
     },
   },
 ]
 
+const modalReducer = (state, { type, payload }) => {
+  switch (type) {
+    case 'TOGGLE_MODAL_ON':
+      return {
+        isModalShowing: true,
+        modalContent: payload.modal,
+      }
+    case 'TOGGLE_MODAL_OFF':
+      return {
+        isModalShowing: false,
+        modalContent: null,
+      }
+    default:
+      return state
+  }
+}
+
 export default React.memo(props => {
   const initialFocusRef = useRef()
   const [canContinue, setContinue] = useState(false)
+  const [modalContext, dispatchModal] = useReducer(modalReducer, {
+    isModalShowing: false,
+    modalContent: null,
+  })
   const [transitionDirection, setTransitionDirection] = useState(
     'horizontal-left'
   )
@@ -80,69 +105,94 @@ export default React.memo(props => {
   )
 
   return (
-    <Location>
-      {({ navigate }) => (
-        <Container>
-          <DescriptionHeader>
-            <BackButton
-              ref={initialFocusRef}
-              onClick={
-                index === 0
-                  ? e => navigate('/')
-                  : e => {
-                      if (canContinue) setContinue(false)
-
-                      if (transitionDirection !== 'horizontal-right') {
-                        setTransitionDirection('horizontal-right')
-                      }
-
-                      context.questionnaireDispatch({
-                        type: 'NEXT',
-                        payload: {
-                          value: questionnaireSteps[index - 1].id,
-                        },
-                      })
-                    }
-              }
-              aria-label="go back"
+    <>
+      <Modal
+        domElement="modal-root"
+        toggleModal={() => {
+          dispatchModal({
+            type: 'TOGGLE_MODAL_OFF',
+          })
+        }}
+        isShowing={modalContext.isModalShowing}
+        backgroundColor="var(--black2)"
+      >
+        {modalContext.modalContent}
+      </Modal>
+      <Location>
+        {({ navigate }) => (
+          <Container>
+            <Status
+              aria-label="hidden"
+              width={(index + 1) / questionnaireSteps.length}
             />
-            <p>{meta.sectionTitle}</p>
-          </DescriptionHeader>
-          <Transition
-            transitionKey={context.questionnaireState.meta.currentStepId}
-          >
-            <Question>{meta.question}</Question>
-          </Transition>
-          <WizardTransition
-            transitionKey={context.questionnaireState.meta.currentStepId}
-            type={transitionDirection}
-          >
-            <UserInteractionSection>
-              <Component canContinue={canContinue} setContinue={setContinue} />
-            </UserInteractionSection>
-          </WizardTransition>
-          {index !== questionnaireSteps.length - 1 && (
-            <NextButton
-              disabled={!canContinue}
-              onClick={e => {
-                if (transitionDirection !== 'horizontal-left') {
-                  setTransitionDirection('horizontal-left')
+            <DescriptionHeader>
+              <BackButton
+                ref={initialFocusRef}
+                onClick={
+                  index === 0
+                    ? e => navigate('/')
+                    : e => {
+                        if (canContinue) setContinue(false)
+
+                        if (transitionDirection !== 'horizontal-right') {
+                          setTransitionDirection('horizontal-right')
+                        }
+
+                        context.questionnaireDispatch({
+                          type: 'NEXT',
+                          payload: {
+                            value: questionnaireSteps[index - 1].id,
+                          },
+                        })
+                      }
                 }
-                context.questionnaireDispatch({
-                  type: 'NEXT',
-                  payload: {
-                    value: questionnaireSteps[index + 1].id,
-                  },
-                })
-                if (canContinue) setContinue(false)
-              }}
+                aria-label="go back"
+              />
+              <p>{meta.sectionTitle}</p>
+            </DescriptionHeader>
+            <Transition
+              transitionKey={context.questionnaireState.meta.currentStepId}
             >
-              <span>Next</span>
-            </NextButton>
-          )}
-        </Container>
-      )}
-    </Location>
+              <Question>{meta.question}</Question>
+              {meta.subquestion && (
+                <SubQuestion>{meta.subquestion}</SubQuestion>
+              )}
+            </Transition>
+            <WizardTransition
+              transitionKey={context.questionnaireState.meta.currentStepId}
+              type={transitionDirection}
+            >
+              <UserInteractionSection>
+                <Component
+                  canContinue={canContinue}
+                  setContinue={setContinue}
+                  dispatchModal={dispatchModal}
+                />
+              </UserInteractionSection>
+            </WizardTransition>
+            {index !== questionnaireSteps.length - 1 && (
+              <NextButton
+                disabled={!canContinue}
+                onClick={e => {
+                  if (transitionDirection !== 'horizontal-left') {
+                    setTransitionDirection('horizontal-left')
+                  }
+                  context.questionnaireDispatch({
+                    type: 'NEXT',
+                    payload: {
+                      value: questionnaireSteps[index + 1].id,
+                    },
+                  })
+                  if (canContinue) setContinue(false)
+                }}
+              >
+                <span>Next</span>
+              </NextButton>
+            )}
+          </Container>
+        )}
+      </Location>
+    </>
   )
 })
 
@@ -152,11 +202,37 @@ const Container = styled.section`
   margin: 80px auto;
 `
 
+const Status = React.memo(
+  styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 2;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--blue);
+      transition: transform 0.25s ease-in;
+      transform: ${props => `scaleX(${props.width})`};
+      transform-origin: 0;
+      transition-delay: 0.15s;
+    }
+  `,
+  (prevProps, nextProps) => prevProps.width === nextProps.width
+)
+
 const DescriptionHeader = styled.div`
   position: relative;
   display: flex;
   align-items: center;
   margin-bottom: 40px;
+  background: var(--white);
 
   > p {
     position: absolute;
@@ -167,6 +243,16 @@ const DescriptionHeader = styled.div`
     font-weight: var(--fontbold);
     text-transform: uppercase;
     color: var(--black2);
+  }
+
+  @media (max-width: ${screenmd}px) {
+    position: fixed;
+    top: 2px;
+    left: 0;
+    right: 0;
+    padding: 25px;
+    box-shadow: var(--baseboxshadow);
+    z-index: 2;
   }
 `
 
@@ -226,14 +312,23 @@ const BackButton = styled(UnstyledButton)`
 `
 
 const Question = styled.h1`
-  margin: 0 0 40px 0;
+  margin: 0 0 20px 0;
   font-size: var(--fontlg);
   font-family: var(--ff-serif);
   text-align: center;
   color: var(--black);
 `
 
+const SubQuestion = styled.h2`
+  margin: 0;
+  text-align: center;
+  color: var(--gray2);
+  font-weight: var(--fontregular);
+  line-height: var(--baselineheight);
+`
+
 const UserInteractionSection = styled.div`
+  position: relative;
   min-height: 300px;
   height: 100%;
   margin: 5rem 0 2.5rem 0;
@@ -242,6 +337,8 @@ const UserInteractionSection = styled.div`
 `
 
 export const NextButton = styled(UnstyledButton)`
+  position: sticky;
+  bottom: var(--baseborderpadding);
   padding: var(--fontmd);
   width: 100%;
   background: transparent;

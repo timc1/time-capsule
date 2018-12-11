@@ -5,8 +5,6 @@ const getInitialUIState = (context = {}) => {
   return {
     isCompanyTypeShowing: hasOccupation ? true : false,
     isHappinessShowing: hasOccupation ? true : false,
-    isOptionsModalShowing: false,
-    optionsModalContent: null,
   }
 }
 
@@ -21,18 +19,6 @@ const occupationsUIReducer = (state, { type, payload }) => {
       return {
         ...state,
         isCompanyTypeShowing: false,
-      }
-    case 'TOGGLE_MODAL_ON':
-      return {
-        ...state,
-        isOptionsModalShowing: true,
-        optionsModalContent: payload.modal,
-      }
-    case 'TOGGLE_MODAL_OFF':
-      return {
-        ...state,
-        isOptionsModalShowing: false,
-        optionsModalContent: null,
       }
     case 'RESET':
       return getInitialUIState()

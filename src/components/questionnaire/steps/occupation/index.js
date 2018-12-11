@@ -2,8 +2,6 @@ import React, { useReducer, useRef, useState } from 'react'
 
 import useQuestionnaire from '../../../shared/hooks/useQuestionnaire'
 
-import Modal from '../../../shared/modal'
-
 import AddNewCheckboxItem from './sections/add-new-checkbox-item'
 import {
   ClickForMoreButton,
@@ -19,7 +17,7 @@ import {
   formatMessage,
 } from './reducers'
 
-export default React.memo(({ canContinue, setContinue }) => {
+export default React.memo(({ canContinue, setContinue, dispatchModal }) => {
   // useQuestionnaire stores all our questionnaire values.
   const { context } = useQuestionnaire()
 
@@ -41,21 +39,8 @@ export default React.memo(({ canContinue, setContinue }) => {
   const rolesFirstRender = useRef(true)
   const happinessFirstRender = useRef(true)
 
-  const toggleModal = action =>
-    dispatch({
-      type: 'TOGGLE_MODAL_OFF',
-    })
-
   return (
     <>
-      <Modal
-        domElement="modal-root"
-        toggleModal={toggleModal}
-        isShowing={state.isOptionsModalShowing}
-        backgroundColor="var(--black2)"
-      >
-        {state.optionsModalContent}
-      </Modal>
       <Message message={message} />
       <Section>
         <SectionName>Role</SectionName>
@@ -119,12 +104,14 @@ export default React.memo(({ canContinue, setContinue }) => {
         />
         <ClickForMoreButton
           onClick={e =>
-            dispatch({
+            dispatchModal({
               type: 'TOGGLE_MODAL_ON',
               payload: {
                 modal: (
                   <AddNewCheckboxItem
-                    toggleModal={toggleModal}
+                    toggleModal={() => {
+                      dispatchModal({ type: 'TOGGLE_MODAL_OFF' })
+                    }}
                     sectionToUpdate="occupationRole"
                     title="I am currently a..."
                     placeholder="Small business owner"
@@ -173,14 +160,16 @@ export default React.memo(({ canContinue, setContinue }) => {
             />
             <ClickForMoreButton
               onClick={e =>
-                dispatch({
+                dispatchModal({
                   type: 'TOGGLE_MODAL_ON',
                   payload: {
                     modal: (
                       <AddNewCheckboxItem
-                        toggleModal={toggleModal}
+                        toggleModal={() => {
+                          dispatchModal({ type: 'TOGGLE_MODAL_OFF' })
+                        }}
                         sectionToUpdate="occupationPlace"
-                        title="I current work at..."
+                        title="I currently work at..."
                         placeholder="an agency in Los Angeles"
                       />
                     ),

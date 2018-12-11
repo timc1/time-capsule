@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react'
+import React, { useReducer } from 'react'
 import { getQuestionnaire } from '../../../../models/questionnaire'
 import { questionnaireReducer } from './reducers'
 
@@ -11,14 +11,6 @@ const QuestionnaireProvider = React.memo(({ children }) => {
   )
 
   console.log('questionnaireState', questionnaireState)
-
-  useEffect(() => {
-    const root = document.getElementById('___gatsby')
-    const el = document.createElement('div')
-    el.setAttribute('id', 'modal-root')
-    document.body.insertBefore(el, root)
-    return () => document.body.removeChild(el)
-  }, [])
 
   return (
     <QuestionnaireContext.Provider

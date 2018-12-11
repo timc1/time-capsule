@@ -102,7 +102,6 @@ const reducer = (state, { type, payload }) => {
 
       return clonedCopy
     case 'SETUP':
-      console.log('hi', payload)
       return payload.items
     default:
       return state

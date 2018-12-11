@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-const Form = styled.form``
+const Form = styled.form`
+  position: relative;
+`
 
 const Label = styled.label`
   position: relative;
@@ -38,8 +40,7 @@ const Input = styled.input`
   font-family: var(--ff-sanserif);
   font-weight: var(--fontregular);
   font-size: var(--fontmd);
-  line-height: var(--fontlg);
-  padding: 8px 15px;
+  padding: 16px;
   transition: background-color 0.1s ease-in, color 0.1s ease-in;
   &::placeholder {
     transition: color 0.15s ease-in;
@@ -61,7 +62,7 @@ const Textarea = styled.textarea`
   font-size: var(--fontmd);
   line-height: 1.5rem;
   padding: 8px 15px;
-  min-height: 150px;
+  min-height: 200px;
   transition: background-color 0.1s ease-in, color 0.1s ease-in;
   &::placeholder {
     transition: color 0.15s ease-in;

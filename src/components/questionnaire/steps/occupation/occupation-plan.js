@@ -2,7 +2,7 @@ import React from 'react'
 import { DebouncedInput } from '../shared/index'
 import useQuestionnaire from '../../../shared/hooks/useQuestionnaire'
 
-export default React.memo(() => {
+export default React.memo(({ canContinue, setContinue }) => {
   const { context } = useQuestionnaire()
   return (
     <DebouncedInput
@@ -10,6 +10,7 @@ export default React.memo(() => {
       id="occupationPlan"
       initialValue={context.questionnaireState.answers.occupationPlan}
       onSuccess={values => {
+        if (!canContinue) setContinue(true)
         context.questionnaireDispatch({
           type: 'UPDATE_OCCUPATION',
           payload: {
@@ -18,7 +19,9 @@ export default React.memo(() => {
           },
         })
       }}
-      onError={error => console.log('error', error)}
+      onError={error => {
+        if (canContinue) setContinue(false)
+      }}
       placeholder="I've really enjoyed working with my creative director, and am interested in learning more about her field of work. So, I will help her with her work more this upcoming year and learn alongside her."
     />
   )

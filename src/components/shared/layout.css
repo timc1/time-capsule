@@ -32,6 +32,7 @@
   --fontmd: 1rem;
   --fontlg: 2.5rem;
   --fontxl: 4rem;
+  --baselineheight: 1.5rem;
 
   --black: #000;
   --black1: rgba(15, 13, 32, 0.99);
@@ -46,7 +47,7 @@
   --gray3: #272635;
   --blue: #3c3cff;
   --blue1: #3372ff;
-  --error: #ffa27b;
+  --error: #E98F66;
 
   --baseborderpadding: 25px;
   --baseborderradius: 2px;
