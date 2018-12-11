@@ -113,6 +113,7 @@ const DebouncedInput = React.memo(
     validateOnChange,
     onSuccess,
     onError,
+    ...rest
   }) => {
     const {
       errors,
@@ -132,9 +133,13 @@ const DebouncedInput = React.memo(
       () => {
         const debouncedObj = debounce(
           debounceRef,
-          () => onSuccess(formState),
+          () => {
+            const { errors, ...values } = formState
+            onSuccess(values)
+          },
           500
         )
+        return () => debouncedObj.clear()
       },
       [JSON.stringify(formState)]
     )
@@ -142,9 +147,9 @@ const DebouncedInput = React.memo(
     return (
       <Form {...getFormProps()}>
         {type.toUpperCase() === 'TEXTAREA' ? (
-          <Textarea {...getInputStateAndProps({ id, errors })} />
+          <Textarea {...getInputStateAndProps({ id, errors, ...rest })} />
         ) : (
-          <Input {...getInputStateAndProps({ id, errors })} />
+          <Input {...getInputStateAndProps({ id, errors, ...rest })} />
         )}
       </Form>
     )

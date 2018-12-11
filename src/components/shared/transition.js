@@ -14,12 +14,10 @@ const getBaseStyles = ({ delay }) => ({
   entered: {
     transition: `${delay}ms ease-in`,
     opacity: 1,
-    transform: 'translateX(0)',
   },
   exiting: {
     transition: `${delay}ms ease-in`,
     opacity: 0,
-    transform: 'translateX(0px)',
   },
 })
 

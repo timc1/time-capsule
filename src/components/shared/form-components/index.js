@@ -43,7 +43,7 @@ const Input = styled.input`
   transition: background-color 0.1s ease-in, color 0.1s ease-in;
   &::placeholder {
     transition: color 0.15s ease-in;
-    color: ${props => (props.error ? 'var(--error)' : 'var(--gray2)')};
+    color: ${props => (props.error ? 'var(--error)' : 'var(--gray1)')};
   }
 `
 
@@ -59,12 +59,13 @@ const Textarea = styled.textarea`
   font-family: var(--ff-sanserif);
   font-weight: var(--fontregular);
   font-size: var(--fontmd);
-  line-height: var(--fontlg);
+  line-height: 1.5rem;
   padding: 8px 15px;
+  min-height: 150px;
   transition: background-color 0.1s ease-in, color 0.1s ease-in;
   &::placeholder {
     transition: color 0.15s ease-in;
-    color: ${props => (props.error ? 'var(--error)' : 'var(--gray2)')};
+    color: ${props => (props.error ? 'var(--error)' : 'var(--gray1)')};
   }
 `
 

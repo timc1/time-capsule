@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
-import { UnstyledButton } from '../shared/styles'
+import { screenmd, UnstyledButton } from '../shared/styles'
 import { Location } from '@reach/router'
 
 import caretLeft from '../../images/caret-left.svg'
@@ -104,9 +104,8 @@ export default React.memo(props => {
                       })
                     }
               }
-            >
-              back
-            </BackButton>
+              aria-label="go back"
+            />
             <p>{meta.sectionTitle}</p>
           </DescriptionHeader>
           <Transition
@@ -307,4 +306,11 @@ export const NextButton = styled(UnstyledButton)`
         }
       }
     `};
+
+  @media (max-width: ${screenmd}px) {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 `
