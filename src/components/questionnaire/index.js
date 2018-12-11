@@ -9,6 +9,7 @@ import caretLeft from '../../images/caret-left.svg'
 import About from './steps/about/index'
 import Occupation from './steps/occupation/index'
 import OccupationPlan from './steps/occupation/occupation-plan'
+import PersonalInterests from './steps/hobbies/index'
 
 import useQuestionnaire from '../shared/hooks/useQuestionnaire'
 
@@ -51,7 +52,7 @@ const questionnaireSteps = [
   {
     id: 'PERSONAL_INTERESTS',
     data: {
-      component: Occupation,
+      component: PersonalInterests,
       meta: {
         sectionTitle: 'Personal Interests',
         question: 'Some of my interests include...',

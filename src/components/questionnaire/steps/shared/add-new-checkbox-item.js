@@ -1,11 +1,11 @@
 import React, { useRef, useEffect } from 'react'
-import { Form, Label, Input } from '../../../../shared/form-components/index'
+import { Form, Label, Input } from '../../../shared/form-components/index'
 
-import useForm from '../../../../shared/hooks/useForm'
-import useQuestionnaire from '../../../../shared/hooks/useQuestionnaire'
+import useForm from '../../../shared/hooks/useForm'
+import useQuestionnaire from '../../../shared/hooks/useQuestionnaire'
 
-import { SmallModalContainer } from '../../shared/index'
-import { NextButton } from '../../../index'
+import { SmallModalContainer } from '../shared/index'
+import { NextButton } from '../../index'
 
 export default React.memo(
   ({ toggleModal, sectionToUpdate = '', title = '', placeholder = '' }) => {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
 
 const Form = styled.form`
@@ -19,8 +19,7 @@ const Label = styled.label`
     left: 0;
     right: 0;
     bottom: 0;
-    border: 2px solid var(--error);
-    border-radius: var(--baseborderradius);
+    border: none;
     background: transparent;
     opacity: ${props => (props.error ? 1 : 0)};
     transition-property: opacity;
@@ -31,44 +30,75 @@ const Label = styled.label`
 const Input = styled.input`
   position: relative;
   display: block;
-  background-color: var(--gray);
+  background-color: transparent;
   border: none;
+  border-left: 1px solid
+    ${props => (props.error ? 'var(--error)' : 'var(--gray2)')};
   outline: none;
   width: 100%;
-  border-radius: var(--baseborderradius);
   color: var(--black);
   font-family: var(--ff-sanserif);
   font-weight: var(--fontregular);
   font-size: var(--fontmd);
   padding: 16px;
   transition: background-color 0.1s ease-in, color 0.1s ease-in;
+  opacity: 0.7;
   &::placeholder {
     transition: color 0.15s ease-in;
-    color: ${props => (props.error ? 'var(--error)' : 'var(--gray1)')};
+    color: var(--gray1);
+  }
+  &:focus {
+    opacity: 1;
   }
 `
 
-const Textarea = styled.textarea`
+const StyledTextarea = styled.textarea`
   position: relative;
   display: block;
-  background-color: var(--gray);
+  background-color: transparent;
   border: none;
+  border-left: 1px solid
+    ${props => (props.error ? 'var(--error)' : 'var(--gray2)')};
   outline: none;
   width: 100%;
-  border-radius: var(--baseborderradius);
   color: var(--black);
   font-family: var(--ff-sanserif);
   font-weight: var(--fontregular);
   font-size: var(--fontmd);
   line-height: 1.5rem;
-  padding: 8px 15px;
+  padding: 0 15px;
   min-height: 200px;
   transition: background-color 0.1s ease-in, color 0.1s ease-in;
+  opacity: 0.7;
+  resize: none;
   &::placeholder {
     transition: color 0.15s ease-in;
     color: ${props => (props.error ? 'var(--error)' : 'var(--gray1)')};
   }
+  &:focus {
+    opacity: 1;
+  }
 `
+
+const Textarea = React.memo(props => {
+  const eventListener = useRef()
+  const inputRef = useRef()
+
+  const calcHeight = () => {
+    inputRef.current.style.height = '96px'
+    inputRef.current.style.height = inputRef.current.scrollHeight + 'px'
+  }
+
+  useEffect(() => {
+    calcHeight()
+    eventListener.current = e => calcHeight()
+
+    inputRef.current.addEventListener('input', eventListener.current)
+    return () =>
+      inputRef.current.removeEventListener('input', eventListener.current)
+  }, [])
+  return <StyledTextarea {...props} ref={inputRef} />
+})
 
 const MessageContainer = styled.div`
   position: absolute;

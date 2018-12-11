@@ -2,7 +2,7 @@ import React, { useReducer, useRef, useState } from 'react'
 
 import useQuestionnaire from '../../../shared/hooks/useQuestionnaire'
 
-import AddNewCheckboxItem from './sections/add-new-checkbox-item'
+import AddNewCheckboxItem from '../shared/add-new-checkbox-item'
 import {
   ClickForMoreButton,
   Section,

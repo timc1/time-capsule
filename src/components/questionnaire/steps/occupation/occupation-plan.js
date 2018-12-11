@@ -23,6 +23,7 @@ export default React.memo(({ canContinue, setContinue }) => {
         if (canContinue) setContinue(false)
       }}
       placeholder="I've really enjoyed working with my creative director, and am interested in learning more about her field of work. So, I will help her with her work more this upcoming year and learn alongside her."
+      maxLength="500"
     />
   )
 })
