@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 import styled from '@emotion/styled'
 
-import { ExitButton, ExitIcon } from './styles'
+import { screenmd, ExitButton, ExitIcon } from './styles'
 
 const root = document.getElementById('___gatsby')
 
@@ -115,7 +115,13 @@ const ExitContainer = styled.div`
 
   .nice-to-know {
     margin: 0; 
-    color: var(--black4);
+    color: var(--white2);
     font-size: var(--fontsm);
+  }
+
+  @media(max-width: ${screenmd}px) {
+    .nice-to-know {
+    opacity: 0; 
+    }
   }
 `

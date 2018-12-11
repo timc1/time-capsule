@@ -119,7 +119,7 @@ const ExitButton = styled(UnstyledButton)`
   }
   &::after {
     content: '';
-    box-shadow: 0 0 1px var(--black1);
+    box-shadow: 0 0 1px var(--white2);
     border-radius: 50%;
     opacity: 0;
     position: absolute;
@@ -156,7 +156,7 @@ const ExitButton = styled(UnstyledButton)`
 `
 
 const ExitIcon = styled.div`
-  color: var(--black);
+  color: var(--white);
   position: absolute;
   top: 0;
   left: 0;

@@ -1,5 +1,3 @@
-import { randomEmoji } from '../../../../utils'
-
 const getInitialUIState = (context = {}) => {
   const hasOccupation =
     context.questionnaireState.answers.occupationRole.filter(i => i.isChecked)
@@ -57,7 +55,7 @@ const formatMessage = ({ roles }) => {
     }
   })
 
-  return formatted.toLowerCase() + ` ${randomEmoji()}`
+  return formatted.toLowerCase()
 }
 
 export { getInitialUIState, occupationsUIReducer, formatMessage }

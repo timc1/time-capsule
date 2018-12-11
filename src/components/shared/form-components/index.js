@@ -47,6 +47,27 @@ const Input = styled.input`
   }
 `
 
+const Textarea = styled.textarea`
+  position: relative;
+  display: block;
+  background-color: var(--gray);
+  border: none;
+  outline: none;
+  width: 100%;
+  border-radius: var(--baseborderradius);
+  color: var(--black);
+  font-family: var(--ff-sanserif);
+  font-weight: var(--fontregular);
+  font-size: var(--fontmd);
+  line-height: var(--fontlg);
+  padding: 8px 15px;
+  transition: background-color 0.1s ease-in, color 0.1s ease-in;
+  &::placeholder {
+    transition: color 0.15s ease-in;
+    color: ${props => (props.error ? 'var(--error)' : 'var(--gray2)')};
+  }
+`
+
 const MessageContainer = styled.div`
   position: absolute;
   bottom: 100%;
@@ -69,4 +90,4 @@ const Message = React.memo(
     prevProps.message.error === nextProps.message.error
 )
 
-export { Form, Label, Input, Message }
+export { Form, Label, Input, Textarea, Message }

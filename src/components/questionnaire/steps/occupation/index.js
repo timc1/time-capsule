@@ -30,7 +30,7 @@ export default React.memo(({ canContinue, setContinue }) => {
   )
 
   const [message, setMessage] = useState({
-    error: false,
+    error: null,
     value: '',
   })
 
@@ -39,6 +39,7 @@ export default React.memo(({ canContinue, setContinue }) => {
   const occupationFirstRender = useRef(true)
   // Occupation role work place
   const rolesFirstRender = useRef(true)
+  const happinessFirstRender = useRef(true)
 
   const toggleModal = action =>
     dispatch({
@@ -78,6 +79,10 @@ export default React.memo(({ canContinue, setContinue }) => {
             dispatch({
               type: 'SHOW_COMPANY_TYPE',
             })
+
+            if (occupationFirstRender.current) {
+              occupationFirstRender.current = false
+            }
           }}
           onError={error => {
             if (canContinue) setContinue(false)
@@ -85,6 +90,7 @@ export default React.memo(({ canContinue, setContinue }) => {
               occupationFirstRender.current = false
               return
             }
+
             setMessage({
               error: true,
               value: 'You need to select something!',
@@ -174,7 +180,7 @@ export default React.memo(({ canContinue, setContinue }) => {
                       <AddNewCheckboxItem
                         toggleModal={toggleModal}
                         sectionToUpdate="occupationPlace"
-                        title="I current work at"
+                        title="I current work at..."
                         placeholder="an agency in Los Angeles"
                       />
                     ),
@@ -190,6 +196,11 @@ export default React.memo(({ canContinue, setContinue }) => {
             <Checkboxes
               items={context.questionnaireState.answers.occupationHappiness}
               onSuccess={success => {
+                if (happinessFirstRender.current) {
+                  happinessFirstRender.current = false
+                  return
+                }
+
                 context.questionnaireDispatch({
                   type: 'UPDATE_OCCUPATION',
                   payload: {
@@ -198,7 +209,13 @@ export default React.memo(({ canContinue, setContinue }) => {
                   },
                 })
               }}
-              onError={error => console.log('error', error)}
+              onError={error => {
+                if (happinessFirstRender.current) {
+                  happinessFirstRender.current = false
+                  return
+                }
+                console.log('error', error)
+              }}
               limit={1}
             />
           </Section>

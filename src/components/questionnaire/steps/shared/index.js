@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
 
 import { fadeInUp, UnstyledButton } from '../../../shared/styles'
 import { Checkbox } from '../../../shared/form-components/checkbox'
+import { Form, Textarea, Input } from '../../../shared/form-components/index'
 
 import useCheckbox from '../../../shared/hooks/useCheckbox'
+import useForm from '../../../shared/hooks/useForm'
+
+import { debounce } from '../../../../utils'
 
 const SmallModalContainer = styled.div`
   position: relative;
@@ -16,6 +20,7 @@ const SmallModalContainer = styled.div`
   label {
     margin-bottom: 10px;
     font-size: var(--fontlg);
+    text-align: center;
   }
 
   form {
@@ -99,10 +104,58 @@ const Checkboxes = React.memo(
   }
 )
 
+const DebouncedInput = React.memo(
+  ({
+    type = 'textarea',
+    id,
+    initialValue,
+    validators,
+    validateOnChange,
+    onSuccess,
+    onError,
+  }) => {
+    const {
+      errors,
+      state: formState,
+      getFormProps,
+      getInputStateAndProps,
+    } = useForm({
+      initialValues: {
+        [id]: initialValue,
+      },
+      validators,
+      validateOnChange,
+    })
+
+    const debounceRef = useRef()
+    useEffect(
+      () => {
+        const debouncedObj = debounce(
+          debounceRef,
+          () => onSuccess(formState),
+          500
+        )
+      },
+      [JSON.stringify(formState)]
+    )
+
+    return (
+      <Form {...getFormProps()}>
+        {type.toUpperCase() === 'TEXTAREA' ? (
+          <Textarea {...getInputStateAndProps({ id, errors })} />
+        ) : (
+          <Input {...getInputStateAndProps({ id, errors })} />
+        )}
+      </Form>
+    )
+  }
+)
+
 export {
   SmallModalContainer,
   ClickForMoreButton,
   Section,
   SectionName,
   Checkboxes,
+  DebouncedInput,
 }

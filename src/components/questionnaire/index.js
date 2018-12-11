@@ -8,6 +8,7 @@ import caretLeft from '../../images/caret-left.svg'
 
 import About from './steps/about/index'
 import Occupation from './steps/occupation/index'
+import OccupationPlan from './steps/occupation/occupation-plan'
 
 import useQuestionnaire from '../shared/hooks/useQuestionnaire'
 
@@ -25,22 +26,22 @@ const questionnaireSteps = [
     },
   },
   {
-    id: 'OCCUPATION_TITLE',
+    id: 'OCCUPATION_INFO',
     data: {
       component: Occupation,
       meta: {
-        sectionTitle: 'About',
+        sectionTitle: 'Work/Education',
         question: 'I am currently a',
       },
     },
   },
   {
-    id: 'OCCUPATION_COMPANY',
+    id: 'OCCUPATION_PLAN',
     data: {
-      component: Occupation,
+      component: OccupationPlan,
       meta: {
-        sectionTitle: 'Interests',
-        question: 'working at',
+        sectionTitle: 'Work/Education',
+        question: 'What will you do to improve your work?',
       },
     },
   },
