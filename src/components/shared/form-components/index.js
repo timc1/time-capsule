@@ -31,12 +31,13 @@ const Input = styled.input`
   position: relative;
   display: block;
   background-color: transparent;
+  border-radius: 0;
   border: none;
   border-left: 1px solid
     ${props => (props.error ? 'var(--error)' : 'var(--gray2)')};
   outline: none;
   width: 100%;
-  color: var(--black);
+  color: ${props => (props.light ? 'var(--white)' : 'var(--black)')};
   font-family: var(--ff-sanserif);
   font-weight: var(--fontregular);
   font-size: var(--fontmd);
@@ -56,6 +57,7 @@ const StyledTextarea = styled.textarea`
   position: relative;
   display: block;
   background-color: transparent;
+  border-radius: 0;
   border: none;
   border-left: 1px solid
     ${props => (props.error ? 'var(--error)' : 'var(--gray2)')};
@@ -68,7 +70,6 @@ const StyledTextarea = styled.textarea`
   line-height: 1.5rem;
   padding: 0 15px;
   min-height: 200px;
-  transition: background-color 0.1s ease-in, color 0.1s ease-in;
   opacity: 0.7;
   resize: none;
   &::placeholder {

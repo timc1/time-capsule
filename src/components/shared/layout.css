@@ -57,11 +57,11 @@
 }
 
 ::selection {
-  background: var(--black1); /* WebKit/Blink Browsers */
+  background: #3C91F0; /* WebKit/Blink Browsers */
   color: #fff;
 }
 ::-moz-selection {
-  background: var(--black1);/* Gecko Browsers */
+  background: #3C91F0;/* Gecko Browsers */
   color: #fff;
 }
 

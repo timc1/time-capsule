@@ -43,6 +43,12 @@ const fadeInUp = keyframes`
   }
 `
 
+const scroll = (to = '30px') => keyframes`
+  to {
+    transform: translateX(${to});
+  }
+`
+
 const UnstyledLink = styled(Link)`
   position: relative;
   text-decoration: none;
@@ -196,6 +202,7 @@ export {
   fadeIn,
   fadeInUp,
   zoomIn,
+  scroll,
   UnstyledLink,
   UnstyledButton,
   ExitButton,

@@ -1,20 +1,24 @@
 import React, { useState, useRef, useEffect, useReducer } from 'react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
-import { screenmd, UnstyledButton } from '../shared/styles'
+import { screenmd, UnstyledButton, scroll } from '../shared/styles'
 import { Location } from '@reach/router'
 
 import caretLeft from '../../images/caret-left.svg'
 
 import About from './steps/about/index'
-import Occupation from './steps/occupation/index'
+import Occupation, { IntroOccupation } from './steps/occupation/index'
 import OccupationPlan from './steps/occupation/occupation-plan'
 import PersonalInterests from './steps/hobbies/index'
+import PersonalInterestsPlan from './steps/hobbies/personal-interests-plan'
+import Relationships from './steps/relationships/index'
 
 import useQuestionnaire from '../shared/hooks/useQuestionnaire'
 
 import Transition, { WizardTransition } from '../shared/transition'
 import Modal from '../shared/modal'
+
+import arrow from '../../images/arrow.svg'
 
 const questionnaireSteps = [
   {
@@ -24,6 +28,15 @@ const questionnaireSteps = [
       meta: {
         sectionTitle: 'About',
         question: 'My name is...',
+      },
+    },
+  },
+  {
+    id: 'INTRO_OCCUPATION',
+    data: {
+      component: IntroOccupation,
+      meta: {
+        sectionTitle: 'Career/Work',
       },
     },
   },
@@ -43,7 +56,7 @@ const questionnaireSteps = [
       component: OccupationPlan,
       meta: {
         sectionTitle: 'Career/Work',
-        question: 'What will you do to improve your work?',
+        question: 'Where would you like to be within this next year?',
         subquestion:
           'Think where would you like to be in a year and what actions you are going to take to get there.',
       },
@@ -55,8 +68,27 @@ const questionnaireSteps = [
       component: PersonalInterests,
       meta: {
         sectionTitle: 'Personal Interests',
-        question: 'Some of my interests include...',
-        subquestion: '',
+        question: 'What are some hobbies and activites that interest you?',
+      },
+    },
+  },
+  {
+    id: 'PERSONAL_INTERESTS_PLAN',
+    data: {
+      component: PersonalInterestsPlan,
+      meta: {
+        sectionTitle: 'Personal Interests',
+        question: 'How do you plan on being consistent with these interests?',
+      },
+    },
+  },
+  {
+    id: 'RELATIONSHIPS',
+    data: {
+      component: Relationships,
+      meta: {
+        sectionTitle: 'Relationships',
+        question: 'How would you rate your interpersonal relationships?',
       },
     },
   },
@@ -188,6 +220,11 @@ export default React.memo(props => {
                 }}
               >
                 <span>Next</span>
+                <div className="rockets" aria-hidden="true" {...props}>
+                  <div />
+                  <div />
+                  <div />
+                </div>
               </NextButton>
             )}
           </Container>
@@ -330,16 +367,19 @@ const SubQuestion = styled.h2`
 
 const UserInteractionSection = styled.div`
   position: relative;
-  min-height: 300px;
-  height: 100%;
   margin: 5rem 0 2.5rem 0;
   display: grid;
   grid-auto-rows: max-content;
+  min-height: 300px;
 `
 
 export const NextButton = styled(UnstyledButton)`
-  position: sticky;
+  position: fixed;
   bottom: var(--baseborderpadding);
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 400px;
+  width: 100%;
   padding: var(--fontmd);
   width: 100%;
   background: transparent;
@@ -383,7 +423,65 @@ export const NextButton = styled(UnstyledButton)`
     &::after {
       background: var(--blue);
       z-index: -2;
-      transition: opacity 0.1s ease-in;
+      transition: opacity 0.15s ease-in;
+    }
+  }
+
+  .rockets {
+    position: absolute;
+    right: 10px;
+    height: 30px;
+    width: 50%;
+    top: 50%;
+    opacity: 0;
+    transform: translateY(-50%);
+    transition: opacity 0.15s ease-in;
+    overflow: hidden;
+    > div::before {
+      content: '';
+      position: absolute;
+      height: 10px;
+      width: 10px;
+      background: var(--white);
+      mask: url(${arrow}) center center / contain no-repeat;
+      -webkit-mask: url(${arrow}) center center / contain no-repeat;
+      animation: ${scroll('120px')} 1s infinite linear;
+      transform: translateX(-20px);
+      opacity: 1;
+      transition-property: opacity, transform;
+    }
+
+    > div:first-of-type {
+      transform: translateY(20px);
+      &::before {
+        animation-duration: 1.1s;
+        background: #fff9a7;
+      }
+    }
+
+    > div:nth-of-type(2) {
+      transform: translateY(10px);
+      &::before {
+        animation-duration: 0.9s;
+        background: #9cf0e1;
+      }
+    }
+  }
+
+  @media (min-width: ${screenmd}px) {
+    &:hover,
+    &:focus {
+      .rockets {
+        > div::before {
+          animation-duration: 0.8s;
+        }
+        > div:first-of-type::before {
+          animation-duration: 0.9s;
+        }
+        > div:nth-of-type(2)::before {
+          animation-duration: 0.7s;
+        }
+      }
     }
   }
 
@@ -392,23 +490,25 @@ export const NextButton = styled(UnstyledButton)`
     css`
       &:hover,
       &:focus {
-        transform: translateY(-1px);
+        transform: translateY(-1px) translateX(-50%);
         > span::after {
           opacity: 0;
         }
       }
       &:active {
-        transform: translateY(1px);
+        transform: translateY(1px) translateX(-50%);
         > span::after {
           opacity: 1;
         }
+      }
+
+      .rockets {
+        opacity: 1;
       }
     `};
 
   @media (max-width: ${screenmd}px) {
     position: fixed;
-    left: 0;
-    right: 0;
     bottom: 0;
   }
 `

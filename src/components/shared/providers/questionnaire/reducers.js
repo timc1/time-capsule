@@ -13,7 +13,7 @@ const questionnaireReducer = (state, { type, payload }) => {
         ...state,
         user,
       }
-    case 'UPDATE_OCCUPATION':
+    case 'UPDATE_ANSWERS':
       return {
         ...state,
         answers: {

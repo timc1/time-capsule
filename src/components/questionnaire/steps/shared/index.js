@@ -15,7 +15,6 @@ const SmallModalContainer = styled.div`
   margin: calc(25vh) auto 100px auto;
   max-width: 400px;
   width: 100%;
-  animation: ${fadeInUp} 0.15s ease-in;
 
   label {
     margin-bottom: 10px;
@@ -135,10 +134,10 @@ const DebouncedInput = React.memo(
           debounceRef,
           () => {
             const { errors, ...values } = formState
-            if (values[id].length === 0) {
+            if (values[id].trim().length === 0) {
               onError(values)
             } else {
-              onSuccess(values)
+              onSuccess(values[id].trim())
             }
           },
           500

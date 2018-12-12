@@ -17,6 +17,8 @@ import {
   formatMessage,
 } from './reducers'
 
+export { IntroOccupation } from './intro'
+
 export default React.memo(({ canContinue, setContinue, dispatchModal }) => {
   // useQuestionnaire stores all our questionnaire values.
   const { context } = useQuestionnaire()
@@ -54,7 +56,7 @@ export default React.memo(({ canContinue, setContinue, dispatchModal }) => {
             })
 
             context.questionnaireDispatch({
-              type: 'UPDATE_OCCUPATION',
+              type: 'UPDATE_ANSWERS',
               payload: {
                 id: 'occupationRole',
                 value,
@@ -82,7 +84,7 @@ export default React.memo(({ canContinue, setContinue, dispatchModal }) => {
             })
 
             context.questionnaireDispatch({
-              type: 'UPDATE_OCCUPATION',
+              type: 'UPDATE_ANSWERS',
               payload: {
                 id: 'occupationRole',
                 value: error,
@@ -137,7 +139,7 @@ export default React.memo(({ canContinue, setContinue, dispatchModal }) => {
                 }
 
                 context.questionnaireDispatch({
-                  type: 'UPDATE_OCCUPATION',
+                  type: 'UPDATE_ANSWERS',
                   payload: {
                     id: 'occupationPlace',
                     value,
@@ -150,7 +152,7 @@ export default React.memo(({ canContinue, setContinue, dispatchModal }) => {
                   return
                 }
                 context.questionnaireDispatch({
-                  type: 'UPDATE_OCCUPATION',
+                  type: 'UPDATE_ANSWERS',
                   payload: {
                     id: 'occupationPlace',
                     value: error,
@@ -191,7 +193,7 @@ export default React.memo(({ canContinue, setContinue, dispatchModal }) => {
                 }
 
                 context.questionnaireDispatch({
-                  type: 'UPDATE_OCCUPATION',
+                  type: 'UPDATE_ANSWERS',
                   payload: {
                     id: 'occupationHappiness',
                     value: success,

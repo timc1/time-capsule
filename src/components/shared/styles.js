@@ -5,6 +5,7 @@ export {
   fadeIn,
   fadeInUp,
   zoomIn,
+  scroll,
   UnstyledLink,
   UnstyledButton,
   ExitButton,

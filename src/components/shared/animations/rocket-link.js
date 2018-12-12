@@ -1,9 +1,8 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { keyframes } from '@emotion/core'
 import arrow from '../../../images/arrow.svg'
 
-import { UnstyledLink, screenmd } from '../styles'
+import { UnstyledLink, screenmd, scroll } from '../styles'
 
 export function RocketLink({ to, text, ...props }) {
   return (
@@ -17,12 +16,6 @@ export function RocketLink({ to, text, ...props }) {
     </AnimatedLink>
   )
 }
-
-const scroll = keyframes`
-  to {
-    transform: translateX(35px); 
-  }
-`
 
 const AnimatedLink = styled(UnstyledLink)`
   display: inline-block;
@@ -61,7 +54,7 @@ const AnimatedLink = styled(UnstyledLink)`
       background: var(--white);
       mask: url(${arrow}) center center / contain no-repeat;
       -webkit-mask: url(${arrow}) center center / contain no-repeat;
-      animation: ${scroll} 1s infinite linear;
+      animation: ${scroll('35px')} 1s infinite linear;
       transform: translateX(-20px);
       opacity: 1;
       transition-property: opacity, transform;

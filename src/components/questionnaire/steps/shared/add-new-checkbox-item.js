@@ -78,6 +78,7 @@ export default React.memo(
               maxLength: 30,
               ref: initialFocusRef,
             })}
+            light
           />
           <NextButton
             disabled={val.length < 2}

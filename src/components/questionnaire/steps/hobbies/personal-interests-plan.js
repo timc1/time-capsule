@@ -7,14 +7,14 @@ export default React.memo(({ canContinue, setContinue }) => {
   return (
     <DebouncedInput
       type="textarea"
-      id="occupationPlan"
-      initialValue={context.questionnaireState.answers.occupationPlan}
+      id="hobbiesPlan"
+      initialValue={context.questionnaireState.answers.hobbiesPlan}
       onSuccess={values => {
         if (!canContinue) setContinue(true)
         context.questionnaireDispatch({
           type: 'UPDATE_ANSWERS',
           payload: {
-            id: 'occupationPlan',
+            id: 'hobbiesPlan',
             value: values,
           },
         })
@@ -22,7 +22,7 @@ export default React.memo(({ canContinue, setContinue }) => {
       onError={error => {
         if (canContinue) setContinue(false)
       }}
-      placeholder="I've really enjoyed working with my creative director, and am interested in learning more about her field of work. So, I will help her with her work more this upcoming year and learn alongside her."
+      placeholder="I plan on attending a kickboxing class twice a week."
       maxLength="500"
     />
   )
