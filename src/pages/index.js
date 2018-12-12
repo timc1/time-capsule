@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import styled from '@emotion/styled'
 
 import {
@@ -9,9 +9,22 @@ import {
   RocketLink,
 } from '../components/shared/styles'
 
-import landingIllustration from '../images/landing_video.mp4'
+import lottie from 'lottie-web'
+import landingIllustration from '../images/landing_illustration.json'
 
-const IndexPage = () => {
+const IndexPage = React.memo(() => {
+  const illustrationRef = useRef()
+
+  useEffect(() => {
+    lottie.loadAnimation({
+      container: illustrationRef.current, // the dom element that will contain the animation
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      animationData: landingIllustration,
+    })
+  }, [])
+
   return (
     <Container>
       <Intro>
@@ -22,14 +35,10 @@ const IndexPage = () => {
         </h2>
         <RocketLink to="/setup" text="Start" />
       </Intro>
-      <Illustration>
-        <video src={landingIllustration} type="video/mp4" autoPlay loop muted>
-          Your browser does not support our beautiful animation.
-        </video>
-      </Illustration>
+      <Illustration ref={illustrationRef} />
     </Container>
   )
-}
+})
 
 const Container = styled.div`
   padding: var(--baseborderpadding);
@@ -81,27 +90,25 @@ const Intro = styled.section`
   }
 
   @media (max-width: ${screenmd}px) {
-    margin-top: 40px;
+    margin-top: 20px;
     text-align: center;
   }
 `
 
 const Illustration = styled.div`
-  video {
-    max-height: 750px;
-    max-width: 800px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    z-index: -1;
-    opacity: 0;
-    animation: ${fadeIn} 0.5s ease-in;
-    animation-fill-mode: forwards;
-    animation-delay: 1s;
-    @media (max-width: ${screenmd}px) {
-      margin-top: 30px;
-      max-width: 90vw;
-    }
+  max-height: 675px;
+  max-width: 800px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  opacity: 0;
+  animation: ${fadeIn} 0.5s ease-in;
+  animation-fill-mode: forwards;
+  animation-delay: 1s;
+  @media (max-width: ${screenmd}px) {
+    margin-top: 30px;
+    max-width: 90vw;
   }
 `
 

@@ -13,6 +13,7 @@ import OccupationPlan from './steps/occupation/occupation-plan'
 import PersonalInterests from './steps/hobbies/index'
 import PersonalInterestsPlan from './steps/hobbies/personal-interests-plan'
 import Relationships from './steps/relationships/index'
+import RelationshipsPlan from './steps/relationships/relationships-plan'
 
 import useQuestionnaire from '../shared/hooks/useQuestionnaire'
 
@@ -23,22 +24,22 @@ import arrow from '../../images/arrow.svg'
 
 const questionnaireSteps = [
   {
-    id: 'ABOUT',
+    id: `ABOUT`,
     data: {
       component: About,
       meta: {
-        sectionTitle: 'About',
-        question: 'My name is...',
+        sectionTitle: `About`,
+        question: `My name is...`,
       },
     },
   },
   {
-    id: 'INTRO_OCCUPATION',
+    id: `INTRO_OCCUPATION`,
     data: {
       component: SectionIntro,
       meta: {
-        sectionTitle: 'Career/Work',
-        question: 'My Career',
+        sectionTitle: `Career/Work`,
+        question: `Let's start with my career.`,
       },
       introProps: {
         text: `Nunc ultrices, orci eu dictum sollicitudin, enim nisl semper nibh,
@@ -51,24 +52,23 @@ const questionnaireSteps = [
     },
   },
   {
-    id: 'OCCUPATION_INFO',
+    id: `OCCUPATION_INFO`,
     data: {
       component: Occupation,
       meta: {
-        sectionTitle: 'Career/Work',
-        question: 'I am currently a',
+        sectionTitle: `Career/Work`,
+        question: `I am currently a`,
       },
     },
   },
   {
-    id: 'OCCUPATION_PLAN',
+    id: `OCCUPATION_PLAN`,
     data: {
       component: OccupationPlan,
       meta: {
-        sectionTitle: 'Career/Work',
-        question: 'Where would you like to be within this next year?',
-        subquestion:
-          'Think where would you like to be in a year and what actions you are going to take to get there.',
+        sectionTitle: `Career/Work`,
+        question: `Where I would like to be within this next year`,
+        subquestion: `What are some things you want to see change with your work and what actions will you take to take to get there?`,
       },
     },
   },
@@ -77,8 +77,8 @@ const questionnaireSteps = [
     data: {
       component: SectionIntro,
       meta: {
-        sectionTitle: 'Persnoal Interests',
-        question: `Let's move on to personal interests`,
+        sectionTitle: 'Personal Interests',
+        question: `Easy! Let's move on to personal interests.`,
       },
       introProps: {
         text: `Nunc ultrices, orci eu dictum sollicitudin, enim nisl semper nibh,
@@ -91,32 +91,61 @@ const questionnaireSteps = [
     },
   },
   {
-    id: 'PERSONAL_INTERESTS',
+    id: `PERSONAL_INTERESTS`,
     data: {
       component: PersonalInterests,
       meta: {
-        sectionTitle: 'Personal Interests',
-        question: 'What are some hobbies and activites that interest you?',
+        sectionTitle: `Personal Interests`,
+        question: `Things that interest me.`,
       },
     },
   },
   {
-    id: 'PERSONAL_INTERESTS_PLAN',
+    id: `PERSONAL_INTERESTS_PLAN`,
     data: {
       component: PersonalInterestsPlan,
       meta: {
-        sectionTitle: 'Personal Interests',
-        question: 'How do you plan on being consistent with these interests?',
+        sectionTitle: `Personal Interests`,
+        question: `How I plan on pursuing and being consistent with these interests.`,
       },
     },
   },
   {
-    id: 'RELATIONSHIPS',
+    id: `INTRO_RELATIONSHIPS`,
+    data: {
+      component: SectionIntro,
+      meta: {
+        sectionTitle: `Relationships`,
+        question: `Let's move onto improving relationships.`,
+      },
+      introProps: {
+        text: `Nunc ultrices, orci eu dictum sollicitudin, enim nisl semper nibh,
+        egestas bibendum massa est laoreet orci. Pellentesque sagittis ex
+        sapien, nec iaculis orci sollicitudin sed. Vestibulum ante ipsum primis
+        in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque
+        habitant morbi tristique senectus et netus et malesuada fames ac turpis
+        egestas. Cras volutpat nisi et bibendum viverra.`,
+      },
+    },
+  },
+  {
+    id: `RELATIONSHIPS`,
     data: {
       component: Relationships,
       meta: {
-        sectionTitle: 'Relationships',
-        question: 'How would you rate your interpersonal relationships?',
+        sectionTitle: `Relationships`,
+        question: `How I would rate my interpersonal relationship skills.`,
+      },
+    },
+  },
+  {
+    id: `RELATIONSHIPS_PLAN`,
+    data: {
+      component: RelationshipsPlan,
+      meta: {
+        sectionTitle: `Relationships`,
+        question: `How I will improve my relationships with others.`,
+        subquestion: `Think actionable and reasonable steps that you will take.`,
       },
     },
   },
@@ -250,6 +279,16 @@ export default React.memo(props => {
                 }}
               >
                 <span>Next</span>
+                <div
+                  className="rockets rockets-left"
+                  aria-hidden="true"
+                  {...props}
+                >
+                  <div />
+                  <div />
+                  <div />
+                </div>
+
                 <div className="rockets" aria-hidden="true" {...props}>
                   <div />
                   <div />
@@ -265,7 +304,7 @@ export default React.memo(props => {
 })
 
 const Container = styled.section`
-  max-width: 400px;
+  max-width: 440px;
   width: 100%;
   margin: 80px auto;
   padding: var(--baseborderpadding);
@@ -278,6 +317,7 @@ const Status = React.memo(
     left: 0;
     right: 0;
     height: 2px;
+    background: var(--white);
     z-index: 2;
     &::after {
       content: '';
@@ -462,39 +502,62 @@ export const NextButton = styled(UnstyledButton)`
     position: absolute;
     right: 10px;
     height: 30px;
-    width: 50%;
+    width: 40%;
     top: 50%;
     opacity: 0;
     transform: translateY(-50%);
     transition: opacity 0.15s ease-in;
     overflow: hidden;
+    > div {
+      transform: translateX(-50%);
+    }
     > div::before {
       content: '';
       position: absolute;
+      left: unset;
+      right: 10px;
       height: 10px;
       width: 10px;
       background: var(--white);
       mask: url(${arrow}) center center / contain no-repeat;
       -webkit-mask: url(${arrow}) center center / contain no-repeat;
-      animation: ${scroll('120px')} 1s infinite linear;
+      animation: ${scroll('200px')} 1.2s infinite linear;
       transform: translateX(-20px);
       opacity: 1;
       transition-property: opacity, transform;
     }
 
     > div:first-of-type {
-      transform: translateY(20px);
+      transform: translateY(20px) translateX(-100%);
       &::before {
-        animation-duration: 1.1s;
-        background: #ff9e44;
+        animation-duration: 1.3s;
       }
     }
 
     > div:nth-of-type(2) {
-      transform: translateY(10px);
+      transform: translateY(10px) translateX(-100%);
       &::before {
-        animation-duration: 0.9s;
-        background: #7bffef;
+        animation-duration: 1.1s;
+      }
+    }
+  }
+
+  .rockets-left {
+    right: unset;
+    left: 10px;
+    > div {
+      &::before {
+        animation-duration: 1.3s;
+      }
+    }
+    > div:first-of-type {
+      &::before {
+        animation-duration: 1.2s;
+      }
+    }
+    > div:nth-of-type(2) {
+      &::before {
+        animation-duration: 1.4s;
       }
     }
   }
@@ -511,6 +574,17 @@ export const NextButton = styled(UnstyledButton)`
         }
         > div:nth-of-type(2)::before {
           animation-duration: 0.7s;
+        }
+      }
+      .rockets-left {
+        > div::before {
+          animation-duration: 0.9s;
+        }
+        > div:first-of-type::before {
+          animation-duration: 0.7s;
+        }
+        > div:nth-of-type(2)::before {
+          animation-duration: 0.8s;
         }
       }
     }

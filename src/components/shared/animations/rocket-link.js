@@ -64,7 +64,6 @@ const AnimatedLink = styled(UnstyledLink)`
       transform: translateY(20px);
       &::before {
         animation-duration: 1.1s;
-        background: #fff9a7;
       }
     }
 
@@ -72,7 +71,6 @@ const AnimatedLink = styled(UnstyledLink)`
       transform: translateY(10px);
       &::before {
         animation-duration: 0.9s;
-        background: #9cf0e1;
       }
     }
   }
