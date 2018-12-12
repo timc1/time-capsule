@@ -26,8 +26,9 @@ const getQuestionnaire = q => ({
     hobbies: [
       { id: 'meetups', name: 'Meetups', isChecked: false },
       { id: 'exercising', name: 'Exercising', isChecked: false },
-      { id: 'digitalArt', name: 'Digital Arts', isChecked: false },
+      { id: 'gardening', name: 'Gardening', isChecked: false },
       { id: 'gaming', name: 'Gaming', isChecked: false },
+      { id: 'noHobbies', name: 'No Hobbies 😔', isChecked: false },
     ],
     hobbiesPlan: '',
     wantToLearn: '',
@@ -40,7 +41,6 @@ const getQuestionnaire = q => ({
     betterYourCommunityPlan: '',
   },
 })
-
 const baseHappiness = [
   { id: 'unsatisfied', name: 'Unsatisfied', isChecked: false },
   { id: 'notSoWell', name: 'Not So Well', isChecked: false },
@@ -48,5 +48,4 @@ const baseHappiness = [
   { id: 'satisfied', name: 'Satisfied', isChecked: false },
   { id: 'vertySatisfied', name: 'Very Satisfied', isChecked: false },
 ]
-
 export { getQuestionnaire }

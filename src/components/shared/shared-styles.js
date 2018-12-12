@@ -3,7 +3,7 @@ import { keyframes } from '@emotion/core'
 import { Link } from 'gatsby'
 
 const screensm = 568
-const screenmd = 767
+const screenmd = 768
 const screenlg = 1044
 
 const slideInFromLeft = keyframes`

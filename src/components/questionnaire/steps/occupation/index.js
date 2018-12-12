@@ -17,8 +17,6 @@ import {
   formatMessage,
 } from './reducers'
 
-export { IntroOccupation } from './intro'
-
 export default React.memo(({ canContinue, setContinue, dispatchModal }) => {
   // useQuestionnaire stores all our questionnaire values.
   const { context } = useQuestionnaire()

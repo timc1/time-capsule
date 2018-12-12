@@ -6,8 +6,9 @@ import { Location } from '@reach/router'
 
 import caretLeft from '../../images/caret-left.svg'
 
+import SectionIntro from './steps/shared/intro'
 import About from './steps/about/index'
-import Occupation, { IntroOccupation } from './steps/occupation/index'
+import Occupation from './steps/occupation/index'
 import OccupationPlan from './steps/occupation/occupation-plan'
 import PersonalInterests from './steps/hobbies/index'
 import PersonalInterestsPlan from './steps/hobbies/personal-interests-plan'
@@ -34,9 +35,18 @@ const questionnaireSteps = [
   {
     id: 'INTRO_OCCUPATION',
     data: {
-      component: IntroOccupation,
+      component: SectionIntro,
       meta: {
         sectionTitle: 'Career/Work',
+        question: 'My Career',
+      },
+      introProps: {
+        text: `Nunc ultrices, orci eu dictum sollicitudin, enim nisl semper nibh,
+        egestas bibendum massa est laoreet orci. Pellentesque sagittis ex
+        sapien, nec iaculis orci sollicitudin sed. Vestibulum ante ipsum primis
+        in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque
+        habitant morbi tristique senectus et netus et malesuada fames ac turpis
+        egestas. Cras volutpat nisi et bibendum viverra.`,
       },
     },
   },
@@ -59,6 +69,24 @@ const questionnaireSteps = [
         question: 'Where would you like to be within this next year?',
         subquestion:
           'Think where would you like to be in a year and what actions you are going to take to get there.',
+      },
+    },
+  },
+  {
+    id: 'INTRO_PERSONAL_INTERESTS',
+    data: {
+      component: SectionIntro,
+      meta: {
+        sectionTitle: 'Persnoal Interests',
+        question: `Let's move on to personal interests`,
+      },
+      introProps: {
+        text: `Nunc ultrices, orci eu dictum sollicitudin, enim nisl semper nibh,
+        egestas bibendum massa est laoreet orci. Pellentesque sagittis ex
+        sapien, nec iaculis orci sollicitudin sed. Vestibulum ante ipsum primis
+        in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque
+        habitant morbi tristique senectus et netus et malesuada fames ac turpis
+        egestas. Cras volutpat nisi et bibendum viverra.`,
       },
     },
   },
@@ -127,7 +155,7 @@ export default React.memo(props => {
     step => step.id === context.questionnaireState.meta.currentStepId
   )
   const {
-    data: { component: Component, meta },
+    data: { component: Component, meta, introProps },
   } = questionnaireSteps[index]
 
   useEffect(
@@ -201,6 +229,7 @@ export default React.memo(props => {
                   canContinue={canContinue}
                   setContinue={setContinue}
                   dispatchModal={dispatchModal}
+                  {...introProps}
                 />
               </UserInteractionSection>
             </WizardTransition>
@@ -511,6 +540,7 @@ export const NextButton = styled(UnstyledButton)`
 
   @media (max-width: ${screenmd}px) {
     position: fixed;
+    max-width: 100%;
     bottom: 0;
   }
 `
