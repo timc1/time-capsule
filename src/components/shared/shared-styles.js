@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 import { keyframes } from '@emotion/core'
 import { Link } from 'gatsby'
 
+const screensm = 568
 const screenmd = 767
 const screenlg = 1044
 
@@ -196,6 +197,7 @@ const ExitIcon = styled.div`
 `
 
 export {
+  screensm,
   screenmd,
   screenlg,
   slideInFromLeft,

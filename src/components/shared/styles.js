@@ -1,4 +1,5 @@
 export {
+  screensm,
   screenmd,
   screenlg,
   slideInFromLeft,

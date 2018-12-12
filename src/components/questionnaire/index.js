@@ -133,6 +133,7 @@ export default React.memo(props => {
   useEffect(
     () => {
       initialFocusRef.current.focus()
+      window.scrollTo({ top: 0 })
     },
     [context.questionnaireState.meta.currentStepId]
   )
@@ -151,13 +152,13 @@ export default React.memo(props => {
       >
         {modalContext.modalContent}
       </Modal>
+      <Status
+        aria-label="hidden"
+        width={(index + 1) / questionnaireSteps.length}
+      />
       <Location>
         {({ navigate }) => (
           <Container>
-            <Status
-              aria-label="hidden"
-              width={(index + 1) / questionnaireSteps.length}
-            />
             <DescriptionHeader>
               <BackButton
                 ref={initialFocusRef}
@@ -238,6 +239,7 @@ const Container = styled.section`
   max-width: 400px;
   width: 100%;
   margin: 80px auto;
+  padding: var(--baseborderpadding);
 `
 
 const Status = React.memo(
@@ -455,7 +457,7 @@ export const NextButton = styled(UnstyledButton)`
       transform: translateY(20px);
       &::before {
         animation-duration: 1.1s;
-        background: #fff9a7;
+        background: #ff9e44;
       }
     }
 
@@ -463,7 +465,7 @@ export const NextButton = styled(UnstyledButton)`
       transform: translateY(10px);
       &::before {
         animation-duration: 0.9s;
-        background: #9cf0e1;
+        background: #7bffef;
       }
     }
   }

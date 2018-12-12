@@ -15,15 +15,15 @@
 }
 
 @font-face {
-  font-family: 'GT-Super';
+  font-family: 'DomaineDisplayNarrow';
   font-display: auto;
-  src: url('/assets/fonts/GT-Super-Text-Book.ttf');
-  font-weight: 100 500;
+  src: url('/assets/fonts/DomaineDisplayNarrow-Semibold.otf');
+  font-weight: 100 900;
   font-style: normal;
 }
 
 :root {
-  --ff-serif: "GT-Super", "Georgia", "Times", "Times New Roman";
+  --ff-serif: "DomaineDisplayNarrow", "Georgia", "Times", "Times New Roman";
   --ff-sanserif: "NBInternational", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --fontbold: 800;
   --fontregular: 400;
@@ -54,6 +54,12 @@
 
   --baseboxshadow: 0 1px 3px rgba(188, 193, 217, .12), 0 5px 12px rgba(188, 193, 217, .25);
   --boxshadow2: 0 13px 27px -5px rgba(50,50,93,.22), 0 8px 16px -8px rgba(0,0,0,.2);
+}
+
+@media(max-width: 568px) {
+  :root {
+    --fontxl: 11vw;
+  }
 }
 
 ::selection {

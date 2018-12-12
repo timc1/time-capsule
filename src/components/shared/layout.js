@@ -7,7 +7,6 @@ import Transition from './transition'
 
 import Header from './header'
 import './layout.css'
-import { screenlg } from './styles'
 
 import styled from '@emotion/styled'
 
@@ -49,8 +48,6 @@ const Layout = ({ children }) => (
 )
 
 const Main = styled.main`
-  padding: var(--baseborderpadding);
-  max-width: ${screenlg}px;
   margin: auto;
 `
 
