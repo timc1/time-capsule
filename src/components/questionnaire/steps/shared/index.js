@@ -38,14 +38,14 @@ const ClickForMoreButton = styled(UnstyledButton)`
     color: var(--gray2);
     font-size: var(--fontsm);
     opacity: 0.7;
-    transition: opacity 0.1s ease-in;
+    transition: opacity 0.1s var(--cubic);
     &::before {
       border-radius: var(--baseborderradius);
       box-shadow: 0 0 1px var(--gray2);
       transform: scale(0.8);
       opacity: 0;
       transition-property: opacity, transform;
-      transition: 0.1s ease-in;
+      transition: 0.1s var(--cubic);
     }
   }
 
@@ -72,7 +72,7 @@ const ClickForMoreButton = styled(UnstyledButton)`
 
 const Section = styled.section`
   display: grid;
-  animation: ${fadeInUp} 0.15s ease-in;
+  animation: ${fadeInUp} 0.15s var(--cubic);
   margin-bottom: 15px;
 `
 

@@ -7,14 +7,14 @@ export default React.memo(({ canContinue, setContinue }) => {
   return (
     <DebouncedInput
       type="textarea"
-      id="relationshipsPlan"
-      initialValue={context.questionnaireState.answers.relationshipsPlan}
+      id="personalHealthPlan"
+      initialValue={context.questionnaireState.answers.personalHealthPlan}
       onSuccess={values => {
         if (!canContinue) setContinue(true)
         context.questionnaireDispatch({
           type: 'UPDATE_ANSWERS',
           payload: {
-            id: 'relationshipsPlan',
+            id: 'personalHealthPlan',
             value: values,
           },
         })
@@ -22,7 +22,7 @@ export default React.memo(({ canContinue, setContinue }) => {
       onError={error => {
         if (canContinue) setContinue(false)
       }}
-      placeholder="I am going to reach out and try to meet up with someone I look up to once a month."
+      placeholder="I will run 365 miles this upcoming year."
       maxLength="500"
     />
   )

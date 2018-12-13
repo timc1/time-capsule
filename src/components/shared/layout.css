@@ -54,6 +54,8 @@
 
   --baseboxshadow: 0 1px 3px rgba(188, 193, 217, .12), 0 5px 12px rgba(188, 193, 217, .25);
   --boxshadow2: 0 13px 27px -5px rgba(50,50,93,.22), 0 8px 16px -8px rgba(0,0,0,.2);
+
+  --cubic: cubic-bezier(0.42, 0, 0.59, 1.1);
 }
 
 @media(max-width: 568px) {
@@ -128,3 +130,51 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.wizard {
+  position: absolute;
+  width: 100%;
+  transition-property: opacity, transform;
+}
+
+.wizard-horizontal-right-enter-done,
+.wizard-horizontal-left-enter-done {
+  opacity: 1;
+  transform: translateX(0);
+  transition-duration: .2s;
+  transition-timing-function: var(--cubic);
+}
+
+.wizard-horizontal-left-enter-active,
+.wizard-horizontal-right-enter-active
+{
+  opacity: 0;
+}
+.wizard-horizontal-left-enter-active {
+  transform: translateX(100px);
+}
+.wizard-horizontal-right-enter-active {
+  transform: translateX(-100px);
+}
+
+.wizard-horizontal-left-exit-active, 
+.wizard-horizontal-right-exit-active
+{
+  opacity: 0;
+  transition-duration: .2s;
+  transition-timing-function: var(--cubic); 
+}
+.wizard-horizontal-left-exit-active {
+  transform: translateX(-100px);
+}
+.wizard-horizontal-right-exit-active {
+  transform: translateX(100px);
+}
+
+.wizard-horizontal-right-exit-done {
+  transform: translateX(-100px);
+}
+.wizard-horizontal-left-exit-done {
+  transform: translateX(100px);
+}
+

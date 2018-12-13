@@ -96,8 +96,8 @@ const Intro = styled.section`
 `
 
 const Illustration = styled.div`
-  max-height: 675px;
-  max-width: 800px;
+  height: auto;
+  width: 700px;
   position: absolute;
   bottom: 0;
   right: 0;
