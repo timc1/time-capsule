@@ -106,7 +106,7 @@ export default React.memo(props => {
             </DescriptionHeader>
             <Transition
               transitionKey={context.questionnaireState.meta.currentStepId}
-              delay={250}
+              delay={200}
             >
               <Question>{meta.question}</Question>
               {meta.subquestion && (
@@ -116,7 +116,7 @@ export default React.memo(props => {
             <WizardTransition
               transitionKey={context.questionnaireState.meta.currentStepId}
               type={transitionDirection}
-              delay={250}
+              delay={200}
             >
               <UserInteractionSection>
                 <Component
@@ -192,7 +192,7 @@ const Status = React.memo(
       left: 0;
       right: 0;
       background: var(--blue);
-      transition: transform 0.25s ease-in;
+      transition: transform 0.25s var(--cubic);
       transform: ${props => `scaleX(${props.width})`};
       transform-origin: 0;
       transition-delay: 0.15s;
@@ -258,7 +258,7 @@ const BackButton = styled(UnstyledButton)`
     right: 0;
     bottom: 0;
     transform: scale(0.7);
-    transition: transform 0.1s ease-in;
+    transition: transform 0.1s var(--cubic);
   }
 
   &:hover {
@@ -303,7 +303,7 @@ const SubQuestion = styled.h2`
 
 const UserInteractionSection = styled.div`
   position: relative;
-  margin: 5rem 0 2.5rem 0;
+  margin: 5rem 0 10rem 0;
   display: grid;
   grid-auto-rows: max-content;
   min-height: 300px;
@@ -323,7 +323,7 @@ export const NextButton = styled(UnstyledButton)`
   font-weight: var(--fontbold);
   color: var(--white);
   cursor: pointer;
-  transition: transform 0.15s ease-in;
+  transition: transform 0.15s var(--cubic);
   overflow: hidden;
   outline: none;
 
@@ -336,7 +336,7 @@ export const NextButton = styled(UnstyledButton)`
     bottom: 0;
     background: var(--gray1);
     z-index: -1;
-    transition: 0.25s ease-in;
+    transition: 0.25s var(--cubic);
     transition-property: transform;
     transform: ${props => (props.disabled ? 'scaleX(1)' : 'scaleX(0)')};
     transform-origin: ${props => (props.disabled ? '0 50%' : '100% 50%')};
@@ -359,7 +359,7 @@ export const NextButton = styled(UnstyledButton)`
     &::after {
       background: var(--blue);
       z-index: -2;
-      transition: opacity 0.15s ease-in;
+      transition: opacity 0.15s var(--cubic);
     }
   }
 
@@ -371,7 +371,7 @@ export const NextButton = styled(UnstyledButton)`
     top: 50%;
     opacity: 0;
     transform: translateY(-50%);
-    transition: opacity 0.15s ease-in;
+    transition: opacity 0.15s var(--cubic);
     overflow: hidden;
     > div {
       transform: translateX(-50%);

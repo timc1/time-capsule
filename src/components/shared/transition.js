@@ -80,6 +80,7 @@ const WizardTransition = React.memo(
             key={transitionKey}
             classNames={classNames}
             timeout={delay}
+            appear={true}
           >
             <div>{children}</div>
           </CSSTransition>
