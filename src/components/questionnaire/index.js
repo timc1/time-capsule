@@ -6,150 +6,13 @@ import { Location } from '@reach/router'
 
 import caretLeft from '../../images/caret-left.svg'
 
-import SectionIntro from './steps/shared/intro'
-import About from './steps/about/index'
-import Occupation from './steps/occupation/index'
-import OccupationPlan from './steps/occupation/occupation-plan'
-import PersonalInterests from './steps/hobbies/index'
-import PersonalInterestsPlan from './steps/hobbies/personal-interests-plan'
-import Relationships from './steps/relationships/index'
-import RelationshipsPlan from './steps/relationships/relationships-plan'
-
 import useQuestionnaire from '../shared/hooks/useQuestionnaire'
 
 import Transition, { WizardTransition } from '../shared/transition'
 import Modal from '../shared/modal'
 
 import arrow from '../../images/arrow.svg'
-
-const questionnaireSteps = [
-  {
-    id: `ABOUT`,
-    data: {
-      component: About,
-      meta: {
-        sectionTitle: `About`,
-        question: `My name is...`,
-      },
-    },
-  },
-  {
-    id: `INTRO_OCCUPATION`,
-    data: {
-      component: SectionIntro,
-      meta: {
-        sectionTitle: `Career/Work`,
-        question: `Let's start with my career.`,
-      },
-      introProps: {
-        text: `Nunc ultrices, orci eu dictum sollicitudin, enim nisl semper nibh,
-        egestas bibendum massa est laoreet orci. Pellentesque sagittis ex
-        sapien, nec iaculis orci sollicitudin sed. Vestibulum ante ipsum primis
-        in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque
-        habitant morbi tristique senectus et netus et malesuada fames ac turpis
-        egestas. Cras volutpat nisi et bibendum viverra.`,
-      },
-    },
-  },
-  {
-    id: `OCCUPATION_INFO`,
-    data: {
-      component: Occupation,
-      meta: {
-        sectionTitle: `Career/Work`,
-        question: `I am currently a`,
-      },
-    },
-  },
-  {
-    id: `OCCUPATION_PLAN`,
-    data: {
-      component: OccupationPlan,
-      meta: {
-        sectionTitle: `Career/Work`,
-        question: `Where I would like to be within this next year`,
-        subquestion: `What are some things you want to see change with your work and what actions will you take to take to get there?`,
-      },
-    },
-  },
-  {
-    id: 'INTRO_PERSONAL_INTERESTS',
-    data: {
-      component: SectionIntro,
-      meta: {
-        sectionTitle: 'Personal Interests',
-        question: `Easy! Let's move on to personal interests.`,
-      },
-      introProps: {
-        text: `Nunc ultrices, orci eu dictum sollicitudin, enim nisl semper nibh,
-        egestas bibendum massa est laoreet orci. Pellentesque sagittis ex
-        sapien, nec iaculis orci sollicitudin sed. Vestibulum ante ipsum primis
-        in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque
-        habitant morbi tristique senectus et netus et malesuada fames ac turpis
-        egestas. Cras volutpat nisi et bibendum viverra.`,
-      },
-    },
-  },
-  {
-    id: `PERSONAL_INTERESTS`,
-    data: {
-      component: PersonalInterests,
-      meta: {
-        sectionTitle: `Personal Interests`,
-        question: `Things that interest me.`,
-      },
-    },
-  },
-  {
-    id: `PERSONAL_INTERESTS_PLAN`,
-    data: {
-      component: PersonalInterestsPlan,
-      meta: {
-        sectionTitle: `Personal Interests`,
-        question: `How I plan on pursuing and being consistent with these interests.`,
-      },
-    },
-  },
-  {
-    id: `INTRO_RELATIONSHIPS`,
-    data: {
-      component: SectionIntro,
-      meta: {
-        sectionTitle: `Relationships`,
-        question: `Let's move onto improving relationships.`,
-      },
-      introProps: {
-        text: `Nunc ultrices, orci eu dictum sollicitudin, enim nisl semper nibh,
-        egestas bibendum massa est laoreet orci. Pellentesque sagittis ex
-        sapien, nec iaculis orci sollicitudin sed. Vestibulum ante ipsum primis
-        in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque
-        habitant morbi tristique senectus et netus et malesuada fames ac turpis
-        egestas. Cras volutpat nisi et bibendum viverra.`,
-      },
-    },
-  },
-  {
-    id: `RELATIONSHIPS`,
-    data: {
-      component: Relationships,
-      meta: {
-        sectionTitle: `Relationships`,
-        question: `How I would rate my interpersonal relationship skills.`,
-      },
-    },
-  },
-  {
-    id: `RELATIONSHIPS_PLAN`,
-    data: {
-      component: RelationshipsPlan,
-      meta: {
-        sectionTitle: `Relationships`,
-        question: `How I will improve my relationships with others.`,
-        subquestion: `Think actionable and reasonable steps that you will take.`,
-      },
-    },
-  },
-]
+import questionnaireSteps from './questionnaire-steps'
 
 const modalReducer = (state, { type, payload }) => {
   switch (type) {
@@ -521,7 +384,7 @@ export const NextButton = styled(UnstyledButton)`
       background: var(--white);
       mask: url(${arrow}) center center / contain no-repeat;
       -webkit-mask: url(${arrow}) center center / contain no-repeat;
-      animation: ${scroll('200px')} 1.2s infinite linear;
+      animation: ${scroll('200px')} 1.7s infinite linear;
       transform: translateX(-20px);
       opacity: 1;
       transition-property: opacity, transform;
@@ -530,14 +393,14 @@ export const NextButton = styled(UnstyledButton)`
     > div:first-of-type {
       transform: translateY(20px) translateX(-100%);
       &::before {
-        animation-duration: 1.3s;
+        animation-duration: 1.8s;
       }
     }
 
     > div:nth-of-type(2) {
       transform: translateY(10px) translateX(-100%);
       &::before {
-        animation-duration: 1.1s;
+        animation-duration: 1.6s;
       }
     }
   }
@@ -547,17 +410,17 @@ export const NextButton = styled(UnstyledButton)`
     left: 10px;
     > div {
       &::before {
-        animation-duration: 1.3s;
+        animation-duration: 1.6s;
       }
     }
     > div:first-of-type {
       &::before {
-        animation-duration: 1.2s;
+        animation-duration: 1.7s;
       }
     }
     > div:nth-of-type(2) {
       &::before {
-        animation-duration: 1.4s;
+        animation-duration: 1.8s;
       }
     }
   }
@@ -567,24 +430,24 @@ export const NextButton = styled(UnstyledButton)`
     &:focus {
       .rockets {
         > div::before {
-          animation-duration: 0.8s;
+          animation-duration: 1s;
         }
         > div:first-of-type::before {
-          animation-duration: 0.9s;
+          animation-duration: 1.1s;
         }
         > div:nth-of-type(2)::before {
-          animation-duration: 0.7s;
+          animation-duration: 0.9s;
         }
       }
       .rockets-left {
         > div::before {
-          animation-duration: 0.9s;
+          animation-duration: 1.1s;
         }
         > div:first-of-type::before {
-          animation-duration: 0.7s;
+          animation-duration: 0.9s;
         }
         > div:nth-of-type(2)::before {
-          animation-duration: 0.8s;
+          animation-duration: 1s;
         }
       }
     }
