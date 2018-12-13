@@ -30,8 +30,8 @@
 
   --fontsm: .85rem;
   --fontmd: 1rem;
-  --fontlg: 2.5rem;
-  --fontxl: 4rem;
+  --fontlg: 3rem;
+  --fontxl: 4.5rem;
   --baselineheight: 1.5rem;
 
   --black: #000;
@@ -61,6 +61,7 @@
 @media(max-width: 568px) {
   :root {
     --fontxl: 11vw;
+    --fontlg: 9vw;
   }
 }
 

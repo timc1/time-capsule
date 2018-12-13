@@ -169,7 +169,7 @@ export default React.memo(props => {
 })
 
 const Container = styled.section`
-  max-width: 440px;
+  max-width: 450px;
   width: 100%;
   margin: 80px auto;
   padding: var(--baseborderpadding);

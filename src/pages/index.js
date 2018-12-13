@@ -48,7 +48,7 @@ const Container = styled.div`
 
 const Intro = styled.section`
   position: relative;
-  max-width: 400px;
+  max-width: 420px;
   margin-top: 100px;
   opacity: 0;
   animation: ${fadeIn} 0.25s ease-in;
@@ -69,7 +69,7 @@ const Intro = styled.section`
 
   .subtitle {
     font-family: var(--ff-sans-serif);
-    font-size: var(--fontmd);
+    font-size: 1.25rem;
     font-weight: var(--fontregular);
     margin-bottom: 40px;
   }
