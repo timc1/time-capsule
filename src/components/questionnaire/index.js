@@ -106,6 +106,7 @@ export default React.memo(props => {
             </DescriptionHeader>
             <Transition
               transitionKey={context.questionnaireState.meta.currentStepId}
+              delay={250}
             >
               <Question>{meta.question}</Question>
               {meta.subquestion && (
@@ -115,6 +116,7 @@ export default React.memo(props => {
             <WizardTransition
               transitionKey={context.questionnaireState.meta.currentStepId}
               type={transitionDirection}
+              delay={250}
             >
               <UserInteractionSection>
                 <Component
@@ -384,7 +386,7 @@ export const NextButton = styled(UnstyledButton)`
       background: var(--white);
       mask: url(${arrow}) center center / contain no-repeat;
       -webkit-mask: url(${arrow}) center center / contain no-repeat;
-      animation: ${scroll('200px')} 1.7s infinite linear;
+      animation: ${scroll('200px')} 2.2s infinite linear;
       transform: translateX(-20px);
       opacity: 1;
       transition-property: opacity, transform;
@@ -393,14 +395,14 @@ export const NextButton = styled(UnstyledButton)`
     > div:first-of-type {
       transform: translateY(20px) translateX(-100%);
       &::before {
-        animation-duration: 1.8s;
+        animation-duration: 2.3s;
       }
     }
 
     > div:nth-of-type(2) {
       transform: translateY(10px) translateX(-100%);
       &::before {
-        animation-duration: 1.6s;
+        animation-duration: 2.1s;
       }
     }
   }
@@ -410,17 +412,17 @@ export const NextButton = styled(UnstyledButton)`
     left: 10px;
     > div {
       &::before {
-        animation-duration: 1.6s;
+        animation-duration: 2.1s;
       }
     }
     > div:first-of-type {
       &::before {
-        animation-duration: 1.7s;
+        animation-duration: 2.2s;
       }
     }
     > div:nth-of-type(2) {
       &::before {
-        animation-duration: 1.8s;
+        animation-duration: 2.3s;
       }
     }
   }
@@ -430,24 +432,24 @@ export const NextButton = styled(UnstyledButton)`
     &:focus {
       .rockets {
         > div::before {
-          animation-duration: 1s;
+          animation-duration: 1.4s;
         }
         > div:first-of-type::before {
-          animation-duration: 1.1s;
+          animation-duration: 1.5s;
         }
         > div:nth-of-type(2)::before {
-          animation-duration: 0.9s;
+          animation-duration: 1.3s;
         }
       }
       .rockets-left {
         > div::before {
-          animation-duration: 1.1s;
+          animation-duration: 1.5s;
         }
         > div:first-of-type::before {
-          animation-duration: 0.9s;
+          animation-duration: 1.3s;
         }
         > div:nth-of-type(2)::before {
-          animation-duration: 1s;
+          animation-duration: 1.4s;
         }
       }
     }

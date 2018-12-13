@@ -128,3 +128,48 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.wizard {
+  position: absolute;
+  width: 100%;
+}
+
+.wizard-horizontal-right-enter-done,
+.wizard-horizontal-left-enter-done {
+  opacity: 1;
+  transform: translateX(0);
+  transition: .25s ease-in;
+}
+
+.wizard-horizontal-left-enter-active,
+.wizard-horizontal-right-enter-active
+{
+  opacity: 0;
+}
+.wizard-horizontal-left-enter-active {
+  transform: translateX(20px);
+}
+.wizard-horizontal-right-enter-active {
+  transform: translateX(-20px);
+}
+
+.wizard-horizontal-left-exit-active, 
+.wizard-horizontal-right-exit-active
+{
+  opacity: 0;
+  transition: .25s ease-in;
+}
+.wizard-horizontal-left-exit-active {
+  transform: translateX(-20px);
+}
+.wizard-horizontal-right-exit-active {
+  transform: translateX(20px);
+}
+
+.wizard-horizontal-right-exit-done {
+  transform: translateX(-20px);
+}
+.wizard-horizontal-left-exit-done {
+  transform: translateX(20px);
+}
+
