@@ -1,7 +1,12 @@
 import React, { useState, useRef, useEffect, useReducer } from 'react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
-import { screenmd, UnstyledButton, scroll } from '../shared/styles'
+import {
+  screenmd,
+  UnstyledButton,
+  AnimatedButton,
+  scroll,
+} from '../shared/styles'
 import { Location } from '@reach/router'
 
 import caretLeft from '../../images/caret-left.svg'
@@ -309,59 +314,13 @@ const UserInteractionSection = styled.div`
   min-height: 300px;
 `
 
-export const NextButton = styled(UnstyledButton)`
+export const NextButton = styled(AnimatedButton)`
   position: fixed;
   bottom: var(--baseborderpadding);
   left: 50%;
   transform: translateX(-50%);
   max-width: 400px;
   width: 100%;
-  padding: var(--fontmd);
-  width: 100%;
-  background: transparent;
-  border-radius: var(--baseborderradius);
-  font-weight: var(--fontbold);
-  color: var(--white);
-  cursor: pointer;
-  transition: transform 0.15s var(--cubic);
-  overflow: hidden;
-  outline: none;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--gray1);
-    z-index: -1;
-    transition: 0.25s var(--cubic);
-    transition-property: transform;
-    transform: ${props => (props.disabled ? 'scaleX(1)' : 'scaleX(0)')};
-    transform-origin: ${props => (props.disabled ? '0 50%' : '100% 50%')};
-  }
-
-  > span {
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-    }
-    &::before {
-      background: var(--blue1);
-      z-index: -2;
-    }
-    &::after {
-      background: var(--blue);
-      z-index: -2;
-      transition: opacity 0.15s var(--cubic);
-    }
-  }
 
   .rockets {
     position: absolute;
@@ -461,15 +420,9 @@ export const NextButton = styled(UnstyledButton)`
       &:hover,
       &:focus {
         transform: translateY(-1px) translateX(-50%);
-        > span::after {
-          opacity: 0;
-        }
       }
       &:active {
         transform: translateY(1px) translateX(-50%);
-        > span::after {
-          opacity: 1;
-        }
       }
 
       .rockets {

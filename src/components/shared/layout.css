@@ -45,8 +45,8 @@
   --gray1: #c6c9cc;
   --gray2: #606467;
   --gray3: #272635;
-  --blue: #3c3cff;
-  --blue1: #3372ff;
+  --blue: #0b1cfd;
+  --blue1: #2f5cff;
   --error: #ff6063;
 
   --baseborderpadding: 25px;
@@ -123,7 +123,7 @@ li {
 }
 
 input:-webkit-autofill {
-  -webkit-text-fill-color: #000;
+  -webkit-text-fill-color: var(--blue1);
   transition: background-color 100000000s;
 }
 

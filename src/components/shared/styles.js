@@ -10,6 +10,7 @@ export {
   verticalScroll,
   UnstyledLink,
   UnstyledButton,
+  AnimatedButton,
   ExitButton,
   ExitIcon,
 } from './shared-styles'

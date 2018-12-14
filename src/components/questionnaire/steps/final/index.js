@@ -2,7 +2,7 @@ import React, { useReducer, useRef } from 'react'
 import { DebouncedInput } from '../shared/index'
 import useQuestionnaire from '../../../shared/hooks/useQuestionnaire'
 
-import { verticalScroll, UnstyledButton } from '../../../shared/styles'
+import { verticalScroll, AnimatedButton } from '../../../shared/styles'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import star from '../../../../images/star.svg'
@@ -133,6 +133,21 @@ const validate = email => {
 const parseQuestionnaireData = data => {
   console.log('data', data)
   //  const name = context.name =
+  const { name, email } = data.user
+  const keys = Array.from(Object.keys(data.answers))
+  const final = {}
+  keys.forEach(key => {
+    const type = typeof data.answers[key]
+    if (type === 'object') {
+      const filtered = data.answers[key].filter(item => item.isChecked)
+      final[key] = encodeURIComponent(JSON.stringify(filtered))
+    }
+    if (type === 'string') {
+      final[key] = data.answers[key]
+    }
+  })
+
+  console.log('final', final)
 }
 
 // Styles
@@ -141,42 +156,7 @@ const Container = styled.div`
   grid-gap: 40px;
 `
 
-const SubmitButton = styled(UnstyledButton)`
-  padding: 15px;
-  outline: none;
-  cursor: pointer;
-  transition: transform 0.15s var(--cubic);
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: var(--baseborderradius);
-    transition: 0.25s var(--cubic);
-  }
-  &::before {
-    background: var(--gray1);
-    transition-property: transform;
-    transform: ${props => (props.disabled ? 'scaleX(1)' : 'scaleX(0)')};
-    transform-origin: ${props => (props.disabled ? '0 50%' : '100% 50%')};
-    z-index: -1;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    box-shadow: var(--boxshadow2);
-    opacity: 0;
-  }
-
+const SubmitButton = styled(AnimatedButton)`
   .elements {
     position: absolute;
     top: 0;
@@ -226,30 +206,11 @@ const SubmitButton = styled(UnstyledButton)`
     }
   }
 
-  span {
-    color: var(--white);
-    font-weight: var(--fontbold);
-    &::after,
-    &::before {
-      border-radius: var(--baseborderradius);
-      transition: opacity 0.15s var(--cubic);
-    }
-    &::after {
-      background: var(--blue);
-      z-index: -2;
-    }
-    &::before {
-      background: var(--blue1);
-      z-index: -2;
-    }
-  }
-
   ${props =>
     !props.disabled &&
     css`
       &:hover,
       &:focus {
-        transform: translateY(-1px);
         .elements {
           div:first-of-type::before {
             animation-duration: 1.1s;
@@ -266,24 +227,6 @@ const SubmitButton = styled(UnstyledButton)`
           div:nth-of-type(5)::before {
             animation-duration: 0.8s;
           }
-        }
-
-        span::after {
-          opacity: 0;
-        }
-
-        &::after {
-          opacity: 1;
-        }
-      }
-
-      &:active {
-        transform: translateY(1px);
-        span::after {
-          opacity: 1;
-        }
-        &::after {
-          opacity: 0;
         }
       }
     `};
