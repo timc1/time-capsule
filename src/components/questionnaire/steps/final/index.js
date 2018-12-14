@@ -267,7 +267,9 @@ const SubmitButton = styled(AnimatedButton)`
 
 const SubmitButtonText = styled.p`
   transform: ${props =>
-    props.isShowing ? 'scale(1) rotate(0)' : 'scale(0) rotate(20deg)'};
+    props.isShowing
+      ? 'scale(1) rotate(0) rotateX(0)'
+      : 'scale(.8) rotate(20deg) rotateX(40deg)'};
   opacity: ${props => (props.isShowing ? 1 : 0)};
   transition-property: transform, opacity;
   transition: 0.25s var(--cubic);

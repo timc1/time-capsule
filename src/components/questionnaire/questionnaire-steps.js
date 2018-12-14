@@ -14,6 +14,17 @@ import Email from './steps/final/index'
 
 const questionnaireSteps = [
   {
+    id: `FINAL`,
+    data: {
+      component: Email,
+      meta: {
+        sectionTitle: `Submit`,
+        question: `Last step!`,
+        subquestion: `Enter the email that you'd like to send your letter to. You'll receive it 365 days from today.`,
+      },
+    },
+  },
+  {
     id: `ABOUT`,
     data: {
       component: About,
@@ -214,17 +225,6 @@ const questionnaireSteps = [
         sectionTitle: `Bonus`,
         question: `Something that I will do one day.`,
         subquestion: `What is a moonshot goal of yours? Something a bit crazy, out of the ordinary. What will you do to get that much closer to getting to that goal in this next year?`,
-      },
-    },
-  },
-  {
-    id: `FINAL`,
-    data: {
-      component: Email,
-      meta: {
-        sectionTitle: `Submit`,
-        question: `Last step!`,
-        subquestion: `Enter the email that you'd like to send your letter to. You'll receive it 365 days from today.`,
       },
     },
   },

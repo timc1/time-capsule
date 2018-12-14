@@ -317,6 +317,7 @@ export const NextButton = styled(AnimatedButton)`
   transform: translateX(-50%);
   max-width: 400px;
   width: 100%;
+  perspective: 1000px;
 
   .rockets {
     position: absolute;

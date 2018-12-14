@@ -318,11 +318,13 @@ const Loader = React.memo(
     height: 10em;
     transform: ${props =>
       props.isShowing
-        ? 'translateZ(0) translate(-50%, -50%) scale(1)'
-        : 'translateZ(0) translate(-50%, -50%) scale(0)'};
+        ? 'translateZ(0) translate(-50%, -50%)'
+        : 'translateZ(0) translate(-50%, -50%)'};
     transform-origin: 0 0;
     animation: ${loaderSpin} 1.1s infinite linear;
     opacity: ${props => (props.isShowing ? '1' : '0')};
+    transition: opacity 0.15s var(--cubic);
+    transition-delay: 0.15s;
 
     &::after {
       content: '';
