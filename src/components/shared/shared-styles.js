@@ -50,6 +50,12 @@ const scroll = (to = '30px') => keyframes`
   }
 `
 
+const verticalScroll = (to = '-30px') => keyframes`
+  to {
+    transform: translateY(${to});
+  }
+`
+
 const UnstyledLink = styled(Link)`
   position: relative;
   text-decoration: none;
@@ -205,6 +211,7 @@ export {
   fadeInUp,
   zoomIn,
   scroll,
+  verticalScroll,
   UnstyledLink,
   UnstyledButton,
   ExitButton,

@@ -192,7 +192,7 @@ const Status = React.memo(
       left: 0;
       right: 0;
       background: var(--blue);
-      transition: transform 0.25s var(--cubic);
+      transition: transform 0.15s var(--cubic);
       transform: ${props => `scaleX(${props.width})`};
       transform-origin: 0;
       transition-delay: 0.15s;

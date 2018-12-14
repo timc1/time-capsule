@@ -73,4 +73,36 @@ const deepClone = arr => {
   return clonedCopy
 }
 const noop = () => {}
-export { randomNum, randomEmoji, randomGreeting, debounce, deepClone, noop }
+export const API_URL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://app.tcc.im'
+    : 'http://localhost:8888'
+const httpAttributes = {
+  mode: 'cors', // no-cors, cors, *same-origin
+  cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached //credentials: 'include', // include, *same-origin, omit
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8', // "Content-Type": "application/x-www-form-urlencoded",
+  },
+  redirect: 'follow', // manual, *follow, error
+  referrer: 'no-referrer', // no-referrer, *client
+}
+const http = {
+  post: (url = ``, data = {}) => {
+    return fetch(url, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      body: JSON.stringify(data), // body data type must match "Content-Type" header
+      ...httpAttributes,
+    })
+      .then(response => response.json())
+      .catch(error => ({ error: 'connection error' }))
+  },
+}
+export {
+  randomNum,
+  randomEmoji,
+  randomGreeting,
+  debounce,
+  deepClone,
+  http,
+  noop,
+}

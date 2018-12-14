@@ -8,8 +8,22 @@ import Relationships from './steps/relationships/index'
 import RelationshipsPlan from './steps/relationships/relationships-plan'
 import Health from './steps/health/index'
 import HealthPlan from './steps/health/health-plan'
+import Community from './steps/community/index'
+import Moonshot from './steps/moonshot/index'
+import Email from './steps/final/index'
 
 const questionnaireSteps = [
+  {
+    id: `FINAL`,
+    data: {
+      component: Email,
+      meta: {
+        sectionTitle: `Submit`,
+        question: `Last step!`,
+        subquestion: `Enter the email that you'd like to send your letter to. You'll receive it 365 days from today.`,
+      },
+    },
+  },
   {
     id: `ABOUT`,
     data: {
@@ -189,6 +203,28 @@ const questionnaireSteps = [
         in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque
         habitant morbi tristique senectus et netus et malesuada fames ac turpis
         egestas. Cras volutpat nisi et bibendum viverra.`,
+      },
+    },
+  },
+  {
+    id: `BONUS_COMMUNITY`,
+    data: {
+      component: Community,
+      meta: {
+        sectionTitle: `Bonus`,
+        question: `How I will contribute and improve my community.`,
+        subquestion: `Small or large, what will you do to give to others?`,
+      },
+    },
+  },
+  {
+    id: `BONUS_MOONSHOT`,
+    data: {
+      component: Moonshot,
+      meta: {
+        sectionTitle: `Bonus`,
+        question: `Something that I will do one day.`,
+        subquestion: `What is a moonshot goal of yours? Something a bit crazy, out of the ordinary. What will you do to get that much closer to getting to that goal in this next year?`,
       },
     },
   },

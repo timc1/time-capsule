@@ -47,8 +47,8 @@ const getQuestionnaire = q => ({
       { id: `awesome`, name: `Tip Top Shape`, isChecked: false },
     ],
     personalHealthPlan: ``,
-    betterYourCommunity: ``,
-    betterYourCommunityPlan: ``,
+    community: ``,
+    moonshot: ``,
   },
 })
 const baseHappiness = [
