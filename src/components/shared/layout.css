@@ -91,6 +91,9 @@ html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  min-height: 700px;
+  height: 100%;
+  position: relative;
 }
 body {
   margin: 0;
