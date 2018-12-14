@@ -149,17 +149,13 @@ export default React.memo(props => {
                 }}
               >
                 <span>Next</span>
-                <div
-                  className="rockets rockets-left"
-                  aria-hidden="true"
-                  {...props}
-                >
+                <div className="pseudo" aria-hidden="true" />
+                <div className="rockets rockets-left" aria-hidden="true">
                   <div />
                   <div />
                   <div />
                 </div>
-
-                <div className="rockets" aria-hidden="true" {...props}>
+                <div className="rockets" aria-hidden="true">
                   <div />
                   <div />
                   <div />
@@ -431,7 +427,6 @@ export const NextButton = styled(AnimatedButton)`
     `};
 
   @media (max-width: ${screenmd}px) {
-    position: fixed;
     max-width: 100%;
     bottom: 0;
   }

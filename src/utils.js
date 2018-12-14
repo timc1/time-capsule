@@ -2,16 +2,16 @@ const randomNum = (min = 0, max = 100) => {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-const emojis = ['🤪', '😁', '😸', '😜', '👻', '🌚']
 const randomEmoji = () => {
   const num = randomNum(0, 5)
   return emojis[num]
 }
-const greetings = ['nice.', 'looks good.', 'sounds great.']
+
 const randomGreeting = () => {
   const num = randomNum(0, 2)
   return greetings[num]
 }
+
 const debounceFn = (func, wait, immediate) => {
   let timeout, args, context, timestamp, result
   if (null == wait) wait = 100
@@ -55,6 +55,7 @@ const debounceFn = (func, wait, immediate) => {
   }
   return debounced
 }
+
 const debounce = (debouncedRef = {}, fn = () => {}, delayMs = 1000) => {
   return (() => {
     if (debouncedRef.current) debouncedRef.current.clear()
@@ -63,6 +64,7 @@ const debounce = (debouncedRef = {}, fn = () => {}, delayMs = 1000) => {
     return debouncedRef.current
   })()
 }
+
 const deepClone = arr => {
   const copy = arr.slice()
   const clonedCopy = copy.map(f => {
@@ -72,11 +74,21 @@ const deepClone = arr => {
   })
   return clonedCopy
 }
+
+const camelToUnderscore = key =>
+  key
+    .replace(/\.?([A-Z])/g, function(x, y) {
+      return '_' + y.toLowerCase()
+    })
+    .replace(/^_/, '')
+
 const noop = () => {}
-export const API_URL =
+
+const API_URL =
   process.env.NODE_ENV === 'production'
     ? 'https://app.tcc.im'
     : 'http://localhost:8888'
+
 const httpAttributes = {
   mode: 'cors', // no-cors, cors, *same-origin
   cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached //credentials: 'include', // include, *same-origin, omit
@@ -86,6 +98,7 @@ const httpAttributes = {
   redirect: 'follow', // manual, *follow, error
   referrer: 'no-referrer', // no-referrer, *client
 }
+
 const http = {
   post: (url = ``, data = {}) => {
     return fetch(url, {
@@ -97,6 +110,9 @@ const http = {
       .catch(error => ({ error: 'connection error' }))
   },
 }
+
+const emojis = ['🤪', '😁', '😸', '😜', '👻']
+const greetings = ['nice.', 'looks good.', 'sounds great.']
 export {
   randomNum,
   randomEmoji,
@@ -105,4 +121,6 @@ export {
   deepClone,
   http,
   noop,
+  API_URL,
+  camelToUnderscore,
 }

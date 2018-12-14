@@ -13,6 +13,7 @@ export {
   AnimatedButton,
   ExitButton,
   ExitIcon,
+  Loader,
 } from './shared-styles'
 
 export { RocketLink } from './animations/rocket-link'

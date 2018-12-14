@@ -2,41 +2,67 @@ import React, { useReducer, useRef } from 'react'
 import { DebouncedInput } from '../shared/index'
 import useQuestionnaire from '../../../shared/hooks/useQuestionnaire'
 
-import { verticalScroll, AnimatedButton } from '../../../shared/styles'
+import { verticalScroll, AnimatedButton, Loader } from '../../../shared/styles'
+import { Message } from '../../../shared/form-components/index'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import star from '../../../../images/star.svg'
 
-import { http, API_URL } from '../../../../utils'
+import { http, API_URL, camelToUnderscore } from '../../../../utils'
 
 export default React.memo(({ canContinue, setContinue }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const { context } = useQuestionnaire()
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
     dispatch({
       type: 'SUBMITTING',
     })
 
     // 1. Endpoint
-    const url = API_URL + '/timecap/submit'
+    const url = API_URL + '/v0/tc/submit'
     // 2. Filter data
-    const data = parseQuestionnaireData(context.questionnaireState)
+    const body = {
+      user: context.questionnaireState.user,
+      answers: parseQuestionnaireData(context.questionnaireState),
+      timestamp: Date.now(),
+    }
     // 3. Submit
+    const { error, saved } = await http.post(url, body)
+
+    if (error) {
+      dispatch({
+        type: 'ERROR',
+        payload: {
+          error,
+        },
+      })
+    } else {
+      dispatch({
+        type: 'SUCCESS',
+      })
+    }
+    console.log('error', error, 'saved', saved)
   }
 
   const firstRender = useRef(true)
 
   return (
     <Container>
+      <Message
+        message={{
+          error: state.error,
+          value: state.error,
+        }}
+      />
       <DebouncedInput
         type="input"
         id="email"
         initialValue={context.questionnaireState.user.email}
         onSuccess={value => {
           const isValid = validate(value)
-          if (isValid && !state.canSubmit) {
+          if (isValid) {
             dispatch({
               type: 'UPDATE',
               payload: {
@@ -46,6 +72,7 @@ export default React.memo(({ canContinue, setContinue }) => {
                 error: false,
               },
             })
+            console.log('value', value)
             context.questionnaireDispatch({
               type: 'UPDATE_USER',
               payload: {
@@ -82,8 +109,13 @@ export default React.memo(({ canContinue, setContinue }) => {
       <SubmitButton
         disabled={!state.canSubmit}
         onClick={e => (state.isSubmitting ? {} : handleSubmit(e))}
+        aria-label="Click to submit questionnaire."
       >
-        <span>Submit</span>
+        <SubmitButtonText isShowing={!state.isSubmitting}>
+          Submit
+        </SubmitButtonText>
+        <Loader isShowing={state.isSubmitting} />
+        <div className="pseudo" aria-hidden="true" />
         <div className="elements" aria-hidden="true">
           <div />
           <div />
@@ -110,7 +142,7 @@ const reducer = (state, { type, payload }) => {
     case 'ERROR':
       return {
         ...state,
-        canSubmit: false,
+        canSubmit: true,
         isSubmitting: false,
         error: payload.error,
       }
@@ -131,23 +163,24 @@ const validate = email => {
 }
 
 const parseQuestionnaireData = data => {
-  console.log('data', data)
-  //  const name = context.name =
-  const { name, email } = data.user
   const keys = Array.from(Object.keys(data.answers))
   const final = {}
   keys.forEach(key => {
     const type = typeof data.answers[key]
     if (type === 'object') {
       const filtered = data.answers[key].filter(item => item.isChecked)
+      // Convert camelCase to underscore
+      key = camelToUnderscore(key)
       final[key] = encodeURIComponent(JSON.stringify(filtered))
     }
     if (type === 'string') {
-      final[key] = data.answers[key]
+      const answer = data.answers[key]
+      key = camelToUnderscore(key)
+      final[key] = answer
     }
   })
 
-  console.log('final', final)
+  return final
 }
 
 // Styles
@@ -230,4 +263,12 @@ const SubmitButton = styled(AnimatedButton)`
         }
       }
     `};
+`
+
+const SubmitButtonText = styled.p`
+  transform: ${props =>
+    props.isShowing ? 'scale(1) rotate(0)' : 'scale(0) rotate(20deg)'};
+  opacity: ${props => (props.isShowing ? 1 : 0)};
+  transition-property: transform, opacity;
+  transition: 0.25s var(--cubic);
 `

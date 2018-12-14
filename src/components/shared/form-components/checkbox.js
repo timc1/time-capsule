@@ -7,7 +7,9 @@ const Checkbox = ({ getCheckboxItemProps, items }) => (
     {items.map(item => (
       <li key={item.id}>
         <CheckboxItem {...getCheckboxItemProps({ id: item.id })}>
-          <span>{item.name}</span>
+          <span className="pseudo" aria-hidden="true">
+            {item.name}
+          </span>
         </CheckboxItem>
       </li>
     ))}
@@ -31,6 +33,7 @@ const CheckboxItem = React.memo(
     > span {
       color: var(--black);
       font-size: var(--fontsm);
+      font-weight: var(--fontregular);
       opacity: ${props => (props.isChecked ? 1 : 0.7)};
       transition: opacity 0.15s ease-in;
       &::before,

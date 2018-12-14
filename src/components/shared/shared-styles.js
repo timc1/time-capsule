@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from '@emotion/styled'
 import { keyframes, css } from '@emotion/core'
 import { Link } from 'gatsby'
@@ -106,7 +107,7 @@ const UnstyledButton = styled.button`
     cursor: not-allowed;
   }
 
-  > span {
+  > .pseudo {
     &::before,
     &::after {
       content: '';
@@ -116,6 +117,13 @@ const UnstyledButton = styled.button`
       right: 0;
       bottom: 0;
     }
+  }
+
+  > span,
+  > p {
+    margin: 0;
+    color: var(--white);
+    font-weight: var(--fontbold);
   }
 `
 
@@ -238,7 +246,7 @@ const AnimatedButton = styled(UnstyledButton)`
     opacity: 0;
   }
 
-  span {
+  .pseudo {
     color: var(--white);
     font-weight: var(--fontbold);
     &::after,
@@ -263,7 +271,7 @@ const AnimatedButton = styled(UnstyledButton)`
       &:focus {
         transform: translateY(-1px);
 
-        span::after {
+        .pseudo::after {
           opacity: 0;
         }
 
@@ -274,7 +282,7 @@ const AnimatedButton = styled(UnstyledButton)`
 
       &:active {
         transform: translateY(1px);
-        span::after {
+        .pseudo::after {
           opacity: 1;
         }
         &::after {
@@ -283,6 +291,48 @@ const AnimatedButton = styled(UnstyledButton)`
       }
     `};
 `
+
+const loaderSpin = keyframes`
+  0% {
+    transform: rotate(0deg) translate(-50%, -50%);
+  }
+  100% {
+    transform: rotate(360deg) translate(-50%, -50%);
+  }
+`
+
+const Loader = React.memo(
+  styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    font-size: 1.5px;
+    text-indent: -9999em;
+    border-top: 1.1em solid var(--white);
+    border-right: 1.1em solid var(--white);
+    border-bottom: 1.1em solid var(--white);
+    border-left: 1.1em solid transparent;
+    border-radius: 50%;
+    width: 10em;
+    height: 10em;
+    transform: ${props =>
+      props.isShowing
+        ? 'translateZ(0) translate(-50%, -50%) scale(1)'
+        : 'translateZ(0) translate(-50%, -50%) scale(0)'};
+    transform-origin: 0 0;
+    animation: ${loaderSpin} 1.1s infinite linear;
+    opacity: ${props => (props.isShowing ? '1' : '0')};
+
+    &::after {
+      content: '';
+      border-radius: 50%;
+      width: 10em;
+      height: 10em;
+    }
+  `,
+  (prevProps, nextProps) => prevProps.isShowing === nextProps.isShowing
+)
 
 export {
   screensm,
@@ -299,4 +349,5 @@ export {
   AnimatedButton,
   ExitButton,
   ExitIcon,
+  Loader,
 }
