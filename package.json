@@ -7,6 +7,7 @@
     "@emotion/core": "^10.0.2",
     "@emotion/styled": "^10.0.2",
     "@reach/router": "^1.2.1",
+    "animateplus": "^2.1.1",
     "babel-preset-gatsby": "^0.1.6",
     "gatsby": "^2.0.53",
     "gatsby-image": "^2.0.20",

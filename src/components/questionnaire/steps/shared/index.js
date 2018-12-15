@@ -12,7 +12,7 @@ import { debounce } from '../../../../utils'
 
 const SmallModalContainer = styled.div`
   position: relative;
-  margin: calc(25vh) auto 100px auto;
+  margin: calc(20vh) auto 100px auto;
   max-width: 400px;
   width: 100%;
 

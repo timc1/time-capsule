@@ -10,6 +10,8 @@ import star from '../../../../images/star.svg'
 
 import { http, API_URL, camelToUnderscore } from '../../../../utils'
 
+import { navigate } from 'gatsby'
+
 export default React.memo(({ canContinue, setContinue }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const { context } = useQuestionnaire()
@@ -29,7 +31,7 @@ export default React.memo(({ canContinue, setContinue }) => {
       timestamp: Date.now(),
     }
     // 3. Submit
-    const { error, saved } = await http.post(url, body)
+    const { error } = await http.post(url, body)
 
     if (error) {
       dispatch({
@@ -39,11 +41,14 @@ export default React.memo(({ canContinue, setContinue }) => {
         },
       })
     } else {
-      dispatch({
-        type: 'SUCCESS',
-      })
+      //dispatch({
+      //  type: 'SUCCESS',
+      //})
+
+      setTimeout(() => {
+        navigate('/success', { state: { name: body.user.name } })
+      }, 400)
     }
-    console.log('error', error, 'saved', saved)
   }
 
   const firstRender = useRef(true)
@@ -150,6 +155,12 @@ const reducer = (state, { type, payload }) => {
       return {
         ...state,
         isSubmitting: true,
+        error: false,
+      }
+    case 'SUCCESS':
+      return {
+        canSubmit: false,
+        isSubmitting: false,
         error: false,
       }
     default:

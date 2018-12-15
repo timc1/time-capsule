@@ -59,7 +59,7 @@ const WizardTransition = React.memo(
     type = 'horizontal-left',
     delay = 1000,
   }) => {
-    useBackgroundColorUpdater(location)
+    //useBackgroundColorUpdater(location)
 
     const classNames = `wizard wizard-${type}`
     return (
