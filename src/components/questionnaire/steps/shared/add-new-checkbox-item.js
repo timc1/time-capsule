@@ -113,8 +113,8 @@ const AddButton = styled(AnimatedButton)`
       content: '';
       position: absolute;
       background: var(--white);
-      height: 12px;
-      width: 12px;
+      height: 10px;
+      width: 10px;
       mask: url(${plus}) center center / contain no-repeat;
       transition-property: opacity, transform;
       animation: ${scaleIn} 1.5s var(--cubic) infinite;

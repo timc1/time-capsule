@@ -17,6 +17,10 @@ const Layout = ({ children }) => (
         site {
           siteMetadata {
             title
+            description
+            url
+            image
+            themeColor
           }
         }
       }
@@ -26,8 +30,68 @@ const Layout = ({ children }) => (
         <Helmet
           title={data.site.siteMetadata.title}
           meta={[
-            { name: 'description', content: 'Sample' },
-            { name: 'keywords', content: 'sample, something' },
+            { name: 'title', content: data.site.siteMetadata.title },
+            {
+              name: 'description',
+              content: data.site.siteMetadata.description,
+            },
+            {
+              name: 'keywords',
+              content:
+                'New Years Resolutions, Web Apps, Side Projects, HTML, CSS, Javascript, React, User Interface, User Experience',
+            },
+            {
+              property: 'og:site_name',
+              content: data.site.siteMetadata.title,
+            },
+            {
+              property: 'og:type',
+              content: 'website',
+            },
+            {
+              property: 'og:url',
+              content: data.site.siteMetadata.url,
+            },
+            {
+              property: 'og:title',
+              content: data.site.siteMetadata.title,
+            },
+            {
+              property: 'og:description',
+              content: data.site.siteMetadata.description,
+            },
+            {
+              property: 'og:image',
+              content: data.site.siteMetadata.imageUrl,
+            },
+            {
+              name: 'twitter:domain',
+              content: data.site.siteMetadata.url,
+            },
+            {
+              name: 'twitter:card',
+              content: 'summary_large_image',
+            },
+            {
+              name: 'twitter:url',
+              content: data.site.siteMetadata.url,
+            },
+            {
+              name: 'twitter:title',
+              content: data.site.siteMetadata.title,
+            },
+            {
+              name: 'twitter:description',
+              content: data.site.siteMetadata.description,
+            },
+            {
+              name: 'twitter:image',
+              content: data.site.siteMetadata.imageUrl,
+            },
+            {
+              name: 'theme-color',
+              content: data.site.siteMetadata.themeColor,
+            },
           ]}
         >
           <html lang="en" />
