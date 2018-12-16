@@ -117,7 +117,7 @@ const AddButton = styled(AnimatedButton)`
       width: 10px;
       mask: url(${plus}) center center / contain no-repeat;
       transition-property: opacity, transform;
-      animation: ${scaleIn} 1.5s var(--cubic) infinite;
+      animation: ${scaleIn} 1.8s var(--cubic) infinite;
     }
     > div:first-of-type::before {
       top: 12%;
@@ -145,6 +145,13 @@ const AddButton = styled(AnimatedButton)`
     > div:nth-of-type(6)::before {
       top: 57%;
       left: 85%;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    .elements > div::before {
+      animation-duration: 1.2s;
     }
   }
 `

@@ -39,13 +39,11 @@ const IndexPage = React.memo(() => {
     </Container>
   )
 })
-
 const Container = styled.div`
   padding: var(--baseborderpadding);
   max-width: ${screenlg}px;
   margin: auto;
 `
-
 const Intro = styled.section`
   position: relative;
   max-width: 420px;
@@ -54,6 +52,9 @@ const Intro = styled.section`
   animation: ${fadeIn} 0.25s ease-in;
   animation-fill-mode: forwards;
   animation-delay: 0.15s;
+  display: grid;
+  place-items: start;
+  grid-gap: 10px;
 
   .title,
   .subtitle {
@@ -64,14 +65,13 @@ const Intro = styled.section`
   .title {
     font-family: var(--ff-serif);
     font-size: var(--fontxl);
-    margin-bottom: 10px;
   }
 
   .subtitle {
     font-family: var(--ff-sans-serif);
     font-size: 1.25rem;
     font-weight: var(--fontregular);
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
 
   &::after {
@@ -92,9 +92,9 @@ const Intro = styled.section`
   @media (max-width: ${screenmd}px) {
     margin-top: 20px;
     text-align: center;
+    place-items: center;
   }
 `
-
 const Illustration = styled.div`
   height: auto;
   width: 700px;

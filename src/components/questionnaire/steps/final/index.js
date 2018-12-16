@@ -41,10 +41,6 @@ export default React.memo(({ canContinue, setContinue }) => {
         },
       })
     } else {
-      //dispatch({
-      //  type: 'SUCCESS',
-      //})
-
       setTimeout(() => {
         navigate('/success', { state: { name: body.user.name } })
       }, 400)

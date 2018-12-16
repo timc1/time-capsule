@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'New Year Time Capsule - Send Your Future Self A Letter',
+    title: 'New Year Time Capsule -- Send Your Future Self A Letter',
     description: `Write your future self a letter talking about your goals and how you plan on accomplishing them in the upcoming year. 365 days later you'll receive your letter in your email. Reflect, and hopefully you'll be a few steps closer to where you want to be!`,
     url: `https://timecapsule.io`,
     image: `https://timecapsule.io/images/timecapsule_1200x630.png`,
