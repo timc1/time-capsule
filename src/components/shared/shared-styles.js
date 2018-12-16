@@ -57,6 +57,21 @@ const verticalScroll = (to = '-30px') => keyframes`
   }
 `
 
+const scaleIn = keyframes`
+  0% {
+    transform: scale(.5);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1); 
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0); 
+    opacity: 0;
+  }
+`
+
 const UnstyledLink = styled(Link)`
   position: relative;
   text-decoration: none;
@@ -346,6 +361,7 @@ export {
   zoomIn,
   scroll,
   verticalScroll,
+  scaleIn,
   UnstyledLink,
   UnstyledButton,
   AnimatedButton,

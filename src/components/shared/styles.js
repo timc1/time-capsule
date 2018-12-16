@@ -8,6 +8,7 @@ export {
   zoomIn,
   scroll,
   verticalScroll,
+  scaleIn,
   UnstyledLink,
   UnstyledButton,
   AnimatedButton,

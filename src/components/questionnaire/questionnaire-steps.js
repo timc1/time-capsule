@@ -32,12 +32,7 @@ const questionnaireSteps = [
         question: `Let's start with my career.`,
       },
       introProps: {
-        text: `Nunc ultrices, orci eu dictum sollicitudin, enim nisl semper nibh,
-        egestas bibendum massa est laoreet orci. Pellentesque sagittis ex
-        sapien, nec iaculis orci sollicitudin sed. Vestibulum ante ipsum primis
-        in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque
-        habitant morbi tristique senectus et netus et malesuada fames ac turpis
-        egestas. Cras volutpat nisi et bibendum viverra.`,
+        text: `hi.`,
       },
     },
   },
