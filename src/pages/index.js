@@ -14,15 +14,18 @@ import landingIllustration from '../images/landing_illustration.json'
 
 const IndexPage = React.memo(() => {
   const illustrationRef = useRef()
+  const animationRef = useRef()
 
   useEffect(() => {
-    lottie.loadAnimation({
+    animationRef.current = lottie.loadAnimation({
       container: illustrationRef.current, // the dom element that will contain the animation
       renderer: 'svg',
       loop: true,
       autoplay: true,
       animationData: landingIllustration,
     })
+
+    return () => animationRef.current.destroy()
   }, [])
 
   return (

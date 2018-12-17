@@ -12,6 +12,10 @@ import Community from './steps/community/index'
 import Moonshot from './steps/moonshot/index'
 import Email from './steps/final/index'
 
+import careerIllustration from '../../images/career_illustration.json'
+import interestsIllustration from '../../images/interests_illustration.json'
+import moonshotIllustration from '../../images/moonshot_illustration.json'
+
 const questionnaireSteps = [
   {
     id: `ABOUT`,
@@ -33,6 +37,7 @@ const questionnaireSteps = [
       },
       introProps: {
         text: `hi.`,
+        illustration: careerIllustration,
       },
     },
   },
@@ -66,12 +71,7 @@ const questionnaireSteps = [
         question: `Easy! Let's move on to personal interests.`,
       },
       introProps: {
-        text: `Nunc ultrices, orci eu dictum sollicitudin, enim nisl semper nibh,
-        egestas bibendum massa est laoreet orci. Pellentesque sagittis ex
-        sapien, nec iaculis orci sollicitudin sed. Vestibulum ante ipsum primis
-        in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque
-        habitant morbi tristique senectus et netus et malesuada fames ac turpis
-        egestas. Cras volutpat nisi et bibendum viverra.`,
+        illustration: interestsIllustration,
       },
     },
   },
@@ -181,12 +181,7 @@ const questionnaireSteps = [
         question: `Lastly, questions to ponder and ask yourself...`,
       },
       introProps: {
-        text: `Nunc ultrices, orci eu dictum sollicitudin, enim nisl semper nibh,
-        egestas bibendum massa est laoreet orci. Pellentesque sagittis ex
-        sapien, nec iaculis orci sollicitudin sed. Vestibulum ante ipsum primis
-        in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque
-        habitant morbi tristique senectus et netus et malesuada fames ac turpis
-        egestas. Cras volutpat nisi et bibendum viverra.`,
+        illustration: moonshotIllustration,
       },
     },
   },

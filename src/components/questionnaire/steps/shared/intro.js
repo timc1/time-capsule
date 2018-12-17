@@ -1,14 +1,37 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
+import lottie from 'lottie-web'
 
-const Intro = ({ canContinue, setContinue, title, text }) => {
-  if (!canContinue) setContinue(true)
-  return <P>{text}</P>
-}
+const Intro = React.memo(
+  ({ canContinue, setContinue, title, illustration }) => {
+    const illustrationRef = useRef()
+    const animationRef = useRef()
+
+    useEffect(() => {
+      if (!canContinue) setContinue(true)
+
+      if (illustration) {
+        animationRef.current = lottie.loadAnimation({
+          container: illustrationRef.current,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          animationData: illustration,
+        })
+      }
+      return () => {
+        if (animationRef.current) {
+          animationRef.current.destroy()
+        }
+      }
+    }, [])
+
+    return <Container ref={illustrationRef} />
+  }
+)
+
 export default Intro
 
-const P = styled.p`
-  margin: 0;
-  font-size: var(--fontmd);
-  font-family: var(--ff-sans-serif);
+const Container = styled.div`
+  margin-top: -100px;
 `

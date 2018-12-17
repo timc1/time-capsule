@@ -1,9 +1,25 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
-import { UnstyledButton } from './styles'
+import { css } from '@emotion/core'
+import { UnstyledButton, screenmd } from './styles'
+import { Link } from 'gatsby'
+
+import usePopup from './hooks/usePopup'
+
+const links = [
+  { url: '/about', name: 'About' },
+  { url: '/setup', name: 'Get Started' },
+]
 
 export default React.memo(({ siteTitle }) => {
-  const [isTeamShowing, setTeamShowing] = useState(false)
+  const {
+    isOpen,
+    setOpen,
+    getContainerProps,
+    getTogglerProps,
+    getMenuProps,
+    getItemProps,
+  } = usePopup()
 
   return (
     <Header>
@@ -27,34 +43,40 @@ export default React.memo(({ siteTitle }) => {
           <li className="hidden">
             <a href="mailto:timchang.tcc@gmail.com?subject=Hello!">Contact</a>
           </li>
-          <li className="about">
-            <UnstyledButton
-              onClick={e => setTeamShowing(prevIsShowing => !prevIsShowing)}
-            >
-              {isTeamShowing ? 'Bye' : 'Hi'}
-            </UnstyledButton>
-            <MadeIn isShowing={isTeamShowing}>
-              Made in sunny{' '}
-              <span role="img" aria-label="Palm Tree Emoji">
-                🌴
-              </span>{' '}
-              LA by{' '}
-              <a
-                href="https://tcc.im?ref=time_capsule"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Tim Chang
-              </a>{' '}
-              &amp;{' '}
-              <a
-                href="https://alexcarey.myportfolio.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Alex Carey
-              </a>
-            </MadeIn>
+          <li className="menu" {...getContainerProps()}>
+            <MenuButton isMenuOpen={isOpen} {...getTogglerProps()}>
+              <h1 className="hamburger">
+                <span className="text">Menu</span>
+                <span className="escape" aria-hidden="true">
+                  (esc to close)
+                </span>
+              </h1>
+            </MenuButton>
+            <MenuBody {...getMenuProps()}>
+              <li>
+                <MenuTitle>
+                  Hello, there!
+                  <div className="elements" aria-hidden="true">
+                    <span />
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                </MenuTitle>
+              </li>
+              {links.map(link => (
+                <li key={link.url}>
+                  <MenuLink
+                    to={link.url}
+                    {...getItemProps({
+                      onClick: e => setOpen(prevOpen => !prevOpen),
+                    })}
+                  >
+                    {link.name}
+                  </MenuLink>
+                </li>
+              ))}
+            </MenuBody>
           </li>
         </ul>
       </nav>
@@ -62,6 +84,10 @@ export default React.memo(({ siteTitle }) => {
   )
 })
 const Header = styled.header`
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 3;
   .hidden {
     display: none;
   }
@@ -70,28 +96,152 @@ const Header = styled.header`
     position: relative;
   }
 
-  .about {
+  .menu {
     position: absolute;
-    right: 15px;
-    top: 15px;
+    right: 5px;
+    top: 10px;
   }
 `
-const MadeIn = styled.p`
-  margin: 0;
-  position: absolute;
-  top: -5px;
-  right: 50px;
-  font-size: var(--fontsm);
-  width: max-content;
-  margin: 0;
-  opacity: ${props => (props.isShowing ? 1 : 0)};
-  transform: ${props =>
-    props.isShowing ? 'translateX(0)' : 'translateX(40px)'};
-  transition-property: opacity, transform;
-  transition: 0.15s var(--cubic);
-  pointer-events: ${props => (props.isShowing ? 'initial' : 'none')};
-  a {
-    font-size: inherit;
-    color: var(--blue);
+
+const MenuButton = styled(UnstyledButton)`
+  padding: 30px 35px;
+  outline: none;
+  cursor: pointer;
+  transition: opacity 0.15s var(--cubic);
+
+  .hamburger {
+    font-size: 0;
+    position: absolute;
+    right: var(--baseborderpadding);
+    top: 28px;
+    width: 23px;
+
+    > .text {
+      position: absolute;
+      right: 0;
+      height: 3px;
+      width: 100%;
+      font-size: 0;
+      background: var(--black);
+      opacity: ${props => (props.isMenuOpen ? 0 : 1)};
+      transform: scaleX(1);
+      transform-origin: 100%;
+      transition-property: transform, opacity;
+      transition: 0.15s ease;
+    }
+
+    > .escape {
+      position: absolute;
+      top: 50%;
+      right: 35px;
+      width: max-content;
+      font-size: var(--fontxs);
+      opacity: 0;
+      transform: translateY(-50%) translateX(30px);
+    }
+
+    @media (min-width: ${screenmd}px) {
+      > .escape {
+        transform: ${props =>
+          props.isMenuOpen
+            ? 'translateY(-50%) translateX(0px)'
+            : 'translateY(-50%) translateX(30px)'};
+        transition: 0.15s var(--cubic);
+        transition-delay: ${props => (props.isMenuOpen ? '.3s' : 'none')};
+        color: var(--gray2);
+        opacity: ${props => (props.isMenuOpen ? 1 : 0)};
+        font-weight: var(--fontregular);
+      }
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background: currentColor;
+      transition-property: transform, opacity;
+      transition: 0.15s ease;
+      transform-origin: ${props => (props.isMenuOpen ? '50%' : '100%')};
+    }
+
+    &::before {
+      transform: ${props =>
+        props.isMenuOpen
+          ? 'scaleX(1) translateY(0) rotate(45deg)'
+          : 'scaleX(0.6) translateY(-7px)'};
+    }
+
+    &::after {
+      transform: ${props =>
+        props.isMenuOpen
+          ? 'scaleX(1) translateY(0) rotate(-45deg)'
+          : 'scaleX(0.5) translateY(7px)'};
+    }
   }
+
+  ${props =>
+    !props.isMenuOpen &&
+    css`
+      &:hover,
+      &:focus {
+        .hamburger {
+          > .text {
+            transform: scaleX(0.6);
+          }
+          &::before {
+            transform: scaleX(1) translateY(-7px);
+          }
+          &::after {
+            transform: scaleX(1) translateY(7px);
+          }
+        }
+      }
+      &:focus {
+        opacity: 0.5;
+      }
+    `};
+`
+
+const MenuBody = styled.ul`
+  background: var(--white);
+  border: 1px solid var(--gray);
+  position: absolute;
+  right: 30px;
+  width: 300px;
+  border-radius: var(--baseborderradius);
+  box-shadow: var(--boxshadow2);
+  opacity: ${props => (props.isOpen ? 1 : 0)};
+  transform: ${props => (props.isOpen ? 'scale(1)' : 'scale(.5)')};
+  transition: 0.25s var(--cubic);
+  transition-property: transform, opacity;
+  transform-origin: 100% 0;
+`
+
+const MenuTitle = styled.h2`
+  position: relative;
+  margin: 0;
+  font-size: var(--fontmd);
+  font-family: var(--ff-serif);
+  padding: var(--baseborderpadding);
+  color: var(--black);
+
+  .elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--white);
+    z-index: -1;
+  }
+`
+
+const MenuLink = styled(Link)`
+  display: block;
+  padding: calc(var(--baseborderpadding) / 2) var(--baseborderpadding);
+  border-top: 2px solid var(--gray);
+  color: var(--black);
 `
