@@ -20,6 +20,11 @@ export default () => {
           },
         ]}
       />
+      <h1 className="hidden">Setup - Time Capsule</h1>
+      <h2 className="hidden">
+        Get Started - write a letter to your future self, take action, receive
+        it 365 days from today.
+      </h2>
       <QuestionnaireProvider>
         <SetupIndex />
       </QuestionnaireProvider>

@@ -150,6 +150,12 @@ body {
   padding: 0;
 }
 
+.hidden {
+  font-size: 0;
+  opacity: 0;
+  display: none;
+}
+
 .wizard {
   position: absolute;
   width: 100%;
