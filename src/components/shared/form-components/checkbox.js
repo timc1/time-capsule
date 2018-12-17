@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { UnstyledButton } from '../styles'
+import { UnstyledButton, screenmd } from '../styles'
 
 const Checkbox = ({ getCheckboxItemProps, items }) => (
   <CheckboxGroup>
@@ -20,6 +20,9 @@ const CheckboxGroup = styled.ul`
   display: flex;
   flex-wrap: wrap;
   margin: 0 -5px;
+  @media (max-width: ${screenmd}px) {
+    justify-content: center;
+  }
 `
 
 const CheckboxItem = React.memo(

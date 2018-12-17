@@ -108,6 +108,7 @@ const MessageContainer = styled.div`
   margin-bottom: 15px;
   color: ${props => (props.error ? 'var(--error)' : 'var(--success)')};
   font-size: var(--fontmd);
+  text-align: center;
   opacity: ${props => (props.hasContent ? 1 : 0)};
   transition: opacity 0.15s ease-in;
 `

@@ -21,10 +21,7 @@ export default () => {
   })
 
   const getTogglerProps = ({ ...props }) => ({
-    onClick: e => {
-      console.log('isOpen', isOpen)
-      setOpen(!isOpen)
-    },
+    onClick: e => setOpen(!isOpen),
     'aria-label': isOpen ? 'close popup' : 'open popup',
     ref: togglerRef,
     ...props,

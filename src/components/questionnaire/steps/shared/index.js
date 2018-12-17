@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
 
-import { fadeInUp, UnstyledButton } from '../../../shared/styles'
+import { fadeInUp, UnstyledButton, screenmd } from '../../../shared/styles'
 import { Checkbox } from '../../../shared/form-components/checkbox'
 import { Form, Textarea, Input } from '../../../shared/form-components/index'
 
@@ -88,6 +88,10 @@ const SectionName = React.memo(styled.h2`
   font-weight: var(--fontbold);
   color: var(--black);
   text-transform: uppercase;
+
+  @media (max-width: ${screenmd}px) {
+    text-align: center;
+  }
 `)
 
 const Checkboxes = React.memo(

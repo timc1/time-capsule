@@ -174,6 +174,10 @@ const Container = styled.section`
   width: 100%;
   margin: 80px auto;
   padding: var(--baseborderpadding);
+
+  @media (max-width: ${screenmd}px) {
+    margin-top: 100px;
+  }
 `
 
 const Status = React.memo(
@@ -197,6 +201,10 @@ const Status = React.memo(
       transform: ${props => `scaleX(${props.width})`};
       transform-origin: 0;
       transition-delay: 0.15s;
+    }
+
+    @media (max-width: ${screenmd}px) {
+      top: 4.54rem;
     }
   `,
   (prevProps, nextProps) => prevProps.width === nextProps.width
@@ -222,10 +230,10 @@ const DescriptionHeader = styled.div`
 
   @media (max-width: ${screenmd}px) {
     position: fixed;
-    top: 2px;
+    top: 0;
     left: 0;
     right: 0;
-    padding: 25px;
+    padding: 1.5625rem;
     box-shadow: var(--baseboxshadow);
     z-index: 2;
   }
@@ -234,7 +242,7 @@ const DescriptionHeader = styled.div`
 const BackButton = styled(UnstyledButton)`
   padding: 0;
   font-size: 0;
-  padding: 5px 5px 4px 5px;
+  padding: 0.3125rem 0.3125rem 0.25rem 0.3125rem;
   margin-left: -5px;
   cursor: w-resize;
   outline: none;

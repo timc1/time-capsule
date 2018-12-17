@@ -1,4 +1,4 @@
-import React, { useReducer, useRef, useState } from 'react'
+import React, { useReducer, useRef } from 'react'
 
 import useQuestionnaire from '../../../shared/hooks/useQuestionnaire'
 
@@ -9,13 +9,8 @@ import {
   SectionName,
   Checkboxes,
 } from '../shared/index'
-import { Message } from '../../../shared/form-components/index'
 
-import {
-  getInitialUIState,
-  occupationsUIReducer,
-  formatMessage,
-} from './reducers'
+import { getInitialUIState, occupationsUIReducer } from './reducers'
 
 export default React.memo(({ canContinue, setContinue, dispatchModal }) => {
   // useQuestionnaire stores all our questionnaire values.
@@ -27,31 +22,19 @@ export default React.memo(({ canContinue, setContinue, dispatchModal }) => {
     getInitialUIState(context)
   )
 
-  const [message, setMessage] = useState({
-    error: null,
-    value: '',
-  })
-
-  // Occupation role name
-  // Use ref to prevent first useEffect call on setting error messages.
-  const occupationFirstRender = useRef(true)
   // Occupation role work place
   const rolesFirstRender = useRef(true)
+  const occupationFirstRender = useRef(true)
   const happinessFirstRender = useRef(true)
 
   return (
     <>
-      <Message message={message} />
       <Section>
         <SectionName>Role</SectionName>
         <Checkboxes
           items={context.questionnaireState.answers.occupationRole}
           onSuccess={value => {
             if (!canContinue) setContinue(true)
-            setMessage({
-              error: false,
-              value: formatMessage({ roles: value }),
-            })
 
             context.questionnaireDispatch({
               type: 'UPDATE_ANSWERS',
@@ -76,11 +59,6 @@ export default React.memo(({ canContinue, setContinue, dispatchModal }) => {
               return
             }
 
-            setMessage({
-              error: true,
-              value: 'You need to select something!',
-            })
-
             context.questionnaireDispatch({
               type: 'UPDATE_ANSWERS',
               payload: {
@@ -92,14 +70,6 @@ export default React.memo(({ canContinue, setContinue, dispatchModal }) => {
             dispatch({
               type: 'HIDE_COMPANY_TYPE',
             })
-          }}
-          callBeforeDebounceFn={() => {
-            if (message.value !== '') {
-              setMessage({
-                error: false,
-                value: '',
-              })
-            }
           }}
         />
         <ClickForMoreButton

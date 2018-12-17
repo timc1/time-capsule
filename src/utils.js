@@ -111,7 +111,7 @@ const http = {
   },
 }
 
-const emojis = ['🤪', '😁', '😸', '😜', '👻']
+const emojis = ['🤪', '😁', '😎', '😜', '🤗', '🙃']
 const greetings = ['nice.', 'looks good.', 'sounds great.']
 export {
   randomNum,

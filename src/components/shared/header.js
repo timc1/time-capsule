@@ -7,8 +7,9 @@ import { Link } from 'gatsby'
 import usePopup from './hooks/usePopup'
 
 const links = [
-  { url: '/about', name: 'About' },
+  { url: '/', name: 'Home' },
   { url: '/setup', name: 'Get Started' },
+  { url: '/about', name: 'About' },
 ]
 
 export default React.memo(({ siteTitle }) => {
@@ -53,17 +54,6 @@ export default React.memo(({ siteTitle }) => {
               </h1>
             </MenuButton>
             <MenuBody {...getMenuProps()}>
-              <li>
-                <MenuTitle>
-                  New Years Time Capsule
-                  <div className="elements" aria-hidden="true">
-                    <span />
-                    <span />
-                    <span />
-                    <span />
-                  </div>
-                </MenuTitle>
-              </li>
               {links.map(link => (
                 <li key={link.url}>
                   <MenuLink
@@ -104,7 +94,7 @@ const Header = styled.header`
 `
 
 const MenuButton = styled(UnstyledButton)`
-  padding: 30px 35px;
+  padding: 1.875rem 2.1875rem;
   outline: none;
   cursor: pointer;
   transition: opacity 0.15s var(--cubic);
@@ -113,8 +103,8 @@ const MenuButton = styled(UnstyledButton)`
     font-size: 0;
     position: absolute;
     right: var(--baseborderpadding);
-    top: 28px;
-    width: 23px;
+    top: 1.75rem;
+    width: 1.4375rem;
 
     > .text {
       position: absolute;
@@ -222,39 +212,23 @@ const MenuBody = styled.ul`
 
   @media (max-width: ${screenmd}px) {
     right: -5px;
-    min-width: 320px;
-    width: 100%;
+    width: 100vw;
     border: none;
   }
-`
 
-const MenuTitle = styled.h2`
-  position: relative;
-  margin: 0;
-  font-size: var(--fontmd);
-  font-family: var(--ff-serif);
-  padding: var(--baseborderpadding);
-  color: var(--black);
-  text-align: center;
-
-  .elements {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--white);
-    z-index: -1;
+  li:first-of-type a {
+    border-top: none;
   }
 `
 
 const MenuLink = styled(Link)`
   position: relative;
   display: block;
-  padding: calc(var(--baseborderpadding) / 2) var(--baseborderpadding);
+  padding: var(--baseborderpadding);
   border-top: 2px solid var(--gray);
   color: var(--black);
   outline: none;
+  font-family: var(--ff-serif);
 
   &::before,
   &::after {
