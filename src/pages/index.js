@@ -93,9 +93,12 @@ const Intro = styled.section`
   }
 
   @media (max-width: ${screenmd}px) {
-    margin-top: 20px;
+    margin-top: 50px;
     text-align: center;
     place-items: center;
+    .subtitle {
+      margin-bottom: 0;
+    }
   }
 `
 const Illustration = styled.div`

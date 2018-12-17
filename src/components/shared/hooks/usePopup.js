@@ -4,11 +4,13 @@ import useOuterClick from './useOuterClick'
 export default () => {
   const [isOpen, setOpen] = useState(false)
   const containerRef = useRef()
+  const togglerRef = useRef()
 
   useOuterClick({
     toggle: setOpen,
     isOpen,
     ref: containerRef,
+    togglerRef,
   })
 
   const getContainerProps = ({ ...props }) => ({
@@ -19,8 +21,12 @@ export default () => {
   })
 
   const getTogglerProps = ({ ...props }) => ({
-    onClick: e => setOpen(prevOpen => !prevOpen),
+    onClick: e => {
+      console.log('isOpen', isOpen)
+      setOpen(!isOpen)
+    },
     'aria-label': isOpen ? 'close popup' : 'open popup',
+    ref: togglerRef,
     ...props,
   })
 

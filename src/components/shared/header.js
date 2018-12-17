@@ -55,7 +55,7 @@ export default React.memo(({ siteTitle }) => {
             <MenuBody {...getMenuProps()}>
               <li>
                 <MenuTitle>
-                  Hello, there!
+                  New Years Time Capsule
                   <div className="elements" aria-hidden="true">
                     <span />
                     <span />
@@ -218,6 +218,14 @@ const MenuBody = styled.ul`
   transition: 0.25s var(--cubic);
   transition-property: transform, opacity;
   transform-origin: 100% 0;
+  pointer-events: ${props => (props.isOpen ? 'initial' : 'none')};
+
+  @media (max-width: ${screenmd}px) {
+    right: -5px;
+    min-width: 320px;
+    width: 100%;
+    border: none;
+  }
 `
 
 const MenuTitle = styled.h2`
@@ -227,6 +235,7 @@ const MenuTitle = styled.h2`
   font-family: var(--ff-serif);
   padding: var(--baseborderpadding);
   color: var(--black);
+  text-align: center;
 
   .elements {
     position: absolute;
@@ -240,8 +249,38 @@ const MenuTitle = styled.h2`
 `
 
 const MenuLink = styled(Link)`
+  position: relative;
   display: block;
   padding: calc(var(--baseborderpadding) / 2) var(--baseborderpadding);
   border-top: 2px solid var(--gray);
   color: var(--black);
+  outline: none;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+  }
+  &::before {
+    background: var(--gray);
+  }
+
+  &::after {
+    background: var(--white);
+    transform: scaleX(1);
+    transform-origin: 100%;
+    transition: transform 0.22s var(--cubic);
+  }
+
+  &:hover,
+  &:focus {
+    &::after {
+      transform: scaleX(0);
+    }
+  }
 `

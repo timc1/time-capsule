@@ -307,7 +307,6 @@ const UserInteractionSection = styled.div`
   margin: 5rem 0 10rem 0;
   display: grid;
   grid-auto-rows: max-content;
-  min-height: 300px;
 `
 
 export const NextButton = styled(AnimatedButton)`

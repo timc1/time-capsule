@@ -1,12 +1,16 @@
 import { useEffect, useRef } from 'react'
 
-export default ({ toggle, isOpen, ref }) => {
+const isMobile = 'ontouchstart' in document.documentElement === true
+// For touch devices, we don't want to listen to click events but rather touchstart.
+const clickEvent = isMobile ? 'touchstart' : 'click'
+
+export default ({ toggle, isOpen, ref, togglerRef }) => {
   const clickListener = useRef()
   const keydownListener = useRef()
 
   // Setup event listeners, adding the container element's ref as a closure.
   useEffect(() => {
-    clickListener.current = e => handleOuterClick(e, ref, toggle)
+    clickListener.current = e => handleOuterClick(e, ref, toggle, togglerRef)
     keydownListener.current = e => handleKeydown(e, toggle)
   }, [])
 
@@ -15,10 +19,14 @@ export default ({ toggle, isOpen, ref }) => {
       if (ref.current) {
         if (isOpen) {
           document.addEventListener(clickEvent, clickListener.current)
-          document.addEventListener('keydown', keydownListener.current)
+          if (!isMobile) {
+            document.addEventListener('keydown', keydownListener.current)
+          }
         } else {
           document.removeEventListener(clickEvent, clickListener.current)
-          document.removeEventListener('keydown', keydownListener.current)
+          if (!isMobile) {
+            document.removeEventListener('keydown', keydownListener.current)
+          }
         }
       }
       return () => {
@@ -30,18 +38,17 @@ export default ({ toggle, isOpen, ref }) => {
   )
 }
 
-const handleOuterClick = (event, ref, toggle) => {
-  if (!ref.current.contains(event.target)) {
-    toggle(false)
+const handleOuterClick = (event, ref, toggle, togglerRef) => {
+  if (
+    !ref.current.contains(event.target) &&
+    !togglerRef.current.contains(event.target)
+  ) {
+    toggle(prev => !prev)
   }
 }
 
 const handleKeydown = (event, toggle) => {
   if (event.key.toUpperCase() === 'ESCAPE') {
-    toggle(false)
+    toggle(prev => !prev)
   }
 }
-
-// For touch devices, we don't want to listen to click events but rather touchstart.
-const clickEvent =
-  'ontouchstart' in document.documentElement === true ? 'touchstart' : 'click'
