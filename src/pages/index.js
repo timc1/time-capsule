@@ -97,7 +97,7 @@ const Intro = styled.section`
     text-align: center;
     place-items: center;
     .subtitle {
-      margin-bottom: 0;
+      margin-bottom: 20px;
     }
   }
 `

@@ -8,8 +8,8 @@ export default () => (
     <Content>
       <h1>About</h1>
       <p>
-        New Year Time Capsule (NYTC) is a project that enables people to send
-        their future selves a letter and receive the letter one year later.
+        Time Capsule is a project that enables people to send their future
+        selves a letter and receive the letter one year later.
       </p>
       <p>
         It is part of our initiative to design & develop resources to empower
@@ -43,7 +43,10 @@ export default () => (
         </li>
         <li>
           <p>
-            View code on <a href="/">Github</a>
+            View code on{' '}
+            <a href="/" className="new-tab">
+              Github
+            </a>
           </p>
         </li>
       </ul>
@@ -93,6 +96,8 @@ const Content = styled.div`
   a {
     position: relative;
     color: var(--blue);
+    font-weight: var(--fontbold);
+    outline: none;
     &::before {
       content: '';
       position: absolute;

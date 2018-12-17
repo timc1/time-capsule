@@ -228,7 +228,7 @@ const MenuLink = styled(Link)`
   border-top: 2px solid var(--gray);
   color: var(--black);
   outline: none;
-  font-family: var(--ff-serif);
+  font-weight: var(--fontbold);
 
   &::before,
   &::after {
