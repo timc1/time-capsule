@@ -1,8 +1,13 @@
 import { useEffect, useRef } from 'react'
 
-const isMobile = 'ontouchstart' in document.documentElement === true
+const isMobile = () => {
+  if (typeof document !== `undefined`) {
+    return 'ontouchstart' in document.documentElement === true
+  }
+  return false
+}
 // For touch devices, we don't want to listen to click events but rather touchstart.
-const clickEvent = isMobile ? 'touchstart' : 'click'
+const clickEvent = isMobile() ? 'touchstart' : 'click'
 
 export default ({ toggle, isOpen, ref, togglerRef }) => {
   const clickListener = useRef()
@@ -19,12 +24,12 @@ export default ({ toggle, isOpen, ref, togglerRef }) => {
       if (ref.current) {
         if (isOpen) {
           document.addEventListener(clickEvent, clickListener.current)
-          if (!isMobile) {
+          if (!isMobile()) {
             document.addEventListener('keydown', keydownListener.current)
           }
         } else {
           document.removeEventListener(clickEvent, clickListener.current)
-          if (!isMobile) {
+          if (!isMobile()) {
             document.removeEventListener('keydown', keydownListener.current)
           }
         }
