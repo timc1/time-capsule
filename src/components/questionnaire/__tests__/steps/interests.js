@@ -1,16 +1,5 @@
 import React from 'react'
-import {
-  render,
-  within,
-  fireEvent,
-  waitForElement,
-  wait,
-} from 'react-testing-library'
-
-import { getQuestionnaire } from '../../../../models/questionnaire'
-
-import * as utils from '../../../../utils'
-import { getContext } from '../index.test'
+import { render, fireEvent } from 'react-testing-library'
 
 describe('Questionnaire -- Interests', () => {
   jest.doMock(`../../../shared/hooks/useQuestionnaire`, () => {

@@ -1,15 +1,5 @@
 import React from 'react'
-import {
-  render,
-  within,
-  fireEvent,
-  waitForElement,
-  wait,
-} from 'react-testing-library'
-
-import { getQuestionnaire } from '../../../models/questionnaire'
-
-import * as utils from '../../../utils'
+import { render } from 'react-testing-library'
 
 describe(`Questionnaire Wizard Index`, () => {
   test(`Should render without errors.`, () => {

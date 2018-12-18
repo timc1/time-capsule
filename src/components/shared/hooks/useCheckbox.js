@@ -27,6 +27,7 @@ export default ({
           },
         })
       },
+      'data-ischecked': state[index].isChecked,
       ...props,
     }
   }

@@ -1,15 +1,15 @@
 import React from 'react'
 import { render, fireEvent, wait } from 'react-testing-library'
 
-describe('Questionnaire -- Occupation Plan', () => {
+describe('Questionnaire -- Interests Plan', () => {
   jest.doMock(`../../../shared/hooks/useQuestionnaire`, () => {
-    return () => window.getQuestionnaireContext('OCCUPATION_PLAN')
+    return () => window.getQuestionnaireContext('PERSONAL_INTERESTS_PLAN')
   })
 
-  const OccupationPlan = require('../../index').default
+  const InterestsPlan = require('../../index').default
 
   test('Should render a single textarea and a disabled next button.', async () => {
-    const { getByTestId } = render(<OccupationPlan />)
+    const { getByTestId } = render(<InterestsPlan />)
     const nextButton = getByTestId('next-button')
 
     const textarea = getByTestId('textarea')
