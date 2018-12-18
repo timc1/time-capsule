@@ -12,6 +12,7 @@
   window.scrollTo = jest.fn()
 })()
 
+// TODO: Test context.questionnaireDispatch so it's not just an empty jest mock function. 😳
 const getQuestionnaire = require('../src/models/questionnaire').getQuestionnaire
 window.getQuestionnaireContext = currentStepId => ({
   context: {

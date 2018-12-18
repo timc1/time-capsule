@@ -80,6 +80,7 @@ export default React.memo(
               autoComplete: 'off',
               maxLength: 30,
               ref: initialFocusRef,
+              'data-testid': 'add-more-input',
             })}
             light
           />
@@ -87,6 +88,7 @@ export default React.memo(
             disabled={val.length < 2}
             aria-label={`Toggle to add ${state.occupation ||
               'your own occupation.'}`}
+            data-testid="add-more-submit-button"
           >
             <span>Add {val.length < 2 ? '' : val}</span>
             <div className="pseudo" aria-hidden="true" />

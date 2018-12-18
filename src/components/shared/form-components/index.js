@@ -98,7 +98,7 @@ const Textarea = React.memo(props => {
     return () =>
       inputRef.current.removeEventListener('input', eventListener.current)
   }, [])
-  return <StyledTextarea {...props} ref={inputRef} />
+  return <StyledTextarea {...props} ref={inputRef} data-testid="textarea" />
 })
 
 const MessageContainer = styled.div`

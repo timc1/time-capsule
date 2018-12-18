@@ -39,6 +39,7 @@ const modalReducer = (state, { type, payload }) => {
 export default React.memo(props => {
   const initialFocusRef = useRef()
   const [canContinue, setContinue] = useState(false)
+
   const [modalContext, dispatchModal] = useReducer(modalReducer, {
     isModalShowing: false,
     modalContent: null,

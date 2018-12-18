@@ -92,6 +92,7 @@ export default React.memo(
               <ExitButton
                 onClick={e => toggleModal()}
                 tabIndex={isShowing ? '0' : '-1'}
+                data-testid="modal-toggle"
               >
                 <ExitIcon />
                 <span className="screen-reader">Exit modal</span>

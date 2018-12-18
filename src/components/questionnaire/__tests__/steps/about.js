@@ -28,6 +28,7 @@ describe(`Questionnaire -- About`, () => {
     const { getByTestId, getByPlaceholderText } = render(<About />)
     const input = getByPlaceholderText(`My name`)
     const nextButton = getByTestId(`next-button`)
+
     expect(nextButton).toBeInTheDocument()
     expect(nextButton).toHaveAttribute('disabled')
 
@@ -35,8 +36,8 @@ describe(`Questionnaire -- About`, () => {
       target: { value: `Tim` },
     })
 
-    //await waitForElement(() => {
-    //  expect(nextButton).not.toHaveAttribute('disabled')
-    //})
+    await wait(() => {
+      expect(nextButton).not.toHaveAttribute('disabled')
+    })
   })
 })
