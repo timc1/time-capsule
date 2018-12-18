@@ -22,7 +22,7 @@ export default () => (
             <a href="/" className="new-tab">
               Alex Carey
             </a>
-            <span> - Illustration &amp; Motion Animation</span>
+            <span> - Illustration &amp; Animation</span>
           </h3>
         </li>
         <li>

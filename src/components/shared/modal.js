@@ -5,34 +5,33 @@ import styled from '@emotion/styled'
 
 import { screenmd, ExitButton, ExitIcon } from './styles'
 
-const root = document.getElementById('___gatsby')
-
 export default React.memo(
   ({
     children,
     domElement,
     toggleModal,
     isShowing,
-    backgroundColor = '--black4',
+    backgroundColor = 'transparent',
   }) => {
+    const root = useRef(document.getElementById('___gatsby'))
+
     useLayoutEffect(() => {
-      const root = document.getElementById('___gatsby')
       const el = document.createElement('div')
       el.setAttribute('id', 'modal-root')
-      document.body.insertBefore(el, root)
+      document.body.insertBefore(el, root.current)
       return () => document.body.removeChild(el)
     }, [])
 
     const eventListener = useRef()
     const currentScrollPosition = useRef()
 
-    const el = useRef()
+    const el = useRef(document.createElement('div'))
 
     useEffect(() => {
       const modalRoot = document.getElementById(domElement)
-      el.current = document.createElement('div')
       el.current.style = `
       position: fixed;
+      top: 0;
       height: 100%; 
       width: 100%;
       background: ${backgroundColor};
@@ -45,13 +44,14 @@ export default React.memo(
       pointer-events: none;
     `
       modalRoot.appendChild(el.current)
+
       eventListener.current = e => handleKeyDown(e, toggleModal)
       return () => {
         toggleModal(false)
         modalRoot.removeChild(el.current)
         document.removeEventListener('keydown', eventListener.current)
         // Unfreeze root content div
-        root.style = `width: 100%;`
+        root.current.style = `width: 100%;`
         window.scrollTo({ top: currentScrollPosition.current })
       }
     }, [])
@@ -65,20 +65,20 @@ export default React.memo(
 
           // Freeze root content div
           currentScrollPosition.current = window.scrollY
-          root.style = `
-          position: fixed;
-          top: -${currentScrollPosition.current}px;
-          width: 100%;
-          overflow: hidden;
-          pointer-events: none;
-        `
+          //root.style = `
+          //  position: fixed;
+          //  top: -${currentScrollPosition.current}px;
+          //  width: 100%;
+          //  overflow: hidden;
+          //  pointer-events: none;
+          //`
         } else {
           el.current.style.opacity = 0
           el.current.style.pointerEvents = 'none'
           document.removeEventListener('keydown', eventListener.current)
 
           // Unfreeze root content div
-          root.style = `width: 100%`
+          //root.style = `width: 100%`
           window.scrollTo({ top: currentScrollPosition.current })
         }
       },

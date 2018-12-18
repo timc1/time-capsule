@@ -106,16 +106,21 @@ export default React.memo(props => {
                       }
                 }
                 aria-label="go back"
+                data-testid="back-button"
               />
-              <p>{meta.sectionTitle}</p>
+              <p data-testid="section-title">{meta.sectionTitle}</p>
             </DescriptionHeader>
             <Transition
               transitionKey={context.questionnaireState.meta.currentStepId}
               delay={200}
             >
-              <Question>{meta.question}</Question>
+              <Question data-testid="section-question">
+                {meta.question}
+              </Question>
               {meta.subquestion && (
-                <SubQuestion>{meta.subquestion}</SubQuestion>
+                <SubQuestion data-testid="section-subquestion">
+                  {meta.subquestion}
+                </SubQuestion>
               )}
             </Transition>
             <WizardTransition
@@ -123,7 +128,7 @@ export default React.memo(props => {
               type={transitionDirection}
               delay={200}
             >
-              <UserInteractionSection>
+              <UserInteractionSection data-testid="interaction-section">
                 <Component
                   canContinue={canContinue}
                   setContinue={setContinue}
@@ -134,6 +139,7 @@ export default React.memo(props => {
             </WizardTransition>
             {index !== questionnaireSteps.length - 1 && (
               <NextButton
+                data-testid="next-button"
                 disabled={!canContinue}
                 onClick={e => {
                   if (transitionDirection !== 'horizontal-left') {

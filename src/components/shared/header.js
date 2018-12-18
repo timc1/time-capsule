@@ -211,8 +211,6 @@ const MenuBody = styled.ul`
   pointer-events: ${props => (props.isOpen ? 'initial' : 'none')};
 
   @media (max-width: ${screenmd}px) {
-    right: -5px;
-    width: 100vw;
     border: none;
   }
 

@@ -96,7 +96,7 @@ export default React.memo(({ canContinue, setContinue, dispatchModal }) => {
       </Section>
       {state.isCompanyTypeShowing && (
         <>
-          <Section>
+          <Section data-testid="company-selectors">
             <SectionName>Currently at</SectionName>
             <Checkboxes
               items={context.questionnaireState.answers.occupationPlace}

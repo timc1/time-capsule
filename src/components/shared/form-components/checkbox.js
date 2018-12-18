@@ -6,7 +6,12 @@ const Checkbox = ({ getCheckboxItemProps, items }) => (
   <CheckboxGroup>
     {items.map(item => (
       <li key={item.id}>
-        <CheckboxItem {...getCheckboxItemProps({ id: item.id })}>
+        <CheckboxItem
+          {...getCheckboxItemProps({
+            id: item.id,
+            'data-testid': 'checkbox-button',
+          })}
+        >
           <span className="pseudo" aria-hidden="true">
             {item.name}
           </span>

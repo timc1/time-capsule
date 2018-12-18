@@ -37,6 +37,7 @@ export default React.memo(({ canContinue, setContinue }) => {
       }
 
       const name = formState.first_name.trim()
+
       const debouncedObj = debounce(
         debounceRef,
         name.length > 0
@@ -80,7 +81,7 @@ export default React.memo(({ canContinue, setContinue }) => {
   return (
     <Form {...getFormProps()}>
       <Message message={message} />
-      <Label error={errors.first_name}>
+      <Label error={errors.first_name} htmlFor="first_name">
         <Input
           {...getInputStateAndProps({
             id: 'first_name',

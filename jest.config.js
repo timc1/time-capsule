@@ -13,5 +13,6 @@ module.exports = {
     __PATH_PREFIX__: '',
   },
   testURL: 'http://localhost',
-  setupFiles: ['<rootDir>/config/loadershim.js'],
+  setupFiles: ['<rootDir>/config/loadershim.js', '<rootDir>/config/helpers.js'],
+  setupTestFrameworkScriptFile: require.resolve('./config/jest.setup.js'),
 }
