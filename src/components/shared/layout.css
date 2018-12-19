@@ -107,6 +107,7 @@ html {
 @media(max-width: 568px) {
   html {
     min-height: 650px; 
+    height: 100%;
   }
 }
 

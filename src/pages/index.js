@@ -87,7 +87,7 @@ const Intro = styled.section`
     background: var(--white);
     transform: scaleX(1);
     transform-origin: 100%;
-    animation: ${slideInFromLeft} 0.4s ease-in;
+    animation: ${slideInFromLeft} 0.4s var(--cubic);
     animation-fill-mode: forwards;
     animation-delay: 0.5s;
   }
@@ -104,7 +104,7 @@ const Intro = styled.section`
 const Illustration = styled.div`
   height: auto;
   width: 700px;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
   z-index: -1;
