@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from 'react'
+import React, { useReducer, useRef, useEffect } from 'react'
 import { DebouncedInput } from '../shared/index'
 import useQuestionnaire from '../../../shared/hooks/useQuestionnaire'
 
@@ -12,9 +12,33 @@ import { http, API_URL, camelToUnderscore } from '../../../../utils'
 
 import { navigate } from 'gatsby'
 
+const checkLocalEmail = email => {
+  email = email.toLowerCase()
+  try {
+    const emails = JSON.parse(localStorage.getItem('invalid_emails'))
+    if (emails.includes(email)) {
+      return false
+    } else {
+      emails.push(email)
+      localStorage.setItem('invalid_emails', JSON.stringify(emails))
+      return true
+    }
+  } catch (err) {
+    localStorage.setItem('invalid_emails', JSON.stringify([email]))
+    return true
+  }
+}
+
 export default React.memo(({ canContinue, setContinue }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const { context } = useQuestionnaire()
+
+  useEffect(() => {
+    return () => {
+      // Remove localStorage cache of invalid emails.
+      localStorage.removeItem('invalid_emails')
+    }
+  }, [])
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -22,28 +46,41 @@ export default React.memo(({ canContinue, setContinue }) => {
       type: 'SUBMITTING',
     })
 
-    // 1. Endpoint
-    const url = API_URL + '/v0/tc/submit'
-    // 2. Filter data
-    const body = {
-      user: context.questionnaireState.user,
-      answers: parseQuestionnaireData(context.questionnaireState),
-      timestamp: Date.now(),
-    }
-    // 3. Submit
-    const { error, success } = await http.post(url, body)
+    const shouldPingServer = checkLocalEmail(
+      context.questionnaireState.user.email
+    )
 
-    if (error) {
+    if (shouldPingServer) {
+      // 1. Endpoint
+      const url = API_URL + '/v0/tc/submit'
+      // 2. Filter data
+      const body = {
+        user: context.questionnaireState.user,
+        answers: parseQuestionnaireData(context.questionnaireState),
+        timestamp: Date.now(),
+      }
+      // 3. Submit
+      const { error } = await http.post(url, body)
+
+      if (error) {
+        dispatch({
+          type: 'ERROR',
+          payload: {
+            error,
+          },
+        })
+      } else {
+        setTimeout(() => {
+          navigate('/success', { state: { name: body.user.name } })
+        }, 400)
+      }
+    } else {
       dispatch({
         type: 'ERROR',
         payload: {
-          error,
+          error: `You've already submitted your time capsule!`,
         },
       })
-    } else {
-      setTimeout(() => {
-        navigate('/success', { state: { name: body.user.name } })
-      }, 400)
     }
   }
 

@@ -62,7 +62,7 @@ const Intro = styled.section`
   .title,
   .subtitle {
     margin: 0;
-    color: var(--black);
+    color: var(--black1);
   }
 
   .title {
