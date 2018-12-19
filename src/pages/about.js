@@ -73,7 +73,7 @@ export default () => (
 
 const Container = styled.section`
   max-width: ${screenlg}px;
-  margin: 120px auto 80px auto;
+  margin: 120px auto;
   padding: 0 var(--baseborderpadding);
 
   @media (max-width: ${screenmd}px) {
@@ -160,6 +160,12 @@ const Content = styled.div`
     animation-fill-mode: forwards;
     animation-delay: 0.5s;
     transform-origin: 100%;
+  }
+
+  @media (max-width: ${screenmd}px) {
+    h1 {
+      text-align: center;
+    }
   }
 `
 

@@ -31,7 +31,7 @@ export default React.memo(({ canContinue, setContinue }) => {
       timestamp: Date.now(),
     }
     // 3. Submit
-    const { error } = await http.post(url, body)
+    const { error, success } = await http.post(url, body)
 
     if (error) {
       dispatch({
@@ -73,7 +73,6 @@ export default React.memo(({ canContinue, setContinue }) => {
                 error: false,
               },
             })
-            console.log('value', value)
             context.questionnaireDispatch({
               type: 'UPDATE_USER',
               payload: {
@@ -111,6 +110,7 @@ export default React.memo(({ canContinue, setContinue }) => {
         disabled={!state.canSubmit}
         onClick={e => (state.isSubmitting ? {} : handleSubmit(e))}
         aria-label="Click to submit questionnaire."
+        data-testid="submit-button"
       >
         <SubmitButtonText isShowing={!state.isSubmitting}>
           Submit
