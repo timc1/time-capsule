@@ -31,6 +31,7 @@
   --fontxs: .7rem;
   --fontsm: .85rem;
   --fontmd: 1rem;
+  --fontidk: 1.25rem;
   --fontlg: 3rem;
   --fontxl: 4.5rem;
   --baselineheight: 1.5rem;
@@ -39,7 +40,7 @@
   --black1: rgba(15, 13, 32, 0.99);
   --black2: rgba(0,0,0,.95);
   --white: #fff;
-  --white1: rgba(255,255,255,.9);
+  --white1: rgba(255,255,255,.95);
   --white2: rgba(246, 250, 253, 0.9);
   --white3: rgba(255,255,255,.3);
 
@@ -51,11 +52,12 @@
   --blue1: #2f5cff;
   --error: #ff6063;
 
-  --turqoise: #54f7d3;
-  --green: #b8f4bc;
-  --red: #ff3210;
-  --orange: #ffd4a0;
-  --purple: #b9bbff;
+  --c1: rgba(84, 247, 211, 0.3);
+  --c2: rgba(126, 198, 255, 0.3);
+  --c3: rgba(45, 184, 255, 0.3);
+  --c4: rgba(255, 51, 51, 0.3);
+  --c5: rgba(255, 123, 123, 0.3);
+  --c6: rgba(11, 28, 253, 0.3);
 
   --baseborderpadding: 25px;
   --baseborderradius: 2px;

@@ -85,7 +85,7 @@ const Content = styled.div`
   position: relative;
   max-width: 500px;
   color: var(--black1);
-  font-size: 1.25rem;
+  font-size: var(--fontidk);
 
   h1 {
     font-size: var(--fontxl);
