@@ -8,44 +8,52 @@ describe('Questionnaire -- Relationships', () => {
 
   const Relationships = require('../../index').default
 
-  test('Should render at first showing initial relationships checkboxes and a disabled next button.', () => {
+  test('Should render at first showing initial relationships checkboxes and a disabled next button.', async () => {
     const { getByTestId, getAllByTestId } = render(<Relationships />)
-    const nextButton = getByTestId('next-button')
 
-    const roleCheckboxes = getAllByTestId('checkbox-button')
-    expect(roleCheckboxes).toHaveLength(5)
-    expect(nextButton).toHaveAttribute('disabled')
+    await wait(() => {
+      const nextButton = getByTestId('next-button')
+
+      const roleCheckboxes = getAllByTestId('checkbox-button')
+      expect(roleCheckboxes).toHaveLength(5)
+      expect(nextButton).toHaveAttribute('disabled')
+    })
   })
 
   test('Should allow users to click next when they have selected one option.', async () => {
     const { getByTestId, getAllByTestId } = render(<Relationships />)
-    const nextButton = getByTestId('next-button')
 
-    const roleCheckboxes = getAllByTestId('checkbox-button')
+    await wait(async () => {
+      const nextButton = getByTestId('next-button')
 
-    fireEvent.click(roleCheckboxes[0])
+      const roleCheckboxes = getAllByTestId('checkbox-button')
 
-    await wait(() => {
-      expect(nextButton).not.toHaveAttribute('disabled')
+      fireEvent.click(roleCheckboxes[0])
+
+      await wait(() => {
+        expect(nextButton).not.toHaveAttribute('disabled')
+      })
     })
   })
 
-  test('Should only allow users to click one checkbox at a time.', () => {
+  test('Should only allow users to click one checkbox at a time.', async () => {
     const { getByTestId, getAllByTestId } = render(<Relationships />)
 
-    const roleCheckboxes = getAllByTestId('checkbox-button')
+    await wait(() => {
+      const roleCheckboxes = getAllByTestId('checkbox-button')
 
-    // Click multiple checkboxes.
-    fireEvent.click(roleCheckboxes[0])
-    fireEvent.click(roleCheckboxes[1])
-    fireEvent.click(roleCheckboxes[2])
+      // Click multiple checkboxes.
+      fireEvent.click(roleCheckboxes[0])
+      fireEvent.click(roleCheckboxes[1])
+      fireEvent.click(roleCheckboxes[2])
 
-    // Filter out checked elements.
-    const checked = roleCheckboxes.filter(
-      el => el.getAttribute('data-ischecked') === 'true'
-    )
+      // Filter out checked elements.
+      const checked = roleCheckboxes.filter(
+        el => el.getAttribute('data-ischecked') === 'true'
+      )
 
-    // Assert.
-    expect(checked).toHaveLength(1)
+      // Assert.
+      expect(checked).toHaveLength(1)
+    })
   })
 })

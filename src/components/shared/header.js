@@ -88,8 +88,8 @@ const Header = styled.header`
 
   .menu {
     position: absolute;
-    right: 5px;
-    top: 10px;
+    right: 0.3125rem;
+    top: 0.4375rem;
   }
 `
 

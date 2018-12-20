@@ -39,15 +39,17 @@ const CheckboxItem = React.memo(
     transition: transform 0.15s ease-in;
 
     > span {
-      color: var(--black);
+      color: ${props => (props.isChecked ? 'var(--white)' : 'var(--black)')};
       font-size: var(--fontsm);
       font-weight: var(--fontregular);
       opacity: ${props => (props.isChecked ? 1 : 0.7)};
-      transition: opacity 0.15s ease-in;
+      transition: opacity 0.15s var(--cubic);
       &::before,
       &::after {
         border-radius: var(--baseborderradius);
-        transition: opacity 0.15s ease-in;
+        transform-origin: 0;
+        transition: 0.15s var(--cubic);
+        transition-property: opacity, transform;
         z-index: -1;
       }
       &::before {
@@ -55,6 +57,8 @@ const CheckboxItem = React.memo(
       }
       &::after {
         border: 1px solid var(--blue);
+        background: var(--blue);
+        transform: ${props => (props.isChecked ? 'scaleX(1)' : 'scaleX(0)')};
         opacity: ${props => (props.isChecked ? 1 : 0)};
       }
     }

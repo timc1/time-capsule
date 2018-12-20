@@ -8,23 +8,29 @@ describe('Questionnaire -- Health', () => {
 
   const Health = require('../../index').default
 
-  test('Should render at first showing initial health checkboxes and a disabled next button.', () => {
+  test('Should render at first showing initial health checkboxes and a disabled next button.', async () => {
     const { getByTestId, getAllByTestId } = render(<Health />)
-    const nextButton = getByTestId('next-button')
 
-    const roleCheckboxes = getAllByTestId('checkbox-button')
-    expect(roleCheckboxes).toHaveLength(5)
-    expect(nextButton).toHaveAttribute('disabled')
+    await wait(() => {
+      const nextButton = getByTestId('next-button')
+
+      const roleCheckboxes = getAllByTestId('checkbox-button')
+      expect(roleCheckboxes).toHaveLength(5)
+      expect(nextButton).toHaveAttribute('disabled')
+    })
   })
 
   test('Should allow user to continue once an option is clicked.', async () => {
     const { getByTestId, getAllByTestId } = render(<Health />)
-    const nextButton = getByTestId('next-button')
 
-    const roleCheckboxes = getAllByTestId('checkbox-button')
+    await wait(async () => {
+      const nextButton = getByTestId('next-button')
 
-    fireEvent.click(roleCheckboxes[0])
+      const roleCheckboxes = getAllByTestId('checkbox-button')
 
-    await wait(() => expect(nextButton).not.toHaveAttribute('disabled'))
+      fireEvent.click(roleCheckboxes[0])
+
+      await wait(() => expect(nextButton).not.toHaveAttribute('disabled'))
+    })
   })
 })

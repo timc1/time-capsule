@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useReducer } from 'react'
+import React, { Suspense, useState, useRef, useEffect, useReducer } from 'react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import {
@@ -130,12 +130,14 @@ export default React.memo(props => {
               delay={200}
             >
               <UserInteractionSection data-testid="interaction-section">
-                <Component
-                  canContinue={canContinue}
-                  setContinue={setContinue}
-                  dispatchModal={dispatchModal}
-                  {...introProps}
-                />
+                <Suspense fallback={<div>fallback</div>}>
+                  <Component
+                    canContinue={canContinue}
+                    setContinue={setContinue}
+                    dispatchModal={dispatchModal}
+                    {...introProps}
+                  />
+                </Suspense>
               </UserInteractionSection>
             </WizardTransition>
             {index !== questionnaireSteps.length - 1 && (
@@ -430,7 +432,7 @@ export const NextButton = styled(AnimatedButton)`
     css`
       &:hover,
       &:focus {
-        transform: translateY(-1px) translateX(-50%);
+        transform: translateX(-50%);
       }
       &:active {
         transform: translateY(1px) translateX(-50%);

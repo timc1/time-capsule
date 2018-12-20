@@ -41,6 +41,7 @@
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
+    "babel-plugin-dynamic-import-node": "^2.2.0",
     "babel-preset-gatsby": "^0.1.6",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^23.6.0",

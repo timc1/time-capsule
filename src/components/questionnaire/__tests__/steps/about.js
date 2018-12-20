@@ -8,25 +8,30 @@ describe(`Questionnaire -- About`, () => {
 
   const About = require(`../../index`).default
 
-  test(`Should render an input field for user's first name.`, () => {
+  test(`Should render an input field for user's first name.`, async () => {
     const { getByTestId, getByPlaceholderText } = render(<About />)
-    expect(getByPlaceholderText(`My name`)).toBeInTheDocument()
+    await wait(() => {
+      expect(getByPlaceholderText(`My name`)).toBeInTheDocument()
+    })
   })
 
   test(`Next Button should NOT be disabled after user types their name.`, async () => {
     const { getByTestId, getByPlaceholderText } = render(<About />)
-    const input = getByPlaceholderText(`My name`)
-    const nextButton = getByTestId(`next-button`)
 
-    expect(nextButton).toBeInTheDocument()
-    expect(nextButton).toHaveAttribute('disabled')
+    await wait(async () => {
+      const input = getByPlaceholderText(`My name`)
+      const nextButton = getByTestId(`next-button`)
 
-    fireEvent.change(input, {
-      target: { value: `Tim` },
-    })
+      expect(nextButton).toBeInTheDocument()
+      expect(nextButton).toHaveAttribute('disabled')
 
-    await wait(() => {
-      expect(nextButton).not.toHaveAttribute('disabled')
+      fireEvent.change(input, {
+        target: { value: `Tim` },
+      })
+
+      await wait(() => {
+        expect(nextButton).not.toHaveAttribute('disabled')
+      })
     })
   })
 })
