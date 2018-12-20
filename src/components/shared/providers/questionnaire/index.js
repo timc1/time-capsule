@@ -10,8 +10,6 @@ const QuestionnaireProvider = React.memo(({ children }) => {
     initialQuestionnaireState
   )
 
-  console.log('questionnaireState', questionnaireState)
-
   return (
     <QuestionnaireContext.Provider
       value={{
