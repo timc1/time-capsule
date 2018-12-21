@@ -1,8 +1,10 @@
 <h1 align="center">
-  Time Capsule
+  This Next Year 🥳
+  <br>
+  (www.thisnextyear.com)
   <br>
 </h1>
-<p align="center" style="font-size: 1.2rem;">A beautiful, fun, and easy to use web app to send your future (365 days) self a letter.</p>
+<p align="center" style="font-size: 1.2rem;">An animated, fun, and accessible web app to send your future (365 days) self a letter.</p>
 
 ## About
 
@@ -20,5 +22,9 @@ npm install
 
 ```
 npm start
+```
+
+```
+npm run test
 ```
 
