@@ -11,6 +11,5 @@
   ],
   plugins: [
     '@babel/plugin-proposal-optional-chaining',
-    'dynamic-import-node'
   ]
 }

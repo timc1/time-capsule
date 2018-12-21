@@ -31,7 +31,7 @@ const IndexPage = React.memo(() => {
   return (
     <Container>
       <Intro>
-        <h1 className="title">New Year Time Capsule</h1>
+        <h1 className="title">This Next Year</h1>
         <h2 className="subtitle">
           Write a letter to your future self, take action, receive it 365 days
           from today.

@@ -7,20 +7,20 @@ export default () => {
   return (
     <>
       <Helmet
-        title={`Setup — New Year Time Capsule`}
+        title={`Setup — This Next Year`}
         meta={[
-          { name: 'title', content: 'Setup - New Year Time Capsule' },
+          { name: 'title', content: 'Setup - This Next Year' },
           {
             property: 'og:title',
-            content: 'Setup - New Year Time Capsule',
+            content: 'Setup - This Next Year',
           },
           {
             name: 'twitter:title',
-            content: 'Setup - New Year Time Capsule',
+            content: 'Setup - This Next Year',
           },
         ]}
       />
-      <h1 className="hidden">Setup - Time Capsule</h1>
+      <h1 className="hidden">Setup - This Next Year</h1>
       <h2 className="hidden">
         Get Started - write a letter to your future self, take action, receive
         it 365 days from today.

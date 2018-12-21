@@ -15,7 +15,7 @@ export default () => (
       <Content>
         <h1>About</h1>
         <p>
-          Time Capsule is a project that enables people to send their future
+          This Next Year is a project that enables people to send their future
           selves a letter and receive it one year later.
         </p>
         <p>
@@ -26,7 +26,7 @@ export default () => (
         <ul>
           <li>
             <h3>
-              <a href="/" className="new-tab">
+              <a href="/" className="new-tab" rel="noopener noreferrer">
                 Alex Carey
               </a>
               <span> - Illustration &amp; Animation</span>
@@ -34,7 +34,11 @@ export default () => (
           </li>
           <li>
             <h3>
-              <a href="/" className="new-tab">
+              <a
+                href="https://tcc.im?ref=timecapsule"
+                className="new-tab"
+                rel="noopener noreferrer"
+              >
                 Tim Chang
               </a>
               <span> - Design &amp; Development</span>
@@ -51,7 +55,11 @@ export default () => (
           <li>
             <p>
               View code on{' '}
-              <a href="/" className="new-tab">
+              <a
+                href="https://github.com/timc1/time-capsule"
+                className="new-tab"
+                rel="noopener noreferrer"
+              >
                 Github
               </a>
             </p>

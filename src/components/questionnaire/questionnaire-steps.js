@@ -1,27 +1,42 @@
-import { lazy } from 'react'
+// TODO When ReactDOMServer supports Suspense: https://reactjs.org/docs/error-decoder.html/?invariant=294
+//import { lazy } from 'react'
+
+import SectionIntro from './steps/shared/intro'
+import About from './steps/about/index'
+import Occupation from './steps/occupation/index'
+import OccupationPlan from './steps/occupation/occupation-plan'
+import PersonalInterests from './steps/hobbies/index'
+import PersonalInterestsPlan from './steps/hobbies/personal-interests-plan'
+import Relationships from './steps/relationships/index'
+import RelationshipsPlan from './steps/relationships/relationships-plan'
+import Health from './steps/health/index'
+import HealthPlan from './steps/health/health-plan'
+import Community from './steps/community/index'
+import Moonshot from './steps/moonshot/index'
+import Email from './steps/final/index'
 
 import careerIllustration from '../../images/career_illustration.json'
 import interestsIllustration from '../../images/interests_illustration.json'
 import moonshotIllustration from '../../images/moonshot_illustration.json'
 import healthIllustration from '../../images/health_illustration.json'
 
-const SectionIntro = lazy(() => import('./steps/shared/intro'))
-const About = lazy(() => import('./steps/about/index'))
-const Occupation = lazy(() => import('./steps/occupation/index'))
-const OccupationPlan = lazy(() => import('./steps/occupation/occupation-plan'))
-const PersonalInterests = lazy(() => import('./steps/hobbies/index'))
-const PersonalInterestsPlan = lazy(() =>
-  import('./steps/hobbies/personal-interests-plan')
-)
-const Relationships = lazy(() => import('./steps/relationships/index'))
-const RelationshipsPlan = lazy(() =>
-  import('./steps/relationships/relationships-plan')
-)
-const Health = lazy(() => import('./steps/health/index'))
-const HealthPlan = lazy(() => import('./steps/health/health-plan'))
-const Community = lazy(() => import('./steps/community/index'))
-const Moonshot = lazy(() => import('./steps/moonshot/index'))
-const Email = lazy(() => import('./steps/final/index'))
+//const SectionIntro = lazy(() => import('./steps/shared/intro'))
+//const About = lazy(() => import('./steps/about/index'))
+//const Occupation = lazy(() => import('./steps/occupation/index'))
+//const OccupationPlan = lazy(() => import('./steps/occupation/occupation-plan'))
+//const PersonalInterests = lazy(() => import('./steps/hobbies/index'))
+//const PersonalInterestsPlan = lazy(() =>
+//  import('./steps/hobbies/personal-interests-plan')
+//)
+//const Relationships = lazy(() => import('./steps/relationships/index'))
+//const RelationshipsPlan = lazy(() =>
+//  import('./steps/relationships/relationships-plan')
+//)
+//const Health = lazy(() => import('./steps/health/index'))
+//const HealthPlan = lazy(() => import('./steps/health/health-plan'))
+//const Community = lazy(() => import('./steps/community/index'))
+//const Moonshot = lazy(() => import('./steps/moonshot/index'))
+//const Email = lazy(() => import('./steps/final/index'))
 
 const questionnaireSteps = [
   {

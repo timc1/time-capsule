@@ -70,14 +70,20 @@ export default React.memo(props => {
             useful/fun!
           </h3>
           <ul>
-            {social.map(({ name, text, ...rest }) => (
-              <SocialItem key={name}>
-                <h4>{name}</h4>
-                <SocialLink {...rest} target="_blank" rel="noopener noreferrer">
-                  {text || 'Share'}
-                </SocialLink>
-              </SocialItem>
-            ))}
+            {social
+              ? social.map(({ name, text, ...rest }) => (
+                  <SocialItem key={name}>
+                    <h4>{name}</h4>
+                    <SocialLink
+                      {...rest}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {text || 'Share'}
+                    </SocialLink>
+                  </SocialItem>
+                ))
+              : null}
           </ul>
         </SocialContainer>
       </Content>

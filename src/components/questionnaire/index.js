@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useRef, useEffect, useReducer } from 'react'
+import React, { useState, useRef, useEffect, useReducer } from 'react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import {
@@ -130,14 +130,12 @@ export default React.memo(props => {
               delay={200}
             >
               <UserInteractionSection data-testid="interaction-section">
-                <Suspense fallback={<div>fallback</div>}>
-                  <Component
-                    canContinue={canContinue}
-                    setContinue={setContinue}
-                    dispatchModal={dispatchModal}
-                    {...introProps}
-                  />
-                </Suspense>
+                <Component
+                  canContinue={canContinue}
+                  setContinue={setContinue}
+                  dispatchModal={dispatchModal}
+                  {...introProps}
+                />
               </UserInteractionSection>
             </WizardTransition>
             {index !== questionnaireSteps.length - 1 && (

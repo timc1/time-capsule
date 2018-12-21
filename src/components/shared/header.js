@@ -54,18 +54,20 @@ export default React.memo(({ siteTitle }) => {
               </h1>
             </MenuButton>
             <MenuBody {...getMenuProps()}>
-              {links.map(link => (
-                <li key={link.url}>
-                  <MenuLink
-                    to={link.url}
-                    {...getItemProps({
-                      onClick: e => setOpen(prevOpen => !prevOpen),
-                    })}
-                  >
-                    {link.name}
-                  </MenuLink>
-                </li>
-              ))}
+              {links
+                ? links.map(link => (
+                    <li key={link.url}>
+                      <MenuLink
+                        to={link.url}
+                        {...getItemProps({
+                          onClick: e => setOpen(prevOpen => !prevOpen),
+                        })}
+                      >
+                        {link.name}
+                      </MenuLink>
+                    </li>
+                  ))
+                : null}
             </MenuBody>
           </li>
         </ul>
