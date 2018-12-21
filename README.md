@@ -1,8 +1,8 @@
 <h1 align="center">
   This Next Year
   <br>
-  <br>
   (www.thisnextyear.com)
+  <br>
 </h1>
 <p align="center" style="font-size: 1.2rem;">A beautiful, fun, and easy to use web app to send your future (365 days) self a letter.</p>
 
