@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import { OutboundLink } from 'gatsby-plugin-google-analytics'
 
 import {
   screenlg,
@@ -26,21 +27,27 @@ export default () => (
         <ul>
           <li>
             <h3>
-              <a href="/" className="new-tab" rel="noopener noreferrer">
+              <OutboundLink
+                href="/"
+                className="new-tab"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Alex Carey
-              </a>
+              </OutboundLink>
               <span> - Illustration &amp; Animation</span>
             </h3>
           </li>
           <li>
             <h3>
-              <a
+              <OutboundLink
                 href="https://tcc.im?ref=timecapsule"
                 className="new-tab"
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 Tim Chang
-              </a>
+              </OutboundLink>
               <span> - Design &amp; Development</span>
             </h3>
           </li>
@@ -55,13 +62,14 @@ export default () => (
           <li>
             <p>
               View code on{' '}
-              <a
+              <OutboundLink
                 href="https://github.com/timc1/time-capsule"
                 className="new-tab"
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 Github
-              </a>
+              </OutboundLink>
             </p>
           </li>
         </ul>
@@ -69,8 +77,10 @@ export default () => (
         <p>
           We are always open to collaborating and building products with other
           creators. Shoot us an email{' '}
-          <a href="mailto:timchang.tcc@gmail.com?subject=Hello!">here</a>. Based
-          in Los Angeles.
+          <OutboundLink href="mailto:timchang.tcc@gmail.com?subject=Hello!">
+            here
+          </OutboundLink>
+          . Based in Los Angeles.
         </p>
       </Content>
     </Container>

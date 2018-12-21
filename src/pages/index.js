@@ -49,8 +49,8 @@ const Container = styled.div`
 `
 const Intro = styled.section`
   position: relative;
-  max-width: 420px;
-  margin-top: 100px;
+  max-width: 450px;
+  margin-top: 150px;
   opacity: 0;
   animation: ${fadeIn} 0.25s ease-in;
   animation-fill-mode: forwards;
