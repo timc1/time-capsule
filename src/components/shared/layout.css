@@ -28,7 +28,7 @@
   --fontbold: 800;
   --fontregular: 400;
 
-  --fontxs: .7rem;
+  --fontxs: .75rem;
   --fontsm: .85rem;
   --fontmd: 1rem;
   --fontidk: 1.25rem;
@@ -66,6 +66,7 @@
   --boxshadow2: 0 13px 27px -5px rgba(50,50,93,.22), 0 8px 16px -8px rgba(0,0,0,.2);
 
   --cubic: cubic-bezier(0.42, 0, 0.59, 1.1);
+  --cubic2: cubic-bezier(0.65,-0.22, 0.43, 0.72);
 }
 
 @media(max-width: 568px) {
@@ -153,7 +154,6 @@ body {
 }
 
 .hidden {
-  font-size: 0;
   opacity: 0;
   display: none;
 }

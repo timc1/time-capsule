@@ -67,12 +67,17 @@ export default React.memo(({ canContinue, setContinue }) => {
           type: 'ERROR',
           payload: { error },
         })
-        sendEmail(context.questionnaireState.user, error)
+        sendEmail({
+          user: context.questionnaireState.user,
+          error,
+        })
       } else {
         setTimeout(() => {
           navigate('/success', { state: { name: body.user.name } })
         }, 400)
-        sendEmail(context.questionnaireState.user)
+        sendEmail({
+          user: context.questionnaireState.user,
+        })
       }
     } else {
       dispatch({

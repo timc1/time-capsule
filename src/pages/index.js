@@ -36,7 +36,7 @@ const IndexPage = React.memo(() => {
           Write a letter to your future self, take action, receive it 365 days
           from today.
         </h2>
-        <RocketLink to="/setup" text="Start" />
+        <RocketLink to="/setup" text="Start" aria-label="Click to start" />
       </Intro>
       <Illustration ref={illustrationRef} />
     </Container>
@@ -50,7 +50,7 @@ const Container = styled.div`
 const Intro = styled.section`
   position: relative;
   max-width: 450px;
-  margin-top: 150px;
+  margin-top: 200px;
   opacity: 0;
   animation: ${fadeIn} 0.25s ease-in;
   animation-fill-mode: forwards;
@@ -72,7 +72,7 @@ const Intro = styled.section`
 
   .subtitle {
     font-family: var(--ff-sans-serif);
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: var(--fontregular);
     margin-bottom: 30px;
   }
@@ -87,7 +87,7 @@ const Intro = styled.section`
     background: var(--white);
     transform: scaleX(1);
     transform-origin: 100%;
-    animation: ${slideInFromLeft} 0.4s var(--cubic);
+    animation: ${slideInFromLeft} 0.7s var(--cubic2);
     animation-fill-mode: forwards;
     animation-delay: 0.5s;
   }
@@ -111,7 +111,7 @@ const Illustration = styled.div`
   opacity: 0;
   animation: ${fadeIn} 0.5s ease-in;
   animation-fill-mode: forwards;
-  animation-delay: 1s;
+  animation-delay: 1.3s;
   @media (max-width: ${screenmd}px) {
     margin-top: 30px;
     max-width: 90vw;

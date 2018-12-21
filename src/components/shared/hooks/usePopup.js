@@ -36,6 +36,7 @@ export default () => {
 
   const getItemProps = ({ ...props }) => ({
     tabIndex: isOpen ? 0 : -1,
+    role: 'option',
     ...props,
   })
 

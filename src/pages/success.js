@@ -184,7 +184,7 @@ const Title = styled.div`
     background: var(--white);
     transform: scaleX(1);
     transform-origin: 100%;
-    animation: ${slideInFromLeft} 0.8s var(--cubic);
+    animation: ${slideInFromLeft} 0.7s var(--cubic2);
     animation-fill-mode: forwards;
     animation-delay: 0.5s;
   }
@@ -248,7 +248,7 @@ const SocialContainer = styled.div`
   transform: translateY(5px);
   animation: ${animateIn} 0.5s var(--cubic);
   animation-fill-mode: forwards;
-  animation-delay: 1.6s;
+  animation-delay: 1.5s;
 
   @media (max-width: ${screenmd}px) {
     box-shadow: none;

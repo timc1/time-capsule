@@ -25,7 +25,7 @@ export default React.memo(({ siteTitle }) => {
   return (
     <Header>
       <h1 className="hidden">
-        New Year Time Capsule -- Send Your Future Self A Letter
+        This Next Year -- Send Your Future Self A Letter
       </h1>
       <h2 className="hidden">
         Write your future self a letter talking about your goals and how you

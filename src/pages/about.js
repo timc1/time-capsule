@@ -174,7 +174,7 @@ const Content = styled.div`
     bottom: 0;
     background: var(--white);
     z-index: 1;
-    animation: ${slideInFromLeft} 0.4s var(--cubic);
+    animation: ${slideInFromLeft} 0.7s var(--cubic2);
     animation-fill-mode: forwards;
     animation-delay: 0.5s;
     transform-origin: 100%;
@@ -203,7 +203,7 @@ const Illustration = styled.div`
   opacity: 0;
   animation: ${fadeIn} 0.5s ease-in;
   animation-fill-mode: forwards;
-  animation-delay: 1s;
+  animation-delay: 1.5s;
   opacity: 0;
   @media (max-width: ${screenmd}px) {
     margin-top: 30px;

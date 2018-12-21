@@ -38,7 +38,7 @@ const Layout = ({ children }) => (
             {
               name: 'keywords',
               content:
-                'New Years Resolutions, Web Apps, Side Projects, HTML, CSS, Javascript, React, User Interface, User Experience',
+                'New Year, Web Apps, Side Projects, HTML, CSS, Javascript, React, User Interface, User Experience, Web Animation',
             },
             {
               property: 'og:site_name',
@@ -62,7 +62,7 @@ const Layout = ({ children }) => (
             },
             {
               property: 'og:image',
-              content: data.site.siteMetadata.imageUrl,
+              content: data.site.siteMetadata.image,
             },
             {
               name: 'twitter:domain',

@@ -66,6 +66,7 @@ describe('Questionnaire - Final', () => {
         success: true,
       }),
     }
+    utils.sendEmail = jest.fn().mockResolvedValueOnce({ success: true })
 
     const { getByPlaceholderText, getByTestId } = render(<Email />)
 

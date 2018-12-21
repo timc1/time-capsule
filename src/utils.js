@@ -111,22 +111,22 @@ const http = {
   },
 }
 
-const sendEmail = (user, error, additionalMessage) => {
+const sendEmail = ({ user, error, additionalMessage }) => {
   const url = API_URL + '/email'
   const body = error
     ? {
-        from: `User submit error: ${error}`,
-        to: `timchang.tcc@gmail.com, alexcarey.s@gmail.com`,
-        subject: `User signin error: ${error}`,
+        from: `This New Year <${user.name}>`,
+        subject: `An Error Occurred: <${error}>`,
         text: ``,
-        html: ``,
+        html: `<p>${additionalMessage}</p>`,
+        partner: true,
       }
     : {
-        from: `This Next Year submission! <${user.name}>`,
-        to: `timchang.tcc@gmail.com, alexcarey.s@gmail.com`,
-        subject: `a new user has sent their time capsule! <${user.name}>`,
+        from: `This New Year <${user.name}>`,
+        subject: `New Submission! <${user.name}>`,
         text: ``,
-        html: `<p>Additional message: ${additionalMessage}</p>`,
+        html: `<p>${additionalMessage}</p>`,
+        partner: true,
       }
 
   fetch(url, {
