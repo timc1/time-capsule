@@ -12,9 +12,9 @@ With the New Year coming up, write your future self a letter on your goals, inte
 
 365 days from today, you'll receive your own message in your inbox!
 
-Hope you accomplish your goals! 🚀
+Hope you accomplish your goals!
 
-## Installation
+## 🚀 Set up
 
 ```
 npm install
