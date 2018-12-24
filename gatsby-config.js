@@ -21,7 +21,7 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: 'This Next Year',
-        short_name: 'This Next Year',
+        short_name: 'ThisNextYear',
         start_url: '/',
         background_color: '#ffffff',
         theme_color: '#0b1cfd',

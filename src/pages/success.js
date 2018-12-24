@@ -95,32 +95,32 @@ const social = [
   {
     name: `Email`,
     text: `Send`,
-    href: `mailto:?subject=New Years Time Capsule is awesome!&amp;body=Check out this site https://www.timecapsule.io.`,
+    href: `mailto:?subject=This Next Year is awesome!&amp;body=Check out this site https://www.thisnextyear.com`,
     title: `Share by Email`,
     color: `var(--blue)`,
   },
   {
     name: `Twitter`,
     text: `Tweet`,
-    href: `https://twitter.com/home?status=This%20site%20lets%20you%20write%20your%20current%20goals%20to%20your%20future%20self!%20Check%20it%20out%3A%20www.timecapsule.io`,
+    href: `https://twitter.com/home?status=This%20site%20lets%20you%20write%20your%20current%20goals%20to%20your%20future%20self!%20Check%20it%20out%3A%20www.thisnextyear.com`,
     color: `#1da1f2`,
   },
   {
     name: `Facebook`,
     text: `Share`,
-    href: `https://www.facebook.com/sharer/sharer.php?kid_directed_site=true&u=https%3A%2F%2Ftodohq.co`,
+    href: `https://www.facebook.com/sharer/sharer.php?kid_directed_site=true&u=https%3A%2F%2Fthisnextyear.com`,
     color: `#3b5998`,
   },
   {
     name: `Pinterest`,
     text: `Pin`,
-    href: `https://www.pinterest.com/pin/find/?url=https%3A%2F%2Ftodohq.co`,
+    href: `https://www.pinterest.com/pin/find/?url=https%3A%2F%2Fthisnextyear.com`,
     color: `#bd081c`,
   },
   {
     name: `LinkedIn`,
     text: `Post`,
-    href: `https://www.linkedin.com/shareArticle?url=https%3A%2F%2Ftodohq.co&mini=true&title=New Years Time Capsule`,
+    href: `https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fthisnextyear.com&mini=true&title=This Next Year`,
     color: `#007bb5`,
   },
 ]

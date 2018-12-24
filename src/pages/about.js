@@ -91,11 +91,11 @@ export default () => (
 
 const Container = styled.section`
   max-width: ${screenlg}px;
-  margin: 120px auto;
-  padding: 0 var(--baseborderpadding);
+  margin: auto;
+  padding: 120px var(--baseborderpadding);
 
   @media (max-width: ${screenmd}px) {
-    margin-top: 80px;
+    padding-top: 80px;
   }
 `
 

@@ -11,6 +11,7 @@ const Checkbox = ({ getCheckboxItemProps, items }) => (
               {...getCheckboxItemProps({
                 id: item.id,
                 'data-testid': 'checkbox-button',
+                'aria-label': item.name,
               })}
             >
               <span className="pseudo" aria-hidden="true">
