@@ -95,7 +95,7 @@ const Container = styled.section`
   padding: 120px var(--baseborderpadding);
 
   @media (max-width: ${screenmd}px) {
-    padding-top: 80px;
+    padding-top: 40px;
   }
 `
 

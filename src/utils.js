@@ -115,14 +115,14 @@ const sendEmail = ({ user, error, additionalMessage }) => {
   const url = API_URL + '/email'
   const body = error
     ? {
-        from: `This New Year <${user.name}>`,
+        from: `This Next Year <${user.name}>`,
         subject: `An Error Occurred: <${error}>`,
         text: ``,
         html: `<p>${additionalMessage}</p>`,
         partner: true,
       }
     : {
-        from: `This New Year <${user.name}>`,
+        from: `This Next Year <${user.name}>`,
         subject: `New Submission! <${user.name}>`,
         text: ``,
         html: `<p>${additionalMessage}</p>`,
