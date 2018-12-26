@@ -5,13 +5,30 @@ import { OutboundLink } from 'gatsby-plugin-google-analytics'
 import {
   screenlg,
   screenmd,
+  screensm,
   slideInFromLeft,
 } from '../components/shared/styles'
 
 import { keyframes } from '@emotion/core'
 
+import Helmet from 'react-helmet'
+
 export default () => (
   <>
+    <Helmet
+      title={`About — This Next Year`}
+      meta={[
+        { name: 'title', content: 'About - This Next Year' },
+        {
+          property: 'og:title',
+          content: 'About - This Next Year',
+        },
+        {
+          name: 'twitter:title',
+          content: 'About - This Next Year',
+        },
+      ]}
+    />
     <Container>
       <Content>
         <h1>About</h1>
@@ -95,7 +112,7 @@ const Container = styled.section`
   padding: 120px var(--baseborderpadding);
 
   @media (max-width: ${screenmd}px) {
-    padding-top: 40px;
+    padding-top: 75px;
   }
 `
 
@@ -108,6 +125,7 @@ const Content = styled.div`
   h1 {
     font-size: var(--fontxl);
     font-family: var(--ff-serif);
+    margin-top: 0;
   }
   h2 {
     position: relative;
@@ -180,7 +198,7 @@ const Content = styled.div`
     transform-origin: 100%;
   }
 
-  @media (max-width: ${screenmd}px) {
+  @media (max-width: ${screensm}px) {
     h1 {
       text-align: center;
     }
@@ -203,7 +221,7 @@ const Illustration = styled.div`
   opacity: 0;
   animation: ${fadeIn} 0.5s ease-in;
   animation-fill-mode: forwards;
-  animation-delay: 1.5s;
+  animation-delay: 1.3s;
   opacity: 0;
   @media (max-width: ${screenmd}px) {
     margin-top: 30px;

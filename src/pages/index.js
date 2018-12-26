@@ -72,7 +72,7 @@ const Intro = styled.section`
 
   .subtitle {
     font-family: var(--ff-sans-serif);
-    font-size: 1.5rem;
+    font-size: var(--fontidk);
     font-weight: var(--fontregular);
     margin-bottom: 30px;
   }
