@@ -1,11 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="32px" height="24px" viewBox="0 0 32 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.1 (67048) - http://www.bohemiancoding.com/sketch -->
-    <title>right-arrow (1)</title>
-    <desc>Created with Sketch.</desc>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="right-arrow-(1)" fill="#1E201D">
-            <path d="M20.205,0.007 C20.205,0.007 18.618,3 18.618,3 L25.5,9.96 L0.111,9.96 C0.111,9.96 0.111,13.531 0.111,13.531 L25.5,13.5 L18.618,21 C18.665,21 20.205,24 20.205,24 L30.157,13.531 C30.3865198,13.3092342 32,11.753 32,11.745 C32,11.737 30.3714802,10.1667512 30.157,9.96 L20.205,0.007 Z" id="Path"></path>
-        </g>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 62 62" style="enable-background:new 0 0 62 62;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#000000;stroke-width:6;stroke-linecap:round;stroke-miterlimit:10;}
+	.st1{fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#000000;stroke-width:6;stroke-linecap:round;stroke-miterlimit:10;}
+	.st2{fill:#FFFFFF;}
+</style>
+<g>
+	<g>
+		<line class="st0" x1="55.4" y1="31" x2="4.7" y2="31"/>
+	</g>
+	<line class="st1" x1="56.6" y1="31" x2="39" y2="14.1"/>
+	<line class="st1" x1="39.1" y1="47.9" x2="56.6" y2="31"/>
+</g>
 </svg>

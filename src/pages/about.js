@@ -45,7 +45,7 @@ export default () => (
           <li>
             <h3>
               <OutboundLink
-                href="/"
+                href="https://www.instagram.com/alex.scarey/"
                 className="new-tab"
                 target="_blank"
                 rel="noopener noreferrer"
