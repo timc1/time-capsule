@@ -19,6 +19,7 @@ import careerIllustration from '../../images/career_illustration.json'
 import interestsIllustration from '../../images/interests_illustration.json'
 import moonshotIllustration from '../../images/moonshot_illustration.json'
 import healthIllustration from '../../images/health_illustration.json'
+import relationshipsIllustration from '../../images/relationships_illustration.json'
 
 //const SectionIntro = lazy(() => import('./steps/shared/intro'))
 //const About = lazy(() => import('./steps/about/index'))
@@ -126,12 +127,7 @@ const questionnaireSteps = [
         question: `Let's move onto improving relationships.`,
       },
       introProps: {
-        text: `Nunc ultrices, orci eu dictum sollicitudin, enim nisl semper nibh,
-        egestas bibendum massa est laoreet orci. Pellentesque sagittis ex
-        sapien, nec iaculis orci sollicitudin sed. Vestibulum ante ipsum primis
-        in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque
-        habitant morbi tristique senectus et netus et malesuada fames ac turpis
-        egestas. Cras volutpat nisi et bibendum viverra.`,
+        illustration: relationshipsIllustration,
       },
     },
   },
