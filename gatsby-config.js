@@ -3,7 +3,7 @@ module.exports = {
     title: 'This Next Year — Send Your Future Self A Letter',
     description: `Write your future self a letter talking about your goals and how you plan on accomplishing them in the upcoming year. 365 days later you'll receive your letter in your email. Reflect, and hopefully you'll be a few steps closer to where you want to be!`,
     url: `https://thisnextyear.com`,
-    image: `https://thisnextyear.com/images/thisnextyear_1200x630.jpg`,
+    image: `https://thisnextyear.com/images/socialBanner1200x628.png`,
     themeColor: `#0b1cfd`,
   },
   plugins: [
