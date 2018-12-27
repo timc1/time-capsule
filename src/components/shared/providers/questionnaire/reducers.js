@@ -1,3 +1,5 @@
+import { deepClone } from '../../../../utils'
+
 const questionnaireReducer = (state, { type, payload }) => {
   switch (type) {
     case 'NEXT':
@@ -22,7 +24,7 @@ const questionnaireReducer = (state, { type, payload }) => {
         },
       }
     case 'ADD_UNIQUE_CHECKBOX_ITEM':
-      const copy = state.answers[payload.id].slice()
+      const copy = deepClone(state.answers[payload.id])
       copy.push(payload.value)
 
       return {

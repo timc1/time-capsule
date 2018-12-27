@@ -109,7 +109,8 @@ export default React.memo(
     } else {
       return null
     }
-  }
+  },
+  (prevProps, nextProps) => prevProps.isShowing === nextProps.isShowing
 )
 
 const handleKeyDown = (e, toggleModal) => {
