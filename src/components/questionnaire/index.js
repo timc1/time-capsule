@@ -302,7 +302,7 @@ const BackButton = styled(UnstyledButton)`
 `
 
 const Question = styled.h1`
-  margin: 0 0 20px 0;
+  margin: 0;
   font-size: var(--fontlg);
   font-family: var(--ff-serif);
   text-align: center;
@@ -310,7 +310,7 @@ const Question = styled.h1`
 `
 
 const SubQuestion = styled.h2`
-  margin: 0;
+  margin: 20px 0 0 0;
   text-align: center;
   color: var(--gray2);
   font-weight: var(--fontregular);
@@ -319,7 +319,8 @@ const SubQuestion = styled.h2`
 
 const UserInteractionSection = styled.div`
   position: relative;
-  margin: 5rem 0 10rem 0;
+  margin-top: 4rem;
+  margin-bottom: 10rem;
   display: grid;
   grid-auto-rows: max-content;
 `

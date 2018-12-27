@@ -33,5 +33,5 @@ const Intro = React.memo(
 export default Intro
 
 const Container = styled.div`
-  margin-top: -100px;
+  margin-top: -2rem;
 `
