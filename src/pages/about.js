@@ -73,7 +73,10 @@ export default () => (
         <ul>
           <li>
             <p>
-              Download brand assets <a href="/">here</a>
+              Download brand assets{' '}
+              <a href="https://s3-us-west-1.amazonaws.com/tcc.assets/this-next-year/Downloadable_Assets.zip">
+                here
+              </a>
             </p>
           </li>
           <li>
