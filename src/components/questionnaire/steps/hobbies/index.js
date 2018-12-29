@@ -36,7 +36,7 @@ export default React.memo(({ canContinue, setContinue, dispatchModal }) => {
                     dispatchModal({ type: 'TOGGLE_MODAL_OFF' })
                   }}
                   sectionToUpdate="hobbies"
-                  title="What are some hobbies and activites that interest you?"
+                  title="What are some hobbies and activities that interest you?"
                   placeholder="Marathon-ing"
                 />
               ),

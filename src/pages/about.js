@@ -102,6 +102,15 @@ export default () => (
           </OutboundLink>
           . Based in Los Angeles.
         </p>
+        <h2>Privacy</h2>
+        <p>
+          Data collected on this site is used solely for the email sent to the
+          email provided. Once the email is sent, it and its correlated data
+          will be deleted.{' '}
+          <span role="img" aria-label="Peace sign">
+            ✌️
+          </span>
+        </p>
       </Content>
     </Container>
 

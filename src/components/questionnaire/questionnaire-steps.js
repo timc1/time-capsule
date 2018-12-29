@@ -81,7 +81,7 @@ const questionnaireSteps = [
       meta: {
         sectionTitle: `Career/Work`,
         question: `Where I would like to be within this next year`,
-        subquestion: `What are some things you want to see change with your work and what actions will you take to take to get there?`,
+        subquestion: `What are some things you want to see change with your work and what actions will you take to get there?`,
       },
     },
   },
