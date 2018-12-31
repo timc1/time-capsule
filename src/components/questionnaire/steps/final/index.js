@@ -148,6 +148,12 @@ export default React.memo(({ canContinue, setContinue }) => {
         }}
         placeholder="my@email.com"
       />
+      <SubmitInfo>
+        By submitting you agree that we are not responsible for the answers
+        submitted &amp; data collected on this site is used solely for the email
+        sent to the email provided. Once the email is sent, it and its
+        correlated data will be deleted.
+      </SubmitInfo>
       <SubmitButton
         disabled={!state.canSubmit}
         onClick={e => (state.isSubmitting ? {} : handleSubmit(e))}
@@ -322,4 +328,10 @@ const SubmitButtonText = styled.p`
   opacity: ${props => (props.isShowing ? 1 : 0)};
   transition-property: transform, opacity;
   transition: 0.25s var(--cubic);
+`
+
+const SubmitInfo = styled.p`
+  color: var(--gray2);
+  font-size: var(--fontsm);
+  margin: 0;
 `
