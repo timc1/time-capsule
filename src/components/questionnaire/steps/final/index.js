@@ -8,7 +8,7 @@ import styled from '@emotion/styled'
 import { css } from '@emotion/core'
 import star from '../../../../images/star.svg'
 
-import { http, API_URL, camelToUnderscore, sendEmail } from '../../../../utils'
+import { http, API_URL, camelToUnderscore } from '../../../../utils'
 
 import { navigate } from 'gatsby'
 
@@ -67,17 +67,10 @@ export default React.memo(({ canContinue, setContinue }) => {
           type: 'ERROR',
           payload: { error },
         })
-        sendEmail({
-          user: context.questionnaireState.user,
-          error,
-        })
       } else {
         setTimeout(() => {
           navigate('/success', { state: { name: body.user.name } })
         }, 400)
-        sendEmail({
-          user: context.questionnaireState.user,
-        })
       }
     } else {
       dispatch({
