@@ -1,6 +1,7 @@
 import { deepClone } from '../../../../utils'
 
 const questionnaireReducer = (state, { type, payload }) => {
+  console.log(state)
   switch (type) {
     case 'NEXT':
       return {

@@ -43,43 +43,50 @@ export default React.memo(({ canContinue, setContinue }) => {
   const handleSubmit = async e => {
     e.preventDefault()
     dispatch({
-      type: 'SUBMITTING',
+      type: 'ERROR',
+      payload: {
+        error:
+          'Submissions are closed for this year - come and visit us December 28, 2019 ☺️',
+      },
     })
+    //dispatch({
+    //  type: 'SUBMITTING',
+    //})
 
-    const shouldPingServer = checkLocalEmail(
-      context.questionnaireState.user.email
-    )
+    //const shouldPingServer = checkLocalEmail(
+    //  context.questionnaireState.user.email
+    //)
 
-    if (shouldPingServer) {
-      // 1. Endpoint
-      const url = API_URL + '/v0/tc/submit'
-      // 2. Filter data
-      const body = {
-        user: context.questionnaireState.user,
-        answers: parseQuestionnaireData(context.questionnaireState),
-        timestamp: Date.now(),
-      }
-      // 3. Submit
-      const { error } = await http.post(url, body)
+    //if (shouldPingServer) {
+    //  // 1. Endpoint
+    //  const url = API_URL + '/v0/tc/submit'
+    //  // 2. Filter data
+    //  const body = {
+    //    user: context.questionnaireState.user,
+    //    answers: parseQuestionnaireData(context.questionnaireState),
+    //    timestamp: Date.now(),
+    //  }
+    //  // 3. Submit
+    //  const { error } = await http.post(url, body)
 
-      if (error) {
-        dispatch({
-          type: 'ERROR',
-          payload: { error },
-        })
-      } else {
-        setTimeout(() => {
-          navigate('/success', { state: { name: body.user.name } })
-        }, 400)
-      }
-    } else {
-      dispatch({
-        type: 'ERROR',
-        payload: {
-          error: `You've already submitted your time capsule!`,
-        },
-      })
-    }
+    //  if (error) {
+    //    dispatch({
+    //      type: 'ERROR',
+    //      payload: { error },
+    //    })
+    //  } else {
+    //    setTimeout(() => {
+    //      navigate('/success', { state: { name: body.user.name } })
+    //    }, 400)
+    //  }
+    //} else {
+    //  dispatch({
+    //    type: 'ERROR',
+    //    payload: {
+    //      error: `You've already submitted your time capsule!`,
+    //    },
+    //  })
+    //}
   }
 
   const firstRender = useRef(true)

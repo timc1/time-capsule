@@ -31,6 +31,11 @@ const IndexPage = React.memo(() => {
   return (
     <Container>
       <Intro>
+        <Notification>
+          Submissions are closed! The site &amp; web experience is available
+          year round. Come back Dec. 28 🙈
+        </Notification>
+
         <h1 className="title">This Next Year</h1>
         <h2 className="subtitle">
           Write a letter to your future self, take action, receive it 365 days
@@ -116,6 +121,17 @@ const Illustration = styled.div`
     margin-top: 30px;
     max-width: 90vw;
   }
+`
+
+const Notification = styled.p`
+  margin: 0 0 20px 0;
+  padding: 10px;
+  box-shadow: var(--baseboxshadow);
+  border-radius: var(--baseborderradius);
+  font-size: var(--fontsm);
+  color: var(--gray2);
+  text-align: left;
+  background: var(--white);
 `
 
 export default IndexPage
